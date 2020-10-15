@@ -1,2 +1,38 @@
-Home page- once a user logs in
-<%= link_to 'Sign out', destroy_user_session_path, method: :delete %>
+<div class="container mt-4">
+	<div class="row">
+		<div class="col-6" >
+			<div class ="text-center">
+				<div class = "text-center" id = "grey">
+				    <%= image_tag('bot.png')%>
+					<h1 style="font-size: 2.5rem;">Create New Bot</h1>
+                    <p>Set up Business messages to send your clients automatically when they reach out to you</p>
+				</div>
+                <div>
+                    <%= link_to 'Create  > ', new_bot_path, class: "btn btn-secondary btn-lg" %>
+                </div>
+			</div>
+		</div>
+
+		<div class="col-5 v-divider" >
+			<div class ="text-center">
+				<div style="height: 159px;">
+					
+				</div >
+				<div class = "text-center " id = "grey">
+					<h1 style="font-size: 2.5rem;">Edit from Existing Bot</h1>
+                    <p >Pre Created Bots that you can edit and customise as per your Business needs</p>
+				</div>	
+                <div>
+                    <%= link_to 'Choose Bot  > ', bots_path, class: "btn btn-secondary btn-lg" %>
+                </div>
+			</div>
+		</div>
+	</div>
+	<div class="container mt-4">
+		<div class = "text-center">
+			<%= link_to 'View my bots' , bots_path, id: "grey" %>
+			<div><%= image_tag('arrow.png')%></div>
+		</div>
+	</div>
+
+</div>

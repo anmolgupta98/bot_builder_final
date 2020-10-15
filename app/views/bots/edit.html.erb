@@ -1,0 +1,51 @@
+<div class = "container">
+  <span style= "margin-right: 4%; margin-left: 1%;">
+  <%= link_to image_tag("back_arrow.png"), new_bot_path %>
+  <%= link_to 'Go Back', new_bot_path, style: "color: grey; text-decoration: none;" %>
+  </span>
+  <span class = "container" style= "margin-left: 8%;">
+    <span style= "margin-right: 4%; margin-left: 7%;">1. Bot Settings</span>
+    <span style= " margin-left: 4%; margin-right: 4%;">2. Compose Message</span>
+    <span style= "margin-left: 5%;">3. Activate Bot</span>
+  </span>
+</div>
+<div class = "container">
+  <span style= "margin-right: 0%; margin-left: 38%;">
+    <a href="<%= bots_path %>">
+    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+    </a>
+  </span>
+  <%= image_tag("line.png") %>
+  <span style= "margin-left: 2%; margin-right: 0%;">
+    <a href="<%= bots_path %>">
+    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+    </a>
+  </span >
+   <%= image_tag("line.png") %>
+  <span style= "margin-left: 2%;" >
+    <a href="<%= bots_path %>">
+    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+    </a>
+  </span>
+</div>
+
+
+<div class = "container mt-4">
+  <div class ="row">
+  <div class = "text-left">
+      <%= image_tag('bot.png')%>
+  </div>
+  <span>
+      <%= image_tag('msg_1.png')%>
+  </span>
+  </div>    
+  <span class = "mt-4">
+      
+      <%# <div class=" container shadow p-3 mb-5 bg-white rounded hide"  style= "width: 200px;" id = "fifth_message">
+      I am your WhatsApp chat bot
+      </div >class=" container shadow p-3 mb-5 bg-white rounded hide"  style= "width: 65px;" id = "fourth_message"
+      <div class=" container shadow p-3 mb-5 bg-white rounded hide"  style= "width: 300px;" id = "sixth_message">
+      I send and reply to messages on your behalf
+      </div > %>
+  </span>
+</div>

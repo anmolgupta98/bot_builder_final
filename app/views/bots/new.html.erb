@@ -1,0 +1,36 @@
+<div class = "container">
+    <div class ="text-center">
+        <div>
+            <%= image_tag('bot.png')%>
+        </div >
+        <div class = "mt-4">
+            <div class=" container shadow p-3 mb-5 bg-white rounded hide"  style= "width: 65px;" id = "first_message">
+            Hi
+            </div >
+            <div class=" container shadow p-3 mb-5 bg-white rounded hide"  style= "width: 200px;" id = "second_message">
+            I am your WhatsApp chat bot
+            </div >
+            <div class=" container shadow p-3 mb-5 bg-white rounded hide"  style= "width: 300px;" id = "third_message">
+            I send and reply to messages on your behalf
+            </div >
+        </div>
+    </div>   
+    <div class ="text-center">
+        <div class=" container shadow p-3 mb-5 bg-white rounded"  style= "width: 100px;" id= "loading_symbol">
+            Loading...
+        </div >
+    </div>
+</div>
+<div class="hide mt-5" id="new_bot_name">
+    <%= form_with scope: :bot, url: bots_path, method: :post,  local: true do |f| %>
+        <div class="form-group mx-auto text-center" style="width: 300px;">
+                <%= f.label :"Give me a name to continue", class: "col-form-label" %>
+        </div>
+        <div class="form-group mx-auto text-center" style="width: 300px;" >
+            <%= f.text_field :name, class: "form-control shadow rounded text-center", placeholder: "Give the bot a name" %> 
+        </div>
+        <div class="form-group mx-auto text-center" style="width: 300px;">
+            <%= f.submit value: "Enter", class: "btn btn-secondary" %>
+        </div>				
+    <% end %>
+</div>
