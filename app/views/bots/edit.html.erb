@@ -1,33 +1,4 @@
-<div class = "container">
-  <span style= "margin-right: 3%; margin-left: -6%;">
-  <%= link_to image_tag("back_arrow.png", size: "30"), bots_path %>
-  <%= link_to 'Go Back', bots_path, style: "color: grey; text-decoration: none;" %>
-  </span>
-  <span class = "container" style= "margin-left: 14%;">
-    <span style= "margin-right: 8%; margin-left: 7%;">1. Bot Settings</span>
-    <span style= " margin-left: 4%; margin-right: 8%;">2. Compose Message</span>
-    <span style= "margin-left: 5%;">3. Activate Bot</span>
-  </span>
-</div>
-<div class = "container">
-  <span style= "margin-right: 0%; margin-left: 34%;">
-    <a href="<%= edit_bot_path(@bot.id) %>">
-    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2" data-toggle="active">
-    </a>
-  </span>
-  <%= image_tag("line_5.png")%>
-  <span style= "margin-left: 2%; margin-right: 0%;">
-    <a href="<%= composemessage_path %>">
-    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2" data-toggle="active">
-    </a>
-  </span >
-   <%= image_tag("line_5.png")%> 
-  <span style= "margin-left: 2%;" >
-    <a href="<%= activatebot_path %>">
-    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2" data-toggle="active">
-    </a>
-  </span>
-</div>
+<%= render 'bots/botnavigation' %>
 
 
 <div class = "container overflow mt-4" id = "border">

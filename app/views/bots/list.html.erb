@@ -1,0 +1,34 @@
+<h1 class = "text-center mt-4" style = "color: grey"> List of Bots </h1>
+</table>
+<table class="table container shadow text-center mt-5">
+    <%# <thead>
+        <tr class = "text-center"> 
+            <th scope="col">S.No.</th>
+            <th scope="col">Name</th>
+            <th scope="col" colspan = "5" class = "text-center">Options</th>
+            <th scope="col" > Created at</th>
+            <th scope="col" > Updated at</th>
+        </tr>
+    </thead> %>
+    <tbody>
+    
+    <% count = 0 %>
+    <% for bot in @bots do %>
+        <tr style = 'height: 15px;'>
+            <%# <% count = count + 1%>
+            <%# <td><%= count</td> %>
+           
+            <td ><strong class = "text-center"><%= bot.name %></strong></td>   
+            <td><%= link_to 'Statistics', statistics_path(bot.id), id:"customlink" %></td> 
+            <td><%= link_to 'Test the bot', test_path(bot.id), id:"customlink" %></td>
+            <td><%= link_to 'Edit', composemessage_path(bot.id), id:"customlink"  %></td>  
+            <td><%= link_to 'Clone', bots_path, id:"customlink"  %></td>  
+            <td><%= link_to 'Delete', bots_path(bot.id), method: :delete, data: { confirm: "Are you sure about deleting this bot. This is an irreversible action!" }, id:"customlink"  %></td>    
+            <%# <td><%= time_ago_in_words(bot.created_at) %> 
+            <%# ago </td>   %>
+            <%# <td><%= time_ago_in_words(bot.updated_at) %>
+             <%# ago </td>    %> 
+        </tr>
+    <% end %> 
+    </tbody> 
+</table>

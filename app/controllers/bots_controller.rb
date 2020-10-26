@@ -52,12 +52,30 @@ class BotsController < ApplicationController
       end 
     end    
 
+   def destroy
+      @bot = Bot.find(params[:id])
+      @bot.destroy
+      redirect_to list_path
+   end 
+
    def composemessage
       @bot = Bot.where( user_id: current_user.id).last
    end
    
    def activatebot
       @bot = Bot.where( user_id: current_user.id).last
+   end
+
+   def statistics
+      @bot = Bot.find(params[:id]) 
+   end   
+   
+   def list
+     @bots = Bot.where(user_id: current_user.id)
+   end   
+
+   def test
+      @bot = Bot.find(params[:id])
    end
 
 end

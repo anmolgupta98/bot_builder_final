@@ -1,0 +1,92 @@
+<div class = row>
+    <div class = "col-6 container shadow p-3 bg-white rounded">
+        <div class="container  p-3 my-3 bg-dark text-white" style = "height: 700px; width: 350px; border-radius: 7%;">
+            <div class = "container mt-4 shadow p-3 rounded" style = "background-color: rgb(7, 94, 84); height: 50px;"> 
+                 <div class = "row">
+                    <div class = "col-1">
+                    </div>
+                    <div class = "col-2 text-center">
+                       <%= image_tag('bot.png', class: "rounded-circle", size: "25") %>
+                    </div>
+                    <div class = "col-6">
+                       <%= @bot.name %>
+                    </div>
+                 </div>
+            </div> 
+            <div class = "container shadow p-3 " style = "height: 550px; background-color: rgb(236, 229, 221);"> 
+                <%= form_with scope: :test, url: bots_path, local: true do |f| %>
+                    <div class="row" style = "height: 450px">
+                       
+                    </div> 
+                    <div class = "row">   
+                        <div class= "col-9">
+                            
+                            <div class = "p-3 mb-1 grey_background my_border_radius text-center">
+                            <%= f.text_field :user_test %>
+                            </div>
+                            <div class="arrow-left"></div>
+
+                        </div>
+                        <% if @bot%>
+                        <%= f.hidden_field :bot_id, value: @bot.id %>
+                        <% end %>	
+                        <div class="col-2">
+                        <%= image_submit_tag("send.png", class: "rounded-circle", size: "10") %>           
+                        </div>
+                        <div class="col-1">
+                        
+                        </div>
+                    </div>
+                <% end %>
+            </div>
+        </div>
+    </div>    
+    <div class = "col-6">
+        <div class = "container shadow p-3 bg-white rounded"> 
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Parameters</th>
+                        <th scope="col">Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Phone Number</td>
+                        <td><%= @bot.phone %></td>
+                    </tr>
+                    <tr>
+                        <td>Language</td>
+                        <td><%= @bot.language %></td>
+                    </tr>
+                    <tr>
+                    <td>Conversation started by</td>
+                    <td><%= @bot.initconv %></td>
+                    </tr>
+                    <% if @bot.initconv == 'Bot' %>
+                        <tr>
+                        <td>First message is sent </td>
+                        <% if @bot.triggerpoint == "trigger_phrase" %>
+                            <td>when a trigger phrase is used</td>
+                        <% end %>
+                        <% if @bot.triggerpoint == "any_message" %>
+                            <td>when user sends any message</td>
+                        <% end %>
+                        </tr>
+                    <% end %>
+                     <tr>
+                        <td>Working Schedule</td>
+                        <td><%= @bot.days %> ( <%= (@bot.starttime) %> <%=  @bot.endtime %> )
+
+                        </td>
+                    </tr>  
+                   <tr>
+                        <td>Reboot the conversation in </td>
+                        <td><%= @bot.rebootconv %> minutes </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+            
