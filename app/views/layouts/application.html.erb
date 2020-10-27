@@ -9,9 +9,8 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body class = "body">
     
-    <%= render 'layouts/navigation' %>
     <div class ="container">
        <%= render 'layouts/messages' %> 
     </div>
@@ -78,6 +77,8 @@
         document.getElementById('fourth_time').classList.remove('hide');
         document.getElementById('fourth_date').classList.remove('hide');
       }
+      
+
 
     </script>
   </body>

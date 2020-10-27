@@ -1,7 +1,7 @@
 class BotsController < ApplicationController
 
     def index
-
+       @bots = Bot.where(user_id: current_user.id)  
     end    
 
     def show

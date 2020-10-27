@@ -1,0 +1,6 @@
+str = <%= "update_active_toggle" + (@bot.id).to_s %>;
+<% if @bot.status == "Active" %>
+	document.getElementById(str.id).innerHTML = "Active";
+<% else%>
+	document.getElementById(str.id).innerHTML = "Inactive";
+<% end %>

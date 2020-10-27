@@ -1,38 +1,84 @@
-<div class="container mt-4">
-	<div class="row">
-		<div class="col-6" >
-			<div class ="text-center">
-				<div class = "text-center" id = "grey">
-				    <%= image_tag('bot.png', class: "rounded-circle") %>
-					<h1 style="font-size: 2.5rem;">Create New Bot</h1>
-                    <p>Set up Business messages to send your clients automatically when they reach out to you</p>
+<div class="container">
+	<div class="row"  >
+		<div class = "col-1 container-fluid bg-dark" style = "height: 830px; top: -100%; left: -25%; position: relative;">
+		   
+		</div>
+		<div class = "col-11" style = "left:-300px;">
+		    <%= render 'layouts/navigation' %>
+		    <div class = "row">
+				<div class="col-5" style = "margin-top: 2%; left:20%" >
+				
+					<%= image_tag("back.png") %>
+					<strong>Whatsapp Bot </strong>
+					<div class = "container p-3 bg-dark text-white mt-4 text-center" style = "height: 650px; border-radius: 3%; width: 130%; border: solid 1px #707070;background-color: var(--slate); ">
+						<h1 style = "margin-top: 200px;"> Create Whatsapp Bot </h1>
+						<p>Set up Business messages to send your clients automatically when they reach out to you</p>
+						<%= link_to 'Create New Bot ', new_bot_path, class: "btn btn-success btn-lg" %>
+					</div>
 				</div>
-                <div>
-                    <%= link_to 'Create  > ', new_bot_path, class: "btn btn-secondary btn-lg" %>
-                </div>
-			</div>
-		</div>
 
-		<div class="col-6 vl" >
-			<div class ="text-center">
-				<div style="margin-top: 46.5%;">
-					
-				</div >
-				<div class = "text-center " id = "grey">
-					<h1 style="font-size: 2.5rem;">Edit from Existing Bot</h1>
-                    <p >Pre Created Bots that you can edit and customise as per your Business needs</p>
+				<div class="col-6" style = "margin-left: 8%; margin-top: 2%; left:30%">
+					<div style = "margin-top: 11%;"></div> 
+					<strong>My Whatsapp Bots </strong>
+					<div class = "row mt-4" style = "width: 130%">
+						<div class = "col-1">
+
+						</div>
+						<div class="col-2">
+							Bot Name
+						</div>
+						<div class="col-3" >
+							Last modified
+						</div>
+						<div class="col-3" >
+							&nbsp;&nbsp; Status
+						</div>
+						<div class="col-3" >
+							&nbsp;&nbsp; Action
+						</div>
+					</div>
+					<br>
+					<% for bot in @bots do %>
+						<div class="Rectangle-648" style = "width: 130%; margin-top: 2%;">
+							<div class = "row" >
+								<div class="col-3" style = "padding-left: 8%;margin-top: 2%;">
+									&nbsp;&nbsp;&nbsp;<%= bot.name %>
+								</div>
+								<div class="col-3" style = "margin-top: 2%;" >
+									<%= time_ago_in_words(bot.updated_at) %>
+								</div>
+								<div class="col-3" style = "margin-top: 2%;"  >
+									<span class="mr-2" id= <%= "update_active_toggle"+ (bot.id).to_s %> >
+										<% if bot.status == "Active" %>
+											Active
+										<% else%>
+											Inactive
+										<% end %>
+									</span>
+									<label class="switch my-auto">
+									<% if bot.status == "Active" %>
+										<input type="checkbox" checked data-remote="true" class="slider round" data-method="put" data-url= <%= updateactive_path(bot.id )%>>
+									<% else %>
+										<input type="checkbox" data-remote="true" class="slider round" data-method="get" data-url= <%= updateactive_path(bot.id) %>>
+									<% end %>
+									<span class="slider round"></span>
+									</label>
+								</div>
+								<div class="col-3" style = "margin-top: 2%;" >
+									<td><%= link_to 'Edit', composemessage_path(bot.id), class:"btn btn-dark btn-sm"  %></td>  
+								</div>
+							</div>
+							
+						</div >
+					<% end %>
 				</div>	
-                <div>
-                    <%= link_to 'Choose Bot  > ', list_path, class: "btn btn-secondary btn-lg" %>
-                </div>
 			</div>
-		</div>
+        </div>
 	</div>
-	<%# <div class="container mt-4">
-		<div class = "text-center">
-			<%= link_to 'View my bots' , bots_path, id: "grey", style: "text-decoration: none;" %>
-			<%# <div><%= image_tag('arrow.png')%></div>
-		<%# </div>
-	</div> %> 
+</div>	
 
-</div>
+
+
+
+
+
