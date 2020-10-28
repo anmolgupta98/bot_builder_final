@@ -57,7 +57,7 @@
 									</span>
 									<label class="switch my-auto">
 									<% if bot.status == "Active" %>
-										<input type="checkbox" checked data-remote="true" class="slider round" data-method="put" data-url= <%= updateactive_path(bot.id )%>>
+										<input type="checkbox" checked data-remote="true" class="slider round" data-method="get" data-url= <%= updateactive_path(bot.id )%>>
 									<% else %>
 										<input type="checkbox" data-remote="true" class="slider round" data-method="get" data-url= <%= updateactive_path(bot.id) %>>
 									<% end %>

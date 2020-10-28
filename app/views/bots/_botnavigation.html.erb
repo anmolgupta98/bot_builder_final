@@ -1,36 +1,11 @@
-<div class = "container-fluid" style = "background-color: #3b445b; height: 60px;">
- <div style = "color: white;">
-  Referralyogi | <%= @bot.name %>
-  </div>
-</div>  
-  <%# <span style= "margin-right: 3%; margin-left: -6%;">
-  <%= link_to image_tag("back_arrow.png", size: "30"), bots_path %>
-  <%# <%= link_to 'Go Back', bots_path, style: "color: grey; text-decoration: none;" %>
-  <%# </span>
-  <span class = "container" style= "margin-left: 14%;">
-    <span style= "margin-right: 8%; margin-left: 7%;">1. Bot Settings</span>
-    <span style= " margin-left: 4%; margin-right: 8%;">2. Compose Message</span>
-    <span style= "margin-left: 5%;">3. Activate Bot</span>
+<nav class="navbar navbar-expand-lg" style = "background-color: #3b445b; color: #ebebeb; height: 55px;">
+  <%= link_to '←', root_path, style: "font-size: 200%; color: #ebebeb; margin-top: -0.4%; text-decoration: none;" %>&nbsp;&nbsp;
+  <span class="nav-item" href="#" style = "margin-right: 77%;">Referralyogi &nbsp;
+    &nbsp; <a style= "font-size: 140%; color: #ebebeb;">|</a> &nbsp;&nbsp; 
+    <%= image_tag('bot.png', class: "rounded-circle", size: "30") %> &nbsp;&nbsp; <%= @bot.name %> 
+    &nbsp;&nbsp;
+    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil" fill="#ebebeb" xmlns="http://www.w3.org/2000/svg">
+    <path fill-rule="#ebebeb" d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5L13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175l-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
+   </svg>
   </span>
-</div>
-<div class = "container">
-  <span style= "margin-right: 0%; margin-left: 34%;">
-    <a href="<%= edit_bot_path(@bot.id) %>
-    <%# "> %>
-    <%# <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2" data-toggle="active">
-    </a>
-  </span>
-  <%= image_tag("line_5.png")%>
-  <%# <span style= "margin-left: 2%; margin-right: 0%;">
-    <a href="<%= composemessage_path(@bot.id) %>
-    <%# "> %>
-    <%# <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2" data-toggle="active">
-    </a>
-  </span >
-   <%= image_tag("line_5.png")%> 
-  <%# <span style= "margin-left: 2%;" >
-    <a href="<%= activatebot_path(@bot.id) %>
-    <%# "> %>
-    <%# <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2" data-toggle="active">
-    </a>
-  </span>  %>
+</nav>
