@@ -64,8 +64,26 @@
 									<span class="slider round"></span>
 									</label>
 								</div>
-								<div class="col-3" style = "margin-top: 2%;" >
-									<td><%= link_to 'Edit', composemessage_path(bot.id), class:"btn btn-dark btn-sm"  %></td>  
+								<div class="col-3" style = "margin-top: 1%;" >
+									<%= link_to 'Edit', composemessage_path(bot.id), class:"btn btn-dark btn-sm"  %>
+	                                <span class="dropdown">
+										<button class="btn dropdown-toggle" type="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											<%= image_tag("hamburger.png", size: "30" ) %>
+										</button>
+										<style>.dropdown-toggle::after { 
+											content: none;
+										    } 
+										</style>
+										<div class="dropdown-menu">
+										    <%= link_to 'Statistics', statistics_path(bot.id), id:"customlink", class: "dropdown-item" %> 
+											<%= link_to 'Test the bot', test_path(bot.id), id:"customlink", class: "dropdown-item"  %>
+											<%= link_to 'Clone', bots_path, id:"customlink", class: "dropdown-item"  %>  
+                                            <%= link_to 'Delete', bots_path(bot.id), method: :delete, data: { confirm: "Are you sure about deleting this bot. This is an irreversible action!" }, id:"customlink", class: "dropdown-item"   %>    
+										</div>
+									</span>
+
+								    
+
 								</div>
 							</div>
 							

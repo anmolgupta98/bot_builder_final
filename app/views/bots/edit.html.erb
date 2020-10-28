@@ -28,22 +28,22 @@
     </div>
 
     <div class="col-2">
-      <div class="navbar_content_height_undo">
-        <%= link_to image_tag('undo.png', size: "30"), root_path%>
+      <div class="navbar_content_height_undo" style=  "margin-top: -5%;">
+        <%= link_to image_tag('undo.png', size: "45"), root_path%>
         <%= link_to 'Undo', root_path, class: "Undo"%>
       </div>
     </div>
     <div class="col-2">
-      <div class="text-center navbar_content_height_activate">
+      <div class="text-center navbar_content_height_undo" style = "background-color: #dedede; color: white">
         Activate
       </div>
     </div>
   </div>
 </nav> 
 <% @bots = Bot.where(user_id: current_user.id) %>
-<div class = row>
-    <div class = "col-3 container shadow p-5 bg-white" style = "margin-left: 5%; margin-top: 3%; border: solid 1px #d5d5d5; border-radius: 5%; height: 600px;" >
-        <div id = "upon_first_click" class = "">
+<% if @bot.phone == nil && @bot.language  == nil && @bot.initconv  == nil && @bot.triggerpoint  == nil && @bot.starttime  == nil && @bot.endtime  == nil  && @bot.rebootconv  == nil && @bot.days  == nil && @bot.status  == nil  %>
+   <div class = row>
+		<div class = "col-3 container shadow p-5 bg-white" style = "margin-left: 5%; margin-top: 3%; border: solid 1px #d5d5d5; border-radius: 5%; height: 600px;" id = "upon_first_click" >
 			<h3>Bot Settings</h3>
 			<br>
 			Get started by setting up basic details of how <br> your bot should behave.
@@ -66,6 +66,27 @@
 				</div>
 			</div>
 		</div>
+<% else %>
+		<div class = "col-3 container shadow p-5 bg-white" style = "margin-left: 5%; margin-top: 3%; border: solid 1px #d5d5d5; border-radius: 5%; height: 600px;" id = "upon_first_click_2" >
+		<h3>Bot Settings</h3>
+			<br>
+			<a style = "color: #7e7e7e">Outgoing number</a>
+		</div>
+		<div class = "col-6"  id = "upon_first_click_2" style = "margin-right: 5%; margin-top: 11%;">
+			<h3>Select which numbers to send messages from</h3>
+			<div class = "container">
+			<div class = "col-5 container shadow p-5 bg-white" style = "border: solid 1px #d5d5d5; border-radius: 5%;">
+				<div class="row">
+						<div class="col-2">
+							<%= image_tag('symbol.png', size: "40", class: "rounded-circle")%>
+						</div>
+						<div class="col-8">
+							<div class="custom_font">Business 1</div> 
+							+91 <%= @bot.phone%>
+						</div>
+					</div>	
+			</div>
+		</div>
     </div>
-</div>
+<% end %>	
 
