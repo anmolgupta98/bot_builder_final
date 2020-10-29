@@ -1,7 +1,11 @@
+<!-- First navbar -->
+
 <%= render 'bots/botnavigation' %>
+
+<!-- Second navbar -->
+
 <nav class="mynavbar bg-white">
   <div class="row">
-
     <div class="col-8">
       <ul class="steps">
         <li class="past">
@@ -25,11 +29,10 @@
         </li>
       </ul>
     </div>
-
     <div class="col-2">
       <div class="navbar_content_height_undo" style=  "margin-top: -5%;">
         <%= link_to image_tag('undo.png', size: "45"), root_path%>
-        <%= link_to 'Undo', root_path, class: "Undo"%>
+        <%= link_to 'Test the bot', root_path, class: "Undo"%>
       </div>
     </div>
     <div class="col-2">
@@ -39,14 +42,21 @@
     </div>
   </div>
 </nav> 
+
+<div class ="container">
+	<%= render 'layouts/messages' %> 
+</div>
+
+<!-- Main content -->
+
 <div class = "container overflow mt-4" id = "border">
-  <div class ="row">
-    <div class = "col-2 text-center">
-      <%= image_tag('bot.png', class: "rounded-circle")%>
-      <strong><%= @bot.name %></strong>
-    </div>
-    <div class = "col-8">
-        <%= form_with scope: :botsettings, url: bot_path(@bot.id), method: :put,  local: true do |f| %>
+    <div class ="row">
+		<div class = "col-2 text-center">
+		<%= image_tag('bot.png', class: "rounded-circle")%>
+		<strong><%= @bot.name %></strong>
+		</div>
+		<div class = "col-8">
+			<%= form_with scope: :botsettings, url: bot_path(@bot.id), method: :put,  local: true do |f| %>
 				<!-- phone -->
 				<div class="row mt-4 ml-1">
 					<div class="arrow-left"></div>
@@ -55,7 +65,6 @@
 						for conversation 
 					</div>
 				</div>
-
 				<div class="ml-3 mt-4">
 					<div class="row">
 						<div class="col-1">
@@ -65,7 +74,6 @@
 							<div class="custom_font">Business 1</div> 
 							<%= @bot.phone%>
 						</div>
-						
 					</div>	
 				</div>
 				<!-- language -->
@@ -76,7 +84,7 @@
 					</div>
 				</div>
 				<div >
-				    <% i = 0 %>
+					<% i = 0 %>
 					<%= collection_radio_buttons(:botsettings, :language, Language.all, :language, :language) do |b| %>
 							<% if i < 3%>
 							<span class="radio-toolbar mb-1 mr-4 mt-4">
@@ -86,15 +94,15 @@
 							<% else %>
 								<%if i==3%>
 									<span class="dropdown shadow p-2 mb-4 bg-white rounded text-center">
-								  <button class="btn btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								    More Languages
-								  </button>  
-								  <div class="dropdown-menu overflow_two" aria-labelledby="dropdownMenuButton">
-							  <% end %>    
-							     <span class="radio-toolbar text-center">
-								   	<%= b.radio_button%>
-								   	<%= b.label(:"data-value" => b.value , class: "shadow p-2 ml-3 rounded text-center")%> <br>
-								   	</span>
+								<button class="btn btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									More Languages
+								</button>  
+								<div class="dropdown-menu overflow_two" aria-labelledby="dropdownMenuButton">
+							<% end %>    
+								<span class="radio-toolbar text-center">
+									<%= b.radio_button%>
+									<%= b.label(:"data-value" => b.value , class: "shadow p-2 ml-3 rounded text-center")%> <br>
+									</span>
 								<% if i== Language.all.count - 1%>   		
 									</div>	
 								</span>
@@ -187,7 +195,7 @@
 						<span class="mr-2 ml-2" style="width: 15px;">
 							<%= select_minute(5, field_name: 'rebootconv') %>
 						</span>
-						 minutes, bot will reboot the conversation</p>
+						minutes, bot will reboot the conversation</p>
 				</div>
 				<!-- submit -->
 				<div class="ml-3 mb-1">
@@ -195,6 +203,6 @@
 					<%= f.submit value: "Set up Messages  >", class: "btn btn-secondary ml-3"%>
 				</div>
 			<% end %>
+		</div>		
     </div>    
-    
 </div>
