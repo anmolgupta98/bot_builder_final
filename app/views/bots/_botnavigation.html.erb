@@ -1,11 +1,22 @@
 <nav class="navbar navbar-expand-lg" style = "background-color: #3b445b; color: #ebebeb; height: 55px;">
   <%= link_to '←', root_path, style: "font-size: 200%; color: #ebebeb; margin-top: -0.4%; text-decoration: none;" %>&nbsp;&nbsp;
-  <span class="nav-item" href="#" style = "margin-right: 77%;">Referralyogi &nbsp;
-    &nbsp; <a style= "font-size: 140%; color: #ebebeb;">|</a> &nbsp;&nbsp; 
-    <%= image_tag('bot.png', class: "rounded-circle", size: "30") %> &nbsp;&nbsp; <%= @bot.name %> 
-    &nbsp;&nbsp;
-    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil" fill="#ebebeb" xmlns="http://www.w3.org/2000/svg">
-    <path fill-rule="#ebebeb" d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5L13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175l-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
-   </svg>
-  </span>
+  &nbsp;&nbsp;<div class="nav-item" >Referralyogi </div>
+  &nbsp;&nbsp;<div class = "nav-item" style= "font-size: 140%; color: #ebebeb;" >|</div>
+  &nbsp;&nbsp;&nbsp;<div><%= image_tag('bot.png', class: "rounded-circle", size: "30") %> </div>
+  &nbsp;&nbsp;&nbsp;<div id = "name"><%= @bot.name %></div>
+  <div class = "col-2 hide" id = "nameform">
+    <%= form_with scope: :botname, url: bot_path(@bot.id), method: :patch,  local: true do |f| %>
+        <%= f.text_field :name, class: "text-center form_edit_name", placeholder:  @bot.name  %>
+    <% end %>
+    </div>  
+  &nbsp;&nbsp;&nbsp;<div> <%= image_tag('edit2.png', size: "25", class: "text-center", id: "edit")  %></div>
 </nav>
+
+<script type="text/javascript">
+// show form
+document.getElementById('edit').onclick = function() {
+document.getElementById('name').classList.add('hide');
+document.getElementById('nameform').classList.remove('hide');
+}
+</script>					
+
