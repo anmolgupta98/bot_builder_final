@@ -1,0 +1,11 @@
+<div class="container p-3" style="height: 85px; width: 400px; overflow-y: auto; overflow-x: hidden;">
+    <% for phrase in Triggerphrase.where(bot_id: @bot.id)%>
+    <span class="triggerphrase ml-1 mr-1 mt-4 mb-4">
+            <span class= "triggerfont ml-2 mr-2"><%= phrase.trigger %>
+        <span class="hide mb-4" id= <%= "triggerphrase_delete" + (phrase.id).to_s%> >
+        <%= link_to image_tag('cross.png', size: "10"), destroy_path(phrase.id, @bot.id), method: :get, remote: true, class: ""%>	
+        </span>		
+    </span>	
+    </span>  
+    <% end %>
+</div>

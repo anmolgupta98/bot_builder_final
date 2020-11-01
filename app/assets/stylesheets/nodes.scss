@@ -1,0 +1,122 @@
+// Place all the styles related to the nodes controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+//After clicking add button
+.Rectangle-801 {
+    width: 300px;
+    height: 600px;
+    margin-left: 484px; 
+    margin-top: -18px; 
+    border-radius: 7px;
+    box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.16);
+    background-color: #dcf8c6;
+}
+
+.Bot-Response {
+    margin-top: 2px;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.14;
+    letter-spacing: normal;
+    text-align: left;
+    color: #3b3939;
+}
+
+.Path-485 {
+    width: 300px;
+    height: 0;
+    border: solid 1px #c9c9c9;
+    background-color: #c9c9c9;
+}
+
+.Rectangle-802 {
+    width: 276px;
+    height: 151px;
+    border-radius: 2px;
+    border: solid 0.5px #9a9a9a;
+    background-color: #ebfddd;
+}
+
+.Path-484 {
+    width: 247px;
+    height: 0;
+    border: solid 1px #9a9a9a;
+    background-color: #9a9a9a;
+}
+
+.options_text {
+    height: 15px;
+    font-size: 13px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.23;
+    letter-spacing: normal;
+    text-align: left;
+    color: var(--primary-text);
+}
+
+.Set-next-Action {
+    height: 12px;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.33;
+    letter-spacing: normal;
+    text-align: left;
+    color: #434343;
+}
+
+.Path-445 {
+    width: 153.5px;
+    height: 0;
+    border: solid 0.5px #939393;
+    margin-right: -60px;
+}
+
+.radio_options {
+    height: 17px;
+    font-family: HelveticaNeue;
+    font-size: 14px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.21;
+    letter-spacing: normal;
+    text-align: center;
+    color: var(--primary-text);
+}
+
+.botresponses_exit_area{
+    background-color: #ebfddd;
+    font-size: 13px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.23;
+    letter-spacing: normal;
+    text-align: left;
+    border-color: 1px solid grey;
+}
+
+.botresponses_messages_area{
+    background-color: #ebfddd;
+    border-color: transparent;
+}
+
+.botresponses_messages_area:focus{
+    background-color: #ebfddd;
+    border-color: 1px solid grey;
+    width: 279px;
+}
+
+.botresponses_messages_area_full{
+    width: 280px;
+    margin: 0px 10px 10px 10px;
+    background-color: #ebfddd;
+    border: 1px solid grey;
+}

@@ -8,7 +8,7 @@
   <div class="row">
     <div class="col-8">
       <ul class="steps">
-        <li class="past">
+        <li class="past" style = "width: 20px;">
           <span>
             <strong>Steps</strong>
           </span>
@@ -31,8 +31,12 @@
     </div>
     <div class="col-2 border text-center">
       <div class="text-center navbar_content_height_undo" style=  "margin-top: -1%;">
-        <%= image_tag('p.png')%>
-        <%= link_to 'Test the bot', root_path, style: "color: black;" %>
+	    <%= link_to test_path(@bot.id) do %>
+			<div style = "height: 45px; width: 250px;" >
+			<%= image_tag('p.png')%>
+			<%= link_to 'Test the bot', test_path(@bot.id), style: "color: black; text-decoration: none;" %>
+			</div>
+		<% end %>
       </div>
     </div>
     <div class="col-2 border">
@@ -49,160 +53,7 @@
 
 <!-- Main content -->
 
-<div class = "container overflow mt-4" id = "border">
-    <div class ="row">
-		<div class = "col-2 text-center">
-		<%= image_tag('bot.png', class: "rounded-circle")%>
-		<strong><%= @bot.name %></strong>
-		</div>
-		<div class = "col-8">
-			<%= form_with scope: :botsettings, url: bot_path(@bot.id), method: :put,  local: true do |f| %>
-				<!-- phone -->
-				<div class="row mt-4 ml-1">
-					<div class="arrow-left"></div>
-					<div class="p-3 mb-1 grey_background my_border_radius text-center">
-						I use this phone number <br> 
-						for conversation 
-					</div>
-				</div>
-				<div class="ml-3 mt-4">
-					<div class="row">
-						<div class="col-1">
-							<%= image_tag('symbol.png', size: "40", class: "rounded-circle")%>
-						</div>
-						<div class="col-11 mb-4">
-							<div class="custom_font">Business 1</div> 
-							<%= @bot.phone%>
-						</div>
-					</div>	
-				</div>
-				<!-- language -->
-				<div class="row mt-4 ml-1 mb-3">
-					<div class="arrow-left"></div>
-					<div class="p-3 mb-1 grey_background my_border_radius text-center">
-						Select language to reply in
-					</div>
-				</div>
-				<div >
-					<% i = 0 %>
-					<%= collection_radio_buttons(:botsettings, :language, Language.all, :language, :language) do |b| %>
-							<% if i < 3%>
-							<span class="radio-toolbar mb-1 mr-4 mt-4">
-								<%= b.radio_button %> 
-								<%= b.label(:"data-value" => b.value ,class: "shadow p-2 mb-4 rounded text-center")%>
-							</span>
-							<% else %>
-								<%if i==3%>
-									<span class="dropdown shadow p-2 mb-4 bg-white rounded text-center">
-								<button class="btn btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-									More Languages
-								</button>  
-								<div class="dropdown-menu overflow_two" aria-labelledby="dropdownMenuButton">
-							<% end %>    
-								<span class="radio-toolbar text-center">
-									<%= b.radio_button%>
-									<%= b.label(:"data-value" => b.value , class: "shadow p-2 ml-3 rounded text-center")%> <br>
-									</span>
-								<% if i== Language.all.count - 1%>   		
-									</div>	
-								</span>
-								<% end %>
-							<% end %>
-						<% i=i+1%>
-					<% end %>
-				</div>
-				<!-- initiate conversation -->
-				<div class="row mt-4 ml-1">
-					<div class="arrow-left"></div>
-					<div class="p-3 mb-1 grey_background my_border_radius text-center">
-						Who will initiate conversation
-					</div>
-				</div>
-				<div class="mt-2 ml-4">
-					<%= f.radio_button :initconv , "Bot"%>
-					<%= f.label :initconv , "Bot", value: "Bot", class: "ml-2"%>
-				</div>
-				<div class="mt-2 ml-4">	
-					<%= f.radio_button :initconv , "Customer"%>
-					<%= f.label :initconv , "Customer", value: "Customer", class: "ml-2"%>
-				</div>
-				
-				<!-- trigger point -->
-				<div class="row mt-4 ml-1">
-					<div class="arrow-left"></div>
-					<div class="p-3 mb-1 grey_background my_border_radius text-center">
-						When to send the first message ? (Trigger point for bot)
-					</div>
-				</div>
-				<div class="mt-2 ml-4">
-					<%= f.radio_button :triggerpoint , "any_message"%>
-					<%= f.label :triggerpoint , "Any message sent from the user", value: "any_message" , class: "ml-2"%>
-				</div>
-				<div class="mt-2 ml-4">	
-					<%= f.radio_button :triggerpoint , "trigger_phrase"%>
-					<%= f.label :triggerpoint , "When someone texts me", value: "trigger_phrase" , class: "ml-2"%>
-				</div>
-				<!-- working schedule -->
-				<div class="row mt-4 ml-1 mb-4">
-					<div class="arrow-left"></div>
-					<div class="p-3 mb-1 grey_background my_border_radius text-center">
-						What would be working schedule ?
-					</div>
-				</div>
-				<div>
-					<div class="mt-2 ml-4">
-						<%= f.radio_button :days , "Everyday", id: "first_schedule"%>
-						<%= f.label :days , "Everyday", value: "Everyday" , class: "ml-2"%>
-					</div>
-					<div class="ml-3 mt-2 mb-4 hide" id="first_time">
-						<%=time_field("bots", "starttime_1", {ampm: true, class: "mr-2"} )%> to
-						<%=time_field("bots", "endtime_1", {ampm: true, class: "ml-2"})%>
-					</div>
-					<div class="mt-2 ml-4">	
-						<%= f.radio_button :days , "Monday_to_Friday", id: "second_schedule"%>
-						<%= f.label :days , "Monday to Friday", value: "Monday_to_Friday" , class: "ml-2"%>
-					</div>
-					<div class="ml-3 mt-2 mb-4 hide" id="second_time">
-						<%=time_field("bots", "starttime_2", {ampm: true, class: "mr-2"} )%> to
-						<%=time_field("bots", "endtime_2", {ampm: true, class: "ml-2"})%>
-					</div>
-					<div class="mt-2 ml-4">	
-						<%= f.radio_button :days , "Saturday_and_Sunday", id: "third_schedule"%>
-						<%= f.label :days , "Saturday and Sunday", value: "Saturday_and_Sunday" , class: "ml-2"%>
-					</div>
-					<div class="ml-3 mt-2 mb-4  hide" id="third_time">
-						<%=time_field("bots", "starttime_3", {ampm: true, class: "mr-2"} )%> to
-						<%=time_field("bots", "endtime_3", {ampm: true, class: "ml-2"})%>
-					</div>
-					<div class="mt-2 ml-4">	
-						<%= f.radio_button :days , "Custom", id: "fourth_schedule"%>
-						<%= f.label :days , "Custom", value: "Custom" , class: "ml-2"%>
-					</div>
-					<div class="ml-3 mt-2 mb-4 hide" id="fourth_date">
-						<%= date_field("bots", "startdate_4", class: "mr-2") %> to
-						<%= date_field("bots", "enddate_4", class: "ml-2") %>
-					</div>
-					<div class="ml-3 mt-2 mb-4 hide" id="fourth_time">
-						<%=time_field("bots", "starttime_4", {ampm: true, class: "mr-2"} )%> to
-						<%=time_field("bots", "endtime_4", {ampm: true, class: "ml-2"})%>
-					</div>
-				</div>
-				
-				<!-- auto reboot -->
-				<div class="ml-3 mt-2 alert alert-warning">
-					<p>Note:</p>
-					<p>If user doesn’t reply in 
-						<span class="mr-2 ml-2" style="width: 15px;">
-							<%= select_minute(5, field_name: 'rebootconv') %>
-						</span>
-						minutes, bot will reboot the conversation</p>
-				</div>
-				<!-- submit -->
-				<div class="ml-3 mb-1">
-					Awesome, Lets set up the messages now.
-					<%= f.submit value: "Set up Messages  >", class: "btn btn-secondary ml-3"%>
-				</div>
-			<% end %>
-		</div>		
-    </div>    
-</div>
+<%= render 'bots/usernode' %>
+<div class = "Ellipse-160"></div>
+<div class = "Path-510"></div>
+<%= render 'bots/botnode' %>

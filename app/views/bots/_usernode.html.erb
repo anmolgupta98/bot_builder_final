@@ -1,0 +1,21 @@
+<div class="Rectangle-827" id="triggerphrase_usermessage" >
+	<span class="Initial-Message-from-Customer" style = "margin-left: 95px;">
+		Initial Message from Customer 
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <%= link_to 'Done', triggerphrase_path(@bot.id), method: :patch, remote: true, class:"btn btn-success btn-sm hide", id: "stop_edit" %>
+    <%= link_to image_tag('edit2.png', size: "20", id: "triggerphrase_edit_icon", style: "margin-left: 30px;"), edit_triggerphrase_path(@bot.id), method: :get, remote: true %>		
+	</span>
+	<div class="Path-389"></div>
+  <div class = "triggerphrases_partial"><%= render 'bots/triggerphrases'%></div>
+	<div class="Path-389 mt-2 mb-1 hide" id="triggerphrase_usermessage_second_card_divider"></div>
+	<div class="text-center mb-1 hide" id="triggerphrase_add_a_new_phrase">
+		<%= form_with scope: :triggerform, url: create_path(@bot.id), method: :get, remote: true do |f| %>
+      <span class="mx-auto text-center" style="width: 300px; margin-right: 5px;" >
+        <%= f.text_field :trigger, class: "form_trigger text-center", placeholder: "Enter a message", remote: true, style: "border-radius: 10px;", id: "addtriggerphrasefield" %> 
+      </span>
+      <span class="form-group mx-auto mt-4" style="width: 300px;">
+        <%= f.submit value: "Add", class: "btn btn-sm btn-outline-success ml-2", remote: true %>
+      </span>
+    <% end %>
+	</div>
+</div>

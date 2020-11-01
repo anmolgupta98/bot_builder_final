@@ -55,6 +55,9 @@ class BotsController < ApplicationController
       if params[:botname]
          if @bot.update(params.require(:botname).permit(:name))
             flash.now[:notice] = "Name updated successfully"
+            respond_to do |format|
+               format.js
+            end
          end   
       end   
     end    

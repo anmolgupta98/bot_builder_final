@@ -1,0 +1,11 @@
+document.getElementById('stop_edit').onclick = function() {
+document.getElementById('triggerphrase_usermessage').classList.replace('Rectangle-add','Rectangle-827');  
+document.getElementById('triggerphrase_edit_icon').classList.remove('hide');
+document.getElementById('stop_edit').classList.add('hide');
+document.getElementById('triggerphrase_usermessage_second_card_divider').classList.add('hide');
+document.getElementById('triggerphrase_add_a_new_phrase').classList.add('hide');
+<% for phrase in Triggerphrase.where(bot_id: @bot.id)%>
+	str = <%= "triggerphrase_delete" + (phrase.id).to_s %>;
+	document.getElementById(str.id).classList.add('hide');
+<% end %>
+}

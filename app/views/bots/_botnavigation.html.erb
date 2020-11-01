@@ -5,7 +5,7 @@
   &nbsp;&nbsp;&nbsp;<div><%= image_tag('bot.png', class: "rounded-circle", size: "30") %> </div>
   &nbsp;&nbsp;&nbsp;<div id = "name"><%= @bot.name %></div>
   <div class = "col-2 hide" id = "nameform">
-    <%= form_with scope: :botname, url: bot_path(@bot.id), method: :patch,  local: true do |f| %>
+    <%= form_with scope: :botname, url: bot_path(@bot.id), method: :patch,  remote: true do |f| %>
         <%= f.text_field :name, class: "text-center form_edit_name", placeholder:  @bot.name  %>
     <% end %>
     </div>  
