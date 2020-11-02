@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   resources :bots, except: [:index]
   resources :triggerphrases, except: [:destroy, :create]
   resources :nodes, except: [:new]
+  resources :messages, except: [:new, :create, :destroy]
+  post '/destroy_message/:node_id/:bot_id/:id', to: 'messages#destroy', as: 'messages_destroy'
+  post '/new_message/:node_id/:bot_id', to: 'messages#new', as: 'messages_new'
   get '/new/:node_type/:bot_id/:parent_id', to: 'nodes#new', as: 'new'
   get '/create/:id', to: 'triggerphrases#create', as: 'create'
   get '/destroy/:id/:bot_id', to: 'triggerphrases#destroy', as: 'destroy'
