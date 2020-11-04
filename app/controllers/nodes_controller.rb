@@ -13,6 +13,7 @@ class NodesController < ApplicationController
         @bot = Bot.find(params[:bot_id])
         @node = Node.find(params[:id])
         @node.destroy
+        @node = nil
         respond_to do |format|
             format.js
         end

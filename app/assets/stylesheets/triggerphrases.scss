@@ -7,8 +7,6 @@
 .Rectangle-827 {
     width: 400px;
     height: 150px;
-    margin-left: 34px; 
-    margin-top: 36px;
     border-radius: 9px;
     box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.16);
     background-color: var(--white);
@@ -72,8 +70,6 @@
 .Rectangle-add {
     width: 400px;
     height: 174px;
-    margin-left: 34px; 
-    margin-top: 36px;
     border-radius: 9px;
     box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.16);
     background-color: var(--white);
@@ -94,11 +90,10 @@
 	border-radius: 10px;
 }
 
-//Connector between messages - user and bot
+//Connector between messages - user and bot messages
 
-.Ellipse-160 {
-    margin-left: 434px; 
-    margin-top: -138px;
+.Ellipse-160 { 
+    margin-top: 0.9%;
     width: 12px;
     height: 12px;
     box-shadow: 0 0 6px 0 rgba(0, 168, 52, 0.44);
@@ -108,8 +103,7 @@
 }
 
 .Path-510 {
-    margin-left: 446px; 
-    margin-top: -7px; 
+    margin-top: 1.2%; 
     width: 38.1px;
     height: 0;
     background-color: #00914c;
@@ -118,8 +112,6 @@
 }
 
 .Rectangle-703 {
-    margin-left: 484px; 
-    margin-top: -18px; 
     width: 300px;
     height: 43px;
     border-radius: 5px;
@@ -137,7 +129,8 @@
     border: solid 1px #eaeaea;
 }
 
-//Default text message
+//Default text message if no triggerphrase has been added
+
 .default-text {
     width: 192px;
     height: 40px;

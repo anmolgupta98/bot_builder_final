@@ -1,0 +1,10 @@
+<% if @node%>
+    <% if @node.set_next_action == "add_a_node"%>
+        <div class="connector_black_circle" style = "margin-left: -9px;"></div>
+        <div class="connector_black_link"></div>
+        <div class="connector_black_link_vertical", style="margin-right: 15px; height: 53px;"></div>	
+        <div id="usermessagemain_partial">
+            <%= render 'bots/usermessagesmain'%>
+        </div>
+    <% end %>
+<% end %> 
