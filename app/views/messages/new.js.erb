@@ -1,2 +1,2 @@
 document.getElementById('messages_area').innerHTML = "<%= j render 'bots/messages_area' %>";
-document.getElementById('showing_previous_messages').innerHTML = "<%= j render 'bots/showing_previous_messages' %>";
+document.getElementById('showing_previous_messages').innerHTML = "<%= j render 'bots/showing_previous_messages', delete_button: true %>";

@@ -1,5 +1,5 @@
-document.getElementById('showing_previous_messages').innerHTML = "<%= j render 'bots/showing_previous_messages' %>";
 document.getElementById('add_collapsed').innerHTML = "<%= j render 'bots/add_collapsed' %>";
 document.getElementById('after_add').classList.add('hide');
 document.getElementById('after_add_collapsed').classList.remove('hide');
+document.getElementById('showing_previous_messages').innerHTML = "<%= j render 'bots/showing_previous_messages', delete_button: false %>";
 //console.log('beautiful long journey.. miles to go');

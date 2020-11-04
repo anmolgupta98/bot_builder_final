@@ -9,7 +9,7 @@
         <div class="col-1 text-center">
             <% if Node.where(bot_id: @bot.id, parent_id: 0).first %>
                 <% @node = Node.where(bot_id: @bot.id, parent_id: 0).first %>
-                <%= link_to image_tag('del.png', size: "15", class: "mt-2", style: "margin-right: 0px;"), node_destroy_path(@node.id, @bot.id), method: :delete, remote: true %>
+                <%= link_to image_tag('del.png', size: "15", class: "mt-2", style: "margin-right: 0px;"), node_destroy_path(@node.id, @bot.id), method: :delete, data: { confirm: "All attached child nodes will be lost. Are you sure?" }, remote: true %>
             <% end %>
             <%# <%= image_tag('expand.png', size: "20", class: "mt-2", id: "expand") %> 
         </div>
@@ -18,7 +18,7 @@
     <!-- Previous text messages-->
     <div class="Path-485 mb-2"></div>
         <div id = "showing_previous_messages">
-            <%= render 'bots/showing_previous_messages' %>
+            <%= render 'bots/showing_previous_messages', delete_button: true %>
         </div>
     
     <!-- Text box area -->
@@ -90,8 +90,24 @@
         <% end %>
     <% end %>
 </div> 
+<script type="text/javascript">
+	<% if Node.where(bot_id: @bot.id, parent_id: 0).first%>
+		<% if @node.set_next_action == "add_a_node" %>
+			document.getElementById("add_a_node").checked = true;
+			document.getElementById("transfer_to_agent").checked = false;
+			document.getElementById("exit_bot").checked = false;
+			document.getElementById('exit_message').classList.add('hide');
+		<% elsif @node.set_next_action == "transfer_to_agent"%>
+			document.getElementById("add_a_node").checked = false;
+			document.getElementById("transfer_to_agent").checked = true;
+			document.getElementById("exit_bot").checked = false;
+			document.getElementById('exit_message').classList.add('hide');
+		<% elsif @node.set_next_action == "exit_bot"%>
+			document.getElementById("add_a_node").checked = false;
+			document.getElementById("transfer_to_agent").checked = false;
+			document.getElementById("exit_bot").checked = true;
+		<% end %>
 
-<script>
 	 document.getElementById('exit_bot').onclick = function() {
 	 	document.getElementById('exit_message').classList.remove('hide');
 	 }
@@ -101,5 +117,5 @@
 	 document.getElementById('transfer_to_agent').onclick = function() {
 	 	document.getElementById('exit_message').classList.add('hide');
 	 }
-
+	 <% end %>
 </script>
