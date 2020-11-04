@@ -21,29 +21,27 @@
 				<div class="col-7" style = "margin-left: 8%; margin-top: 2%; left:30%">
 					<div style = "margin-top: 11%;"></div> 
 					<strong>My Whatsapp Bots </strong>
-					<div class = "row mt-4" style = "width: 130%">
-						<div class = "col-1">
-
-						</div>
-						<div class="col-2">
-							Bot Name
+					<div class = "row mt-4" style = "width: 130%;">
+                        
+						<div class="col-3">
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bot Name
 						</div>
 						<div class="col-3" >
-							Last modified
+							&nbsp;&nbsp;&nbsp;&nbsp;Last modified
 						</div>
 						<div class="col-3" >
-							&nbsp;&nbsp; Status
+							 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Status
 						</div>
-						<div class="col-3" >
-							&nbsp;&nbsp; Action
+						<div class="col-3 text-center" >
+							 Action
 						</div>
 					</div>
 					<br>
 					<% for bot in @bots do %>
 						<div class="Rectangle-648" style = "width: 130%; margin-top: 2%;">
 							<div class = "row" >
-								<div class="col-3" style = "padding-left: 8%;margin-top: 2%;">
-									&nbsp;&nbsp;&nbsp;<%= bot.name %>
+								<div class="col-3" style = "padding-left: 8%;margin-top: 2%; margin-left: 1%;">
+									<%= bot.name %>
 								</div>
 								<div class="col-3" style = "margin-top: 2%;" >
 									<%= time_ago_in_words(bot.updated_at) %>
@@ -65,23 +63,23 @@
 									<span class="slider round"></span>
 									</label>
 								</div>
-								<div class="col-3" style = "margin-top: 1%;" >
+								<div class="col-1" style = "margin-top: 2%;" >
 									<%= link_to 'Edit', composemessage_path(bot.id), class:"btn btn-dark btn-sm"  %>
-	                                <span class="dropdown">
-										<button class="btn dropdown-toggle" type="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-											<%= image_tag("hamburger.png", size: "30" ) %>
-										</button>
-										<style>.dropdown-toggle::after { 
-											content: none;
-										    } 
-										</style>
-										<div class="dropdown-menu">
-										    <%= link_to 'Statistics', statistics_path(bot.id), id:"customlink", class: "dropdown-item" %> 
-											<%= link_to 'Test the bot', test_path(bot.id), id:"customlink", class: "dropdown-item"  %>
-											<%= link_to 'Clone', bots_path, id:"customlink", class: "dropdown-item"  %>  
-                                            <%= link_to 'Delete', bots_path(bot.id), method: :delete, data: { confirm: "Are you sure about deleting this bot. This is an irreversible action!" }, id:"customlink", class: "dropdown-item"   %>    
-										</div>
-									</span>
+								</div>	
+								<div class="col-1 dropdown" style = "margin-top: 1%;" >    
+									<button class="btn dropdown-toggle" type="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										<%= image_tag("hamburger.png", size: "30" ) %>
+									</button>
+									<style>.dropdown-toggle::after { 
+										content: none;
+										} 
+									</style>
+									<div class="dropdown-menu">
+										<%= link_to 'Statistics', statistics_path(bot.id), id:"customlink", class: "dropdown-item" %> 
+										<%= link_to 'Test the bot', test_path(bot.id), id:"customlink", class: "dropdown-item"  %>
+										<%= link_to 'Clone', bots_path, id:"customlink", class: "dropdown-item"  %>  
+										<%= link_to 'Delete', bot_path(bot.id), method: :delete, data: { confirm: "Are you sure about deleting this bot. This is an irreversible action!" }, id:"customlink", class: "dropdown-item" %>    
+									</div>
 								</div>
 							</div>
 						</div >

@@ -65,11 +65,12 @@ class BotsController < ApplicationController
    def destroy
       @bot = Bot.find(params[:id])
       @bot.destroy
-      redirect_to list_path
+      redirect_to root_path
    end 
 
    def composemessage
       @bot = Bot.find(params[:id])
+      @node = Node.where(bot_id: @bot.id).first
    end
    
    def activatebot
@@ -79,11 +80,7 @@ class BotsController < ApplicationController
    def statistics
       @bot = Bot.find(params[:id]) 
    end   
-   
-   def list
-     @bots = Bot.where(user_id: current_user.id)
-   end   
-
+     
    def test
       @bot = Bot.find(params[:id])
    end

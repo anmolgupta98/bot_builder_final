@@ -1,16 +1,18 @@
 <!--New text message partial -->
-<div class="text-center mx-auto">
-    <%= form_with scope: :text_messages, url:  messages_new_path(@node.id, @bot.id), method: :post, remote: true do |f|%>
-    <div class="botresponses_messages_area_full mt-1">
-        <%= text_area(:text_messages, :text_message, cols: 30, rows: 4, class: 'botresponses_messages_area')%>
-        <div class="Path-484 ml-2 mt-2 mb-1"></div>
-        <div class = "row">
-            <div class = "col-6"></div>
-            <div class = "col-1"><%= link_to image_tag('boldicon.png', size: "12", class: ""), root_path %></div>
-            <div class = "col-1"><%= link_to image_tag('italicicon.png', size: "12", class: ""), root_path %></div>
-            <div class = "col-1"><%= link_to image_tag('underlineicon.png', size: "15", class: ""), root_path %></div>
-            <div class = "col-1"><%= image_submit_tag('send.png', class: "rounded-circle", style: "width: 25px;") %></div>
+<% if @node %>
+    <div class="text-center mx-auto">
+        <%= form_with scope: :text_messages, url:  messages_new_path(@node.id, @bot.id), method: :post, remote: true do |f|%>
+        <div class="botresponses_messages_area_full mt-1">
+            <%= text_area(:text_messages, :text_message, cols: 30, rows: 4, class: 'botresponses_messages_area')%>
+            <div class="Path-484 ml-2 mt-2 mb-1"></div>
+            <div class = "row">
+                <div class = "col-6"></div>
+                <div class = "col-1"><%= link_to image_tag('boldicon.png', size: "12", class: ""), root_path %></div>
+                <div class = "col-1"><%= link_to image_tag('italicicon.png', size: "12", class: ""), root_path %></div>
+                <div class = "col-1"><%= link_to image_tag('underlineicon.png', size: "15", class: ""), root_path %></div>
+                <div class = "col-1"><%= image_submit_tag('send.png', class: "rounded-circle", style: "width: 25px;") %></div>
+            </div>
         </div>
+        <% end %>
     </div>
-    <% end %>
-</div>
+<% end %>

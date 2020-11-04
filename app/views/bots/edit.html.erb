@@ -1,6 +1,8 @@
 <!-- First navbar -->
 
-<%= render 'bots/botnavigation' %>
+<div id = "bot_navigation">
+  <%= render 'bots/botnavigation' %>
+</div>
 
 <!--Second navbar -->
 
@@ -227,9 +229,7 @@
 <script type="text/javascript">
 // show form
 <% if (@bot.phone == nil && @bot.language == nil && @bot.initconv == nil && @bot.triggerpoint==nil && @bot.starttime==nil && @bot.endtime==nil && @bot.startdate == nil && @bot.enddate== nil && @bot.rebootconv==nil && @bot.days==nil && @bot.status==nil)%>
-setTimeout(function(){
 document.getElementById('actualform').classList.add('hide');
-}, 1);
 <% end %>
 document.getElementById('startsetup').onclick = function() {
 document.getElementById('actualform').classList.remove('hide');

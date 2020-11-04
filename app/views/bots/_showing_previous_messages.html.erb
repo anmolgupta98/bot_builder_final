@@ -1,18 +1,20 @@
 <!-- Rendering all previous text messages-->
-<% if Message.where(node_id: @node.id, bot_id: @bot.id) %>
-    <% @messages = Message.where(node_id: @node.id, bot_id: @bot.id) %>
-    <% for message in @messages %>
-        <div class="mx-auto">
-        <div class="botresponses_messages_area_full mt-1 p-1">
-            <div class = "row">
-                <div class = "col-10">
-                    <%= message.text_message %>
+<% if @node %>
+    <% if Message.where(node_id: @node.id, bot_id: @bot.id) != [] %>
+        <% @messages = Message.where(node_id: @node.id, bot_id: @bot.id) %>
+        <% for message in @messages %>
+            <div class="mx-auto">
+            <div class="botresponses_messages_area_full mt-1 p-1">
+                <div class = "row">
+                    <div class = "col-10">
+                        <%= message.text_message %>
+                    </div>
+                    <div class = "col-1">
+                        <%= link_to image_tag('del.png', size: "13", class: "mt-2 mr-2"), messages_destroy_path(@node.id, @bot.id, message.id), method: :post, remote: true %>
+                    </div>
                 </div>
-                <div class = "col-1">
-                    <%= link_to image_tag('del.png', size: "13", class: "mt-2 mr-2"), messages_destroy_path(@node.id, @bot.id, message.id), method: :post, remote: true %>
-                </div>
+            </div> 
             </div>
-        </div> 
-        </div>
+        <% end %>
     <% end %>
 <% end %>

@@ -1,3 +1,4 @@
+<!-- This is the user messages node-->
 <div class="Rectangle-827" id="triggerphrase_usermessage" >
 	<span class="Initial-Message-from-Customer" style = "margin-left: 95px;">
 		Initial Message from Customer 
@@ -9,7 +10,7 @@
   <div id = "triggerphrases_partial"><%= render 'bots/triggerphrases'%></div>
 	<div class="Path-389 mt-2 mb-1 hide" id="triggerphrase_usermessage_second_card_divider"></div>
 	<div class="text-center mb-1 hide" id="triggerphrase_add_a_new_phrase" >
-		<%= form_with scope: :triggerform, url: create_path(@bot.id), method: :get, remote: true do |f| %>
+		<%= form_with scope: :triggerform, url: triggerphrase_create_path(@bot.id), method: :get, remote: true do |f| %>
       <span class="mx-auto text-center" style="width: 300px; margin-right: 5px;" >
         <%= f.text_field :trigger, class: "form_trigger text-center", placeholder: "Enter a message", remote: true, style: "border-radius: 10px;", id: "addtriggerphrasefield" %> 
       </span>

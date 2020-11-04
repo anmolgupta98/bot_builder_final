@@ -1,27 +1,27 @@
 <div>
+	<!-- Add Bot response -->
 	<div id = "add" class = "Rectangle-703">
 		<%= image_tag('symbol.png', class: "Path-134 rounded-circle", size: "35") %>&nbsp;&nbsp;&nbsp;&nbsp;
 		<span class = "triggerfont text-center" style = "margin-top: 3px;">Bot response</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<%= link_to 'Add', new_path("bot", 2, 0), remote: true, class:"btn btn-secondary btn-sm ", style: "background-color: #3b3939;" %>
+		<%= link_to 'Add', new_bot_node_path("bot", @bot.id, 0), remote: true, class:"btn btn-secondary btn-sm ", style: "background-color: #3b3939;" %>
 	</div>
+	<!--After adding bot response expanded view-->
 	<div id = "add_expansion">
 		<%= render 'bots/add_expansion' %>
-	</div>	
+	</div>
+	<!--After adding bot response collapsed view when someone clicks on save-->	
+	<div id = "add_collapsed" >
+        <%= render 'bots/add_collapsed' %>
+	</div>
 </div>   
 
-<script type="text/javascript">
-	 document.getElementById('exit_bot').onclick = function() {
-	 	document.getElementById('exit_message').classList.remove('hide');
-	 }
-	 document.getElementById('add_a_node').onclick = function() {
-	 	document.getElementById('exit_message').classList.add('hide');
-	 }
-	 document.getElementById('transfer_to_agent').onclick = function() {
-	 	document.getElementById('exit_message').classList.add('hide');
-	 }
-	 
-    <% if Node.where(bot_id: @bot.id, parent_id: 0).first %>
-        document.getElementById('after_add').classList.remove('hide');
+<script type="text/javascript">	 
+	<% if Node.where(bot_id: @bot.id, parent_id: 0).first %>
+	    <% if Message.where(bot_id: @bot.id, node_id: @node.id) %>
+			document.getElementById('after_add_collapsed').classList.remove('hide');
+		<% else %>	
+			 document.getElementById('after_add').classList.remove('hide');
+		<% end %>	 
         document.getElementById('add').classList.add('hide');
 	<% end %> 
 </script>
