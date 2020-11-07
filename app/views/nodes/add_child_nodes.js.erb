@@ -1,0 +1,9 @@
+nodes_number = parseInt(document.getElementById('add_child').value);
+document.getElementById('usermessagemain_partial').innerHTML = "<%= j render 'bots/usermessagesmain' %>"
+height = document.getElementById('connector_black_link_vertical').style.height;
+height = parseInt(height);
+var i;
+for (i=0; i< nodes_number; i++){
+	height = height + 52;
+}
+document.getElementById('connector_black_link_vertical').style.height =  height + "px"; 

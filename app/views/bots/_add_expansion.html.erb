@@ -15,11 +15,20 @@
         </div>
     </div>
     
-    <!-- Previous text messages-->
     <div class="Path-485 mb-2"></div>
-        <div id = "showing_previous_messages">
-            <%= render 'bots/showing_previous_messages', delete_button: true %>
-        </div>
+    <div class="options_text ml-3 mt-3">
+        Node name
+    </div>
+    <div class="ml-3 mb-2">
+        <%= form_with scope: :node, url: node_update_path(@node.id, @bot.id), method: :put,  remote: true do |f| %>
+            <%= f.text_field :name, class: "text-center form_node_name", placeholder:  @node.name  %>
+        <% end %>   
+    </div> 
+
+    <!-- Previous text messages-->
+    <div id = "showing_previous_messages">
+        <%= render 'bots/showing_previous_messages', delete_button: true %>
+    </div>
     
     <!-- Text box area -->
     <div id = "messages_area">

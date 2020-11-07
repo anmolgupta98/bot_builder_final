@@ -30,6 +30,20 @@
     background-color: #c9c9c9;
 }
 
+.form_node_name{
+	width: 269px;
+	border:0px solid #f7f2ed;
+	border-radius: 0;
+    border-bottom: 1px solid #bababa;
+    background-color: #dcf8c6;
+	outline:none;
+    transition: all .5s ease;
+	padding: 1em .5em .5em;
+	padding-left: 2em;
+	outline:none;
+	margin-bottom:1.5em auto;  
+}
+
 .Rectangle-802 {
     width: 276px;
     height: 151px;
@@ -245,11 +259,12 @@
 	border-radius: 0;
     border-bottom: 1px solid #bababa;
     background-color: white;
-	outline:none;
     transition: all .5s ease;
-    margin-top: 0px;
-    line-height: 1;
-    height: 10px;
+    padding: 1em .5em .5em;
+	padding-left: 2em;
+	outline:none;
+    margin-bottom:1.5em auto;   
+    height: 14px; 
 }
 
 .user_message_text {
@@ -262,11 +277,24 @@
 
 //form submit button 
 
+.form_trigger_input{
+	width: 269px;
+	border:0px solid #f7f2ed;
+	border-radius: 0;
+    border-bottom: 1px solid #bababa;
+    background-color: white;
+	outline:none;
+    transition: all .5s ease;
+	padding: 1em .5em .5em;
+	padding-left: 2em;
+	outline:none;
+	margin-bottom:1.5em auto;
+}
+
 .submit-text{
     border: none;
     background-color: white;
     margin-left: 40px;
-    margin-top: -9px;
     font-weight: bold;
     font-stretch: normal;
     font-style: normal;
@@ -274,7 +302,7 @@
     letter-spacing: normal;
     text-align: left;
     color: #3b445b;
-    font-size: 14px;
+    font-size: 13px;
 }
 
 .submit-text-line {
