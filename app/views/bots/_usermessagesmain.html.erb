@@ -1,121 +1,128 @@
 <% if @node %>
-<% if @node.children %>
-	<% for child in @node.children%>
-		<div class="row mb-2">
-			<div class="connector_black_link"></div>
+    <!-- After adding child nodes, child nodes with define -->
+	<% if @node.children %>
+		<% for child in @node.children%>
+			<div class="row mb-2" id= <%= "child_define_id" + (child.id).to_s %>>
+				<div class="connector_black_link"></div>
+				<div class="usermessage_white_box">
+					<div class="row">
+						<div class="col-1 text-center mt-2 ml-2">
+							<%= image_tag('greenflash.png', size: "17", class: "rounded-circle")%>
+						</div>
+						<div class="col-4 mt-2", style="padding-right: 5px;">
+							Add node
+						</div>
+						<div class="col-6 mt-2 ml-2", style="padding-left: 5px;">
+							<%= form_with scope: :define_child_node, url: define_child_node_path(child.id), method: :get, remote: true do |f| %>
+							<span class=" text-right ml-5">
+								<%= link_to image_tag('del.png', size: "15"), delete_child_nodes_path(child.id,@node.id,@bot.id ), method: :delete, data: { confirm: "All attached child nodes will be lost. Are you sure?" }, remote: true %>
+							</span>
+							<span class="text-center ml-3">
+								<%= f.submit "Define", value: "Define", class: "usermessage_add_button", remote: true %>
+							</span>
+							<% end %>
+						</div>
+					</div>
+				</div>	
+			</div> 
+            <!--Expanded view of child nodes after clicking define-->    			
+			<div class = "row mb-2 hide"  id= <%= "child_expanded_id" + (child.id).to_s %>>
+				<div class="connector_black_link"></div>
+				<div class = "usermessage_expanded_white_box" >
+					<div class = "row" >
+					    <div id = "user_node_name">
+                             <%= render 'bots/user_node_name', child: child %>
+						</div>
+						<div class = "text-center col-10 hide" id = <%= "childnameform" + (child.id).to_s %>>
+							<%= form_with scope: :childname, url: user_name_update_path(child.id), method: :post,  remote: true do |f| %>
+								<%= f.text_field :name, class: "form__input"  %>
+								<%= f.submit "Done", class: "btn btn-outline-success btn-sm" %>
+							<% end %>
+						</div>  
+						<div id = <%= "editchildname" + (child.id).to_s %> class = "col-1"><%= link_to image_tag('edit2.png', size: "25", class: "text-center mt-3"), user_name_edit_icon_click_path(child.id), method: :get, remote: true  %></div>
+						<div class = "mt-3 col-8 text-right" style = "height: 12px;" id = <%= "cross" + (child.id).to_s %>>
+							<%= image_tag('cross.jpg', size: "17") %>
+						</div>
+					</div>  
+					<div class = "child_divider mt-1"></div>
+					<div class = "text-center mt-4" >
+						<%= form_with scope: :messages, url: node_update_path(@node.id, @bot.id), method: :put,  remote: true do |f| %>
+							<div class = "row">
+								<div class = "col-10">
+									<%= f.text_field :text_message, class: "text-left form_trigger_input", placeholder:  "Add trigger words", style: "width: 230px;"  %>
+								</div>
+								<div class = "col-2 mt-2" >
+									<%= f.submit "Add", class: "submit-text" %>
+								</div>
+							</div>	
+						<% end %>
+					</div>		
+					<div class = "Node-text-font mt-4 ml-3">Expected input type</div>
+					<%= form_with scope: :childsettings, url: node_update_path(@node.id, @bot.id), method: :put,  remote: true do |f| %>
+						<%= f.select :type, [['Text','text'],['Image','image'],['Video','video'],['Upload Pdf','pdf']], {}, {style: "width: 269px; height: 37px;", class: "mt-4 ml-3"} %>
+						<div class="row mb-2">
+							<div class="Node-text-font mt-4 ml-4" >
+								&nbsp;&nbsp;Advanced Settings
+							</div>
+							<div class="col-3 mt-4">
+								<%= link_to image_tag('arrow.png', size: "25", class: "rounded-circle"), root_path %>
+							</div>		
+						</div>
+						<div class="mb-2 mt-4 text-center">
+							<%= f.submit value: "Save", class: "btn btn-outline-secondary mb-3", style: "width: 270px;"%>
+						</div>	
+					<% end %>		
+				</div>
+			</div>	
+		<% end %>
+	<% end %>
+    <!-- Add child node -->	
+	<div class="row mb-2">
+		<div class="connector_black_link"></div>
 			<div class="usermessage_white_box">
 				<div class="row">
 					<div class="col-1 text-center mt-2 ml-2">
 						<%= image_tag('greenflash.png', size: "17", class: "rounded-circle")%>
 					</div>
-					<div class="col-4 mt-2", style="padding-right: 5px;">
+					<div class="col-4 mt-2 Bot-Response", style="padding-right: 5px;">
 						Add node
 					</div>
+					&nbsp;
 					<div class="col-6 mt-2 ml-2", style="padding-left: 5px;">
-						<%= form_with scope: :number_of_nodes, url: root_path, local: true do |f| %>
-						<span class=" text-right ml-5">
-							<%= link_to image_tag('del.png', size: "15"), delete_child_nodes_path(child.id,@node.id,@bot.id ), method: :delete, data: { confirm: "All attached child nodes will be lost. Are you sure?" }, remote: true %>
-						</span>
-						<span class="text-center ml-3">
-							<%= f.submit "Define", value: "Define", class: "usermessage_add_button", local: true%>
-						</span>
-						<% end %>
+						<%= form_with scope: :number_of_nodes, url: add_child_nodes_path(@node.id, @bot.id), method: :post, remote: true do |f| %>
+							<span class=" text-center">
+								<%= link_to "-", node_minus_path(@node.id, @bot.id), id: "decrease", method: :get, remote: true, style: "text-decoration: none;" %>
+								<%= f.text_field :number, class: "number_of_nodes_field text-center", value: 1,style: "width:30px;", id: "add_child", remote: true %>
+								<%= link_to "+", node_plus_path(@node.id, @bot.id), id: "increase", method: :get, remote: true, style: "text-decoration: none;" %>
+							</span>
+							<span class="text-center Bot-Response" style = "margin-left: 19px;">
+								<%= f.submit "Add", value: "Add", class: "usermessage_add_button", remote: true %>
+							</span>
+					<% end %>
 					</div>
 				</div>
 			</div>	
-		</div> 
-	<% end %>
-<% end %>
-<div class="row mb-2">
-<div class="connector_black_link"></div>
-	<div class="usermessage_white_box">
-		<div class="row">
-			<div class="col-1 text-center mt-2 ml-2">
-				<%= image_tag('greenflash.png', size: "17", class: "rounded-circle")%>
-			</div>
-			<div class="col-4 mt-2 Bot-Response", style="padding-right: 5px;">
-				Add node
-			</div>
-			&nbsp;
-			<div class="col-6 mt-2 ml-2", style="padding-left: 5px;">
-				<%= form_with scope: :number_of_nodes, url: add_child_nodes_path(@node.id, @bot.id), method: :post, remote: true do |f| %>
-					<span class=" text-center">
-						<%= link_to "-", node_minus_path(@node.id, @bot.id), id: "decrease", method: :get, remote: true, style: "text-decoration: none;" %>
-						<%= f.text_field :number, class: "number_of_nodes_field text-center", value: 1,style: "width:30px;", id: "add_child", remote: true %>
-						<%= link_to "+", node_plus_path(@node.id, @bot.id), id: "increase", method: :get, remote: true, style: "text-decoration: none;" %>
-					</span>
-					<span class="text-center Bot-Response" style = "margin-left: 19px;">
-						<%= f.submit "Add", value: "Add", class: "usermessage_add_button", remote: true %>
-					</span>
-			   <% end %>
-			</div>
-		</div>
-	</div>	
-</div>
-
-<div class="row">
-	<div class="connector_black_link"></div>
-	<div class="usermessage_error_message">
-		<div class="row">
-			<div class="col-1 text-center mt-2 ml-2">
-				<%= image_tag('redflash.png', size: "17", class: "rounded-circle")%>
-			</div>
-			<div class="col-6 mt-2 Bot-Response", style="padding-right: 5px;">
-				Error Response
-			</div>
-			<div class="col-4 mt-2", style="padding-left: 5px;">
-				<%= form_with scope: :error_message, url: root_path, method: :put, local: true do |f| %>
-                    <span class="text-center Bot-Response" style = "margin-left: 34px;">
-                        <%= f.submit "Define", value: "Define", class: "usermessage_error_button", local: true%>
-                    </span>
-                <% end %>
+	</div>
+    <!-- Error response node -->
+	<div class="row">
+		<div class="connector_black_link"></div>
+		<div class="usermessage_error_message">
+			<div class="row">
+				<div class="col-1 text-center mt-2 ml-2">
+					<%= image_tag('redflash.png', size: "17", class: "rounded-circle")%>
+				</div>
+				<div class="col-6 mt-2 Bot-Response", style="padding-right: 5px;">
+					Error Response
+				</div>
+				<div class="col-4 mt-2", style="padding-left: 5px;">
+					<%= form_with scope: :error_message, url: root_path, method: :put, local: true do |f| %>
+						<span class="text-center Bot-Response" style = "margin-left: 34px;">
+							<%= f.submit "Define", value: "Define", class: "usermessage_error_button", local: true%>
+						</span>
+					<% end %>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
-
-<div class = "usermessage_expanded_white_box hide">
-    <div class = "row" >
-	    <div class = "col-7 Bot-Response ml-3 mt-3 mb-3">
-           Trigger 1
-		</div>
-		<div class = "col-4 text-right mt-3">
-            <%= image_tag('cross.jpg', size: "17") %>
-		</div>
-    </div>  
-	<div class = "child_divider mt-1"></div>
-	<div class = "Node-text-font mt-4 ml-3">Node name</div>
-	<div id = "nodename" class = "text-center" >
-		<%= form_with scope: :child, url: node_update_path(@node.id, @bot.id), method: :put,  remote: true do |f| %>
-			<%= f.text_field :name, class: "text-center form__input", placeholder:  @node.name  %>
-			<div class = "Node-text-font mt-2 ml-3">Expected input type</div>
-			<div style= "width: 200px;" class = "ml-3 mt-3"><%= f.select :type, [['Text','text'],['Image','image'],['Video','video'],['Upload Pdf','pdf']], {}, {style: "width: 269px; height: 37px;", class: "mt-2"} %></div>
-		    <br><br>
-			<div class = "" >
-				<%= form_with scope: :messages, url: node_update_path(@node.id, @bot.id), method: :put,  remote: true do |f| %>
-					<div class = "row">
-						<div class = "col-10">
-							<%= f.text_field :text_message, class: "text-left form_trigger_input", placeholder:  "Add trigger words", style: "width: 230px;"  %>
-						</div>
-						<div class = "col-1 mt-2">
-							<%= f.submit "Add", class: "submit-text" %>
-						</div>
-					</div>
-				<% end %>
-			</div>	
-			<div class="row mb-2">
-				<div class="Node-text-font ml-3 mt-4">
-					Advanced Settings
-				</div>
-				<div class="col-3 mt-4">
-					<%= link_to image_tag('arrow.png', size: "25", class: "rounded-circle"), root_path %>
-				</div>
-			</div>
-			<div class="mb-2 mt-4 text-center">
-                <%= f.submit value: "Save", class: "btn btn-outline-secondary mb-3", style: "width: 270px;"%>
-            </div>
-		<% end %>
-    </div>
-</div>
-
 <% end %>
+

@@ -5,6 +5,9 @@ Rails.application.routes.draw do
   resources :triggerphrases, except: [:destroy, :create]
   resources :nodes, except: [:new, :update, :destroy]
   resources :messages, except: [:new, :create, :destroy]
+  get '/nodes/user_name_edit_icon_click/:id', to: 'nodes#user_name_edit_icon_click', as: 'user_name_edit_icon_click'
+  post '/nodes/user_name_update/:id', to: 'nodes#user_name_update', as: 'user_name_update'
+  get '/nodes/define_child_node/:id', to: 'nodes#define_child_node', as: 'define_child_node'
   delete '/nodes/child/:id/:parent_id/:bot_id', to: 'nodes#delete_child_nodes', as: 'delete_child_nodes'
   post '/nodes/child_nodes/:node_id/:bot_id', to: 'nodes#add_child_nodes', as: 'add_child_nodes'
   get '/nodes/child_plus/:node_id/:bot_id', to: 'nodes#plus', as: 'node_plus'

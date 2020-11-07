@@ -1,0 +1,7 @@
+<div class = "Bot-Response ml-3 mt-3 mb-3" id = <%= "childname" + (child.id).to_s %>>
+    <% if child.name == nil %>
+        Trigger1
+    <% elsif child.name %>
+        <%= child.name %>
+    <% end %>
+</div>

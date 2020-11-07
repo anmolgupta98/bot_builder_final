@@ -20,12 +20,12 @@ class NodesController < ApplicationController
     end  
 
     def update
-       @node = Node.find(params[:node_id]) 
-       @bot = Bot.find(params[:bot_id]) 
-       @node.update(set_next_action: params[:set_next_action][:set_next_action], exit_message: params[:set_next_action][:exit_message])
-       respond_to do |format|
-            format.js
-       end
+        @node = Node.find(params[:node_id]) 
+        @bot = Bot.find(params[:bot_id]) 
+        @node.update(set_next_action: params[:set_next_action][:set_next_action], exit_message: params[:set_next_action][:exit_message])
+        respond_to do |format|
+                format.js
+        end
     end    
 
     def expand
@@ -82,4 +82,26 @@ class NodesController < ApplicationController
         end
     end  
 
+    def define_child_node
+        @child = Node.find(params[:id])
+        @parent = @child.parent_id
+        respond_to do |format|
+            format.js
+        end
+    end    
+
+    def user_name_update
+        @child = Node.find(params[:id]) 
+        @child.update(name: params[:childname][:name])
+        respond_to do |format|
+            format.js
+        end 
+    end     
+
+    def user_name_edit_icon_click
+        @child = Node.find(params[:id]) 
+        respond_to do |format|
+            format.js
+        end 
+    end    
 end

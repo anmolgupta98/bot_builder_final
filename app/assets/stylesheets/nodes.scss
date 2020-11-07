@@ -254,17 +254,14 @@
 
 //Node name form
 .form__input{
-	width: 269px;
+	width: 160px;
 	border:0px solid #f7f2ed;
 	border-radius: 0;
     border-bottom: 1px solid #bababa;
     background-color: white;
     transition: all .5s ease;
-    padding: 1em .5em .5em;
-	padding-left: 2em;
-	outline:none;
-    margin-bottom:1.5em auto;   
-    height: 14px; 
+	outline:none;   
+    margin-top: 0em;
 }
 
 .user_message_text {
@@ -294,13 +291,12 @@
 .submit-text{
     border: none;
     background-color: white;
-    margin-left: 40px;
     font-weight: bold;
     font-stretch: normal;
     font-style: normal;
     line-height: 2.33;
     letter-spacing: normal;
-    text-align: left;
+    margin-left: -14px;
     color: #3b445b;
     font-size: 13px;
 }
