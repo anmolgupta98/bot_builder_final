@@ -1,0 +1,29 @@
+<!--Compressed user child node-->
+<% if child %>
+<div class="row mb-2" id= <%= "child_compressed_id" + (child.id).to_s %> >
+	<div class="connector_black_link"></div>
+	<div class="usermessage_compressed_white_box">
+		<div class = "row text-center">
+            <div class = "Bot-Response col-8 ml-3 mt-2 mb-3" id = <%= "childname" + (child.id).to_s %>>
+                <% if child.name %>
+                    <%= child.name %>
+                <% else %>
+                    Message from Customer 
+                <% end %>
+            </div>
+            <div class = "mt-1 col-1" >
+                <%= link_to image_tag('del.png', size: "17"), user_child_node_compressed_delete_path(child.id), method: :delete, data: { confirm: "All attached child nodes will be lost. Are you sure?" }, remote: true %>
+            </div>
+            <div class = "col-2 text-right" style = "padding-left: 5px; height: 25px; padding-top: -2px;">
+                <%= link_to image_tag('expand.jpg', size: "14", class: "mt-2", id: "expand"), user_child_node_compressed_expand_path(child.id), method: :get, remote: true %>
+            </div>
+        </div> 
+		<div class="child_divider mb-2"></div>
+		  <% if Message.where(node_id: child.id) == [] %>
+             <span class = "default-text p-3">You have not added any messages yet.</span>
+             <br>
+          <% end%>   
+	</div>
+</div>
+
+<% end %>

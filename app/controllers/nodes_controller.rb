@@ -90,7 +90,7 @@ class NodesController < ApplicationController
         end
     end    
 
-    def user_name_update
+    def user_child_node_name_update
         @child = Node.find(params[:id]) 
         @child.update(name: params[:childname][:name])
         respond_to do |format|
@@ -98,10 +98,57 @@ class NodesController < ApplicationController
         end 
     end     
 
-    def user_name_edit_icon_click
+    def user_child_node_name_edit_icon_click
         @child = Node.find(params[:id]) 
         respond_to do |format|
             format.js
         end 
+    end    
+
+    def user_child_node_delete
+        @child = Node.find(params[:id])
+        @bot_id = @child.bot_id
+        @bot = Bot.find(@bot_id)
+        @id = @child.parent_id
+        @node = Node.find(@id)
+        @child.destroy
+        respond_to do |format|
+            format.js
+        end 
+    end    
+
+    def user_child_node_settings
+        @child = Node.find(params[:id])
+        @id = @child.parent_id
+        @node = Node.find(@id)
+        @bot_id = @child.bot_id
+        @bot = Bot.find(@bot_id)
+        @child.update(user_input_type: params[:userchildnodesettings][:user_input_type])
+        respond_to do |format|
+            format.js
+        end   
+    end    
+
+    def user_child_node_compressed_delete
+        @child = Node.find(params[:id])
+        @bot_id = @child.bot_id
+        @bot = Bot.find(@bot_id)
+        @id = @child.parent_id
+        @node = Node.find(@id)
+        @child.destroy
+        respond_to do |format|
+            format.js
+        end  
+    end   
+    
+    def user_child_node_compressed_expand
+        @child = Node.find(params[:id])
+        @bot_id = @child.bot_id
+        @bot = Bot.find(@bot_id)
+        @id = @child.parent_id
+        @node = Node.find(@id)
+        respond_to do |format|
+            format.js
+        end  
     end    
 end

@@ -1,0 +1,7 @@
+user_child_node_compressed = <%= "user_child_node_compressed" + (@child.id).to_s %>;
+user_child_node_expanded = <%= "child_expanded_id" + (@child.id).to_s %>;
+document.getElementById(user_child_node_compressed.id).classList.add('hide');
+document.getElementById(user_child_node_expanded.id).classList.remove('hide');
+height = document.getElementById('connector_black_link_vertical').style.height;
+height = parseInt(height) + 280.28;
+document.getElementById('connector_black_link_vertical').style.height = height + "px";

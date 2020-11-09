@@ -254,7 +254,7 @@
 
 //Node name form
 .form__input{
-	width: 160px;
+	width: 180px;
 	border:0px solid #f7f2ed;
 	border-radius: 0;
     border-bottom: 1px solid #bababa;
@@ -262,6 +262,7 @@
     transition: all .5s ease;
 	outline:none;   
     margin-top: 0em;
+    padding: 0.5px;
 }
 
 .user_message_text {
@@ -305,4 +306,14 @@
     width: 9px;
     height: 0;
     border: solid 1px #bababa;
-  }
+}
+
+//Compressed child node
+.usermessage_compressed_white_box{
+    width: 300px;
+    height: 400px;
+    height: auto!important;
+    border-radius: 3px;
+    box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.16);
+    background-color: var(--white);   
+}

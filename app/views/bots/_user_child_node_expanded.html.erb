@@ -1,0 +1,37 @@
+<!--Expanded user child node -->
+<% if child %>    
+    <div class="connector_black_link"></div>
+    <div class = "usermessage_expanded_white_box" >
+        <div  id = <%= "user_child_node_name" + (child.id).to_s %>>
+            <%= render 'bots/user_child_node_name', child: child %>
+        </div> 
+        <div class = "child_divider mt-1"></div>
+        <div class = "text-center mt-4" >
+            <%= form_with scope: :messages, url: node_update_path(@node.id, @bot.id), method: :put,  remote: true do |f| %>
+                <div class = "row">
+                    <div class = "col-10">
+                        <%= f.text_field :text_message, class: "text-left form_trigger_input", placeholder:  "Add trigger words", style: "width: 230px;"  %>
+                    </div>
+                    <div class = "col-2 mt-2" >
+                        <%= f.submit "Add", class: "submit-text" %>
+                    </div>
+                </div>	
+            <% end %>
+        </div>		
+        <div class = "Node-text-font mt-4 ml-3">Expected input type</div>
+        <%= form_with scope: :userchildnodesettings, url: user_child_node_settings_path(child.id), method: :post,  remote: true do |f| %>
+            <%= f.select :user_input_type, [['Text','text'],['Image','image'],['Video','video'],['Upload Pdf','pdf']], {}, {style: "width: 269px; height: 37px;", class: "mt-4 ml-3"} %>
+            <div class="row mb-2">
+                <div class="Node-text-font mt-4 ml-4" >
+                    &nbsp;&nbsp;Advanced Settings
+                </div>
+                <div class="col-3 mt-4">
+                    <%= link_to image_tag('arrow.png', size: "25", class: "rounded-circle"), root_path %>
+                </div>		
+            </div>
+            <div class="mb-2 mt-4 text-center">
+                <%= f.submit "Save", value: "Save", class: "btn btn-outline-secondary mb-3", style: "width: 270px;", remote: true %>
+            </div>	
+        <% end %>		
+    </div>
+<% end %>    

@@ -1,0 +1,23 @@
+<% if child %>
+    <div class = "row text-center">
+        <div class = "Bot-Response col-9 ml-3 mt-2 mb-3" id = <%= "childname" + (child.id).to_s %>>
+            <% if child.name %>
+                <%= child.name %>
+            <% else %>
+                Message from Customer 
+            <% end %>
+        </div>
+        <div class = "col-10 ml-3 mt-1 hide" id = <%= "childnameform" + (child.id).to_s %> style = "height: 35px;">
+            <%= form_with scope: :childname, url: user_child_node_name_update_path(child.id), method: :post,  remote: true do |f| %>
+                <%= f.text_field :name, class: "form__input"  %>
+                <%= f.submit "Done", class: "btn btn-outline-success btn-sm",  style: "height: 24px; padding-top: 0.5px;"%>
+            <% end %>
+        </div>
+        <div id = <%= "editchildname" + (child.id).to_s %> class = "" >
+            <%= link_to image_tag('edit2.png', size: "17", class: "text-center", style: "margin-top: 11px;"), user_child_node_name_edit_icon_click_path(child.id), method: :get, remote: true  %>
+        </div>
+        <div class = "col-1 text-center mt-1" style = "padding-left: 5px; height: 25px;">
+            <%= link_to image_tag('del.png', size: "17"), user_child_node_delete_path(child.id), method: :delete, data: { confirm: "All attached child nodes will be lost. Are you sure?" }, remote: true %>
+        </div>
+    </div> 
+<% end %>

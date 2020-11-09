@@ -1,9 +1,10 @@
+<!--Compose message page nodes-->
 <div class="row" id = "composemessagemain">
-	<%= render 'bots/usernode' %>
+	<%= render 'bots/usernode' %> <!-- Triggerphrases-->
 	<div class = "Ellipse-160"></div>
     <div class = "Path-510"></div>
-    <%= render 'bots/botnode' %>
-	<div class="row", id="usermessagemain_partial_with_connector">
+    <%= render 'bots/botnode' %> <!--Bot response-->
+	<div class="row", id="usermessagemain_partial_with_connector"> <!--Parent bot response and child user node connectors-->
 		<%= render 'bots/usermessagesmain_with_connector'%>	
 	</div>  
 </div>

@@ -1,4 +1,4 @@
-<!-- Rendering all previous text messages-->
+<!-- Rendering all previous text messages for user message node-->
 <% count = 0 %>
 <% if @node %>
     <% if Message.where(node_id: @node.id, bot_id: @bot.id) != [] %>

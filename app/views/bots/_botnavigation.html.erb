@@ -1,15 +1,16 @@
+<!--First navbar on compose message page-->
 <nav class="navbar navbar-expand-lg" style = "background-color: #3b445b; color: #ebebeb; height: 55px;">
-  <%= link_to '←', root_path, style: "font-size: 200%; color: #ebebeb; margin-top: -0.4%; text-decoration: none;" %>&nbsp;&nbsp;
-  &nbsp;&nbsp;<div class="nav-item" >Referralyogi </div>
-  &nbsp;&nbsp;<div class = "nav-item" style= "font-size: 140%; color: #ebebeb;" >|</div>
-  &nbsp;&nbsp;&nbsp;<div><%= image_tag('bot.png', class: "rounded-circle", size: "30") %> </div>
-  &nbsp;&nbsp;&nbsp;<div id = "name"><%= @bot.name %></div>
+  <%= link_to '←', root_path, style: "font-size: 200%; color: #ebebeb; margin-top: -0.4%; text-decoration: none; margin-right: 1%;" %>
+  <div class="nav-item" style = "margin-right: 1%;" >Referralyogi </div>
+  <div class = "nav-item" style= "font-size: 140%; color: #ebebeb; margin-right: 1%;" >|</div>
+  <div style = "margin-right: 1%;"><%= image_tag('bot.png', class: "rounded-circle", size: "30") %> </div>
+  <div id = "name"><%= @bot.name %></div>
   <div class = "col-2 hide" id = "nameform">
     <%= form_with scope: :botname, url: bot_path(@bot.id), method: :put,  remote: true do |f| %>
         <%= f.text_field :name, class: "text-center form_edit_name", placeholder:  @bot.name  %>
     <% end %>
     </div>  
-  &nbsp;&nbsp;&nbsp;<div> <%= image_tag('edit2.png', size: "25", class: "text-center", id: "edit")  %></div>
+  <div> <%= image_tag('edit2.png', size: "25", class: "text-center", id: "edit")  %></div>
 </nav>
 
 <script type="text/javascript">

@@ -5,8 +5,12 @@ Rails.application.routes.draw do
   resources :triggerphrases, except: [:destroy, :create]
   resources :nodes, except: [:new, :update, :destroy]
   resources :messages, except: [:new, :create, :destroy]
-  get '/nodes/user_name_edit_icon_click/:id', to: 'nodes#user_name_edit_icon_click', as: 'user_name_edit_icon_click'
-  post '/nodes/user_name_update/:id', to: 'nodes#user_name_update', as: 'user_name_update'
+  get '/nodes/user_child_node_compressed_expand/:id', to: 'nodes#user_child_node_compressed_expand', as: 'user_child_node_compressed_expand'
+  delete '/nodes/user_child_node_compressed_delete/:id', to: 'nodes#user_child_node_compressed_delete', as: 'user_child_node_compressed_delete'
+  post '/nodes/user_child_node_settings/:id', to: 'nodes#user_child_node_settings', as: 'user_child_node_settings'
+  delete '/nodes/user_child_node_delete/:id', to: 'nodes#user_child_node_delete', as: 'user_child_node_delete'
+  get '/nodes/user_child_node_name_edit_icon_click/:id', to: 'nodes#user_child_node_name_edit_icon_click', as: 'user_child_node_name_edit_icon_click'
+  post '/nodes/user_child_node_name_update/:id', to: 'nodes#user_child_node_name_update', as: 'user_child_node_name_update'
   get '/nodes/define_child_node/:id', to: 'nodes#define_child_node', as: 'define_child_node'
   delete '/nodes/child/:id/:parent_id/:bot_id', to: 'nodes#delete_child_nodes', as: 'delete_child_nodes'
   post '/nodes/child_nodes/:node_id/:bot_id', to: 'nodes#add_child_nodes', as: 'add_child_nodes'

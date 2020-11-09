@@ -1,8 +1,7 @@
-<!-- This is the user messages node-->
+<!-- This is the first user messages node: Triggerphrase-->
 <div class="Rectangle-827" id="triggerphrase_usermessage" >
-	<span class="Initial-Message-from-Customer" style = "margin-left: 95px;">
+	<span class="Initial-Message-from-Customer" style = "margin-left: 95px; margin-right: 62px;">
 		Initial Message from Customer 
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <%= link_to 'Done', triggerphrase_path(@bot.id), method: :patch, remote: true, class:"btn btn-success btn-sm hide", id: "stop_edit" %>
     <%= link_to image_tag('edit2.png', size: "20", id: "triggerphrase_edit_icon", style: "margin-left: 30px;"), edit_triggerphrase_path(@bot.id), method: :get, remote: true %>		
 	</span>

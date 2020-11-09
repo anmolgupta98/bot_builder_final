@@ -1,4 +1,4 @@
-<!--New text message partial -->
+<!--New text message partial for user node -->
 <% if @node %>
     <div class="text-center mx-auto">
         <%= form_with scope: :text_messages, url:  messages_new_path(@node.id, @bot.id), method: :post, remote: true do |f|%>
