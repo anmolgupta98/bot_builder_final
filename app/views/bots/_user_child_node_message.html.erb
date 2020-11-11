@@ -1,0 +1,31 @@
+<% if child %>
+    <% if delete_message == true %>
+        <% if Message.where(node_id: child.id) == [] %>
+        <div class = "Node-text-font mt-4" >No messages have been added yet. Go on and add the expected customer message.</div>
+        <% else %>
+            <% for message in Message.where(node_id: child.id)%>
+            <span class="triggerphrase ml-1 mr-1 mt-4 mb-4">
+                <span class= "triggerfont ml-2 mr-2"><%= message.text_message %>
+                    <span class="mb-4" id= <%= "user_child_delete_message" + (message.id).to_s%> >
+                    <%= link_to image_tag('cross.png', size: "10"), user_child_delete_message_path(message.id), method: :delete, remote: true, class: ""%>	
+                </span>		
+            </span>	
+            </span> 
+            <br> 
+            <% end %>
+        <% end %>   
+    <% end %>
+    <% if delete_message == false %>
+        <% if Message.where(node_id: child.id) == [] %>
+        <div class = "Node-text-font mt-3" >You have not added any messages yet. Click on expand icon and add messages first.</div>
+        <% else %>
+            <% for message in Message.where(node_id: child.id)%>    
+            <span class="triggerphrase ml-1 mr-1 mt-4 mb-4">
+                <span class= "triggerfont ml-2 mr-2"><%= message.text_message %></span>		
+            </span>	
+            </span> 
+            <br> 
+            <% end %>   
+        <% end %>    
+    <% end %>
+<% end %>

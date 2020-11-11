@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   resources :triggerphrases, except: [:destroy, :create]
   resources :nodes, except: [:new, :update, :destroy]
   resources :messages, except: [:new, :create, :destroy]
+  delete '/messages/user_child_delete_message/:id', to: 'messages#user_child_delete_message', as: 'user_child_delete_message'
+  post '/messages/user_child_node_new_message/:id', to: 'messages#user_child_node_new_message', as: 'user_child_node_new_message'
   get '/nodes/user_child_node_compressed_expand/:id', to: 'nodes#user_child_node_compressed_expand', as: 'user_child_node_compressed_expand'
   delete '/nodes/user_child_node_compressed_delete/:id', to: 'nodes#user_child_node_compressed_delete', as: 'user_child_node_compressed_delete'
   post '/nodes/user_child_node_settings/:id', to: 'nodes#user_child_node_settings', as: 'user_child_node_settings'

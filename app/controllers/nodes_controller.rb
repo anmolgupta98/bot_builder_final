@@ -42,6 +42,7 @@ class NodesController < ApplicationController
         child_nodes = (params[:number_of_nodes][:number]).to_i
         for i in (1..child_nodes)
             @new_node = Node.create(parent_id: @node.id, bot_id: @bot.id, node_type: "user") 
+            @new_node.update(name: "Message from Customer" )
         end    
         respond_to do |format| 
             format.js

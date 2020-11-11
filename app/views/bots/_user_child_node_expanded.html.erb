@@ -1,19 +1,36 @@
 <!--Expanded user child node -->
-<% if child %>    
+<% if child %>  
+    <% user_child_node_message =  "user_child_node_message" + (child.id).to_s %>  
+    <% user_child_node_name = "user_child_node_name" + (child.id).to_s %>
+    <% childnameform =  "childnameform" + (child.id).to_s %>
     <div class="connector_black_link"></div>
     <div class = "usermessage_expanded_white_box" >
-        <div  id = <%= "user_child_node_name" + (child.id).to_s %>>
-            <%= render 'bots/user_child_node_name', child: child %>
-        </div> 
+        <div class = "row">
+            <div  class = "col-9" id = <%= user_child_node_name %>>
+                <%= render 'bots/user_child_node_name', child: child %>
+            </div> 
+            <div class = "col-8 ml-3 mt-1 hide" id = <%= childnameform %> style = "height: 35px;">
+                <%= form_with scope: :childname, url: user_child_node_name_update_path(child.id), method: :post,  remote: true do |f| %>
+                    <%= f.text_field :name, class: "form__input", style: "width: 130px;"  %>
+                    <%= f.submit "Done", class: "btn btn-outline-success btn-sm",  style: "height: 24px; padding-top: 0.5px;"%>
+                <% end %>
+            </div>
+            <div class = "col-1 text-center mt-1" style = "padding-left: 5px; height: 25px;">
+                <%= link_to image_tag('del.png', size: "17"), user_child_node_delete_path(child.id), method: :delete, data: { confirm: "All attached child nodes will be lost. Are you sure?" }, remote: true %>
+            </div>
+        </div>    
         <div class = "child_divider mt-1"></div>
-        <div class = "text-center mt-4" >
-            <%= form_with scope: :messages, url: node_update_path(@node.id, @bot.id), method: :put,  remote: true do |f| %>
+        <div class="container m-1" style="height: 85px; width: 290px; overflow-y: auto; overflow-x: hidden;" id = <%= user_child_node_message %>>
+            <%= render 'bots/user_child_node_message', child: child, delete_message: true %>
+        </div>
+        <div class = "text-center mt-1" >
+            <%= form_with scope: :messages, url:  user_child_node_new_message_path(child.id), method: :post, remote: true do |f| %>
                 <div class = "row">
                     <div class = "col-10">
                         <%= f.text_field :text_message, class: "text-left form_trigger_input", placeholder:  "Add trigger words", style: "width: 230px;"  %>
                     </div>
                     <div class = "col-2 mt-2" >
-                        <%= f.submit "Add", class: "submit-text" %>
+                        <%= f.submit "Add", class: "submit-text", remote: true %>
                     </div>
                 </div>	
             <% end %>

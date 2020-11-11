@@ -1,0 +1,2 @@
+<% user_child_node_message =  "user_child_node_message" + (@child.id).to_s %>;
+document.getElementById('<%= user_child_node_message %>').innerHTML = "<%= j render 'bots/user_child_node_message', child: @child, delete_message: true %>"; 

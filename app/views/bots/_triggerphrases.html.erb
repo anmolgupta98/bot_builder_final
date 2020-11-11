@@ -1,5 +1,5 @@
 <!--Printing triggerphrases-->
-<div class="container border p-3" style="height: 85px; width: 400px; overflow-y: auto; overflow-x: hidden;">
+<div class="container p-3" style="height: 85px; width: 400px; overflow-y: auto; overflow-x: hidden;">
     <% if Triggerphrase.where(bot_id: @bot.id) == [] %>
        <span class = "default-text" >This is the message which a user will enter, to<br> have a conversation with this bot.
         To add messages click on edit icon at the top right corner.</span>

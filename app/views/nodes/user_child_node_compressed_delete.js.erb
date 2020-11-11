@@ -1,4 +1,20 @@
-height = document.getElementById('connector_black_link_vertical').style.height;
-height = parseInt(height) - 90.78;
-document.getElementById('connector_black_link_vertical').style.height = height + "px";
 document.getElementById('usermessagemain_partial').innerHTML = "<%= j render 'bots/usermessagesmain' %>";
+var i;
+var height= 53;
+<% for child in @node.children %>
+   <% if child.user_input_type == nil %>
+       height = height + 52;
+	<% else %> 
+	   height = height + 148.78;  
+	<% end %>   
+<% end %>
+document.getElementById('connector_black_link_vertical').style.height =  height + "px"; 
+<% for child in @node.children %>
+		user_child_node_compressed = <%= "user_child_node_compressed" + (child.id).to_s %>;
+		user_child_node_expanded = <%= "child_expanded_id" + (child.id).to_s %>;
+		child_define = <%= "child_define_id" + (child.id).to_s %>;
+	<% if child.user_input_type != nil %>
+		document.getElementById(child_define.id).classList.add('hide');
+		document.getElementById(user_child_node_compressed.id).classList.remove('hide');
+	<% end %>
+<% end %>

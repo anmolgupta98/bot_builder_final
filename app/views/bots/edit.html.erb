@@ -51,7 +51,11 @@
 </div>
 
 <!-- Main content -->
-
+<% outgoing number = "outgoing_number" + @bot.id %>
+<% bot_language = "bot_language" + @bot.id %>
+<% conversation_starter = "conversation_starter" + @bot.id %>
+<% bot_trigger = "bot_trigger" + @bot.id %>
+<% set_reminder = "set_reminder" + @bot.id %>
 <% @bots = Bot.where(user_id: current_user.id) %>
 <% if @bot.phone == nil && @bot.language  == nil && @bot.initconv  == nil && @bot.triggerpoint  == nil && @bot.starttime  == nil && @bot.endtime  == nil  && @bot.rebootconv  == nil && @bot.days  == nil && @bot.status ==nil  %>
    <div class = row>
@@ -73,7 +77,9 @@
 				</button>
 				<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
 					<% for bot in @bots %>
-					<%= link_to bot.name, edit_bot_path(bot.id), class:"dropdown-item" %> 
+						<% if bot != @bot %>
+							<%= link_to bot.name, edit_bot_path(bot.id), class:"dropdown-item" %> 
+						<% end %>
 					<% end %>
 				</div>
 			</div>
@@ -95,7 +101,7 @@
 			<%= @bot.initconv %>
 			<br><br>
 			<a style = "color: #7e7e7e">Bot trigger</a><span style = "margin-left: 50%; color: #157e4b; font-weight: 500;" > Change</span><br>
-			Hi, Hello
+			<%= @bot.triggerpoint %>
 			<br><br>
             <a style = "color: #7e7e7e">When no customer response</a><span style = "margin-left: 10%; color: #157e4b; font-weight: 500;" > Change</span><br>
 			Reminder 1 - Hi! we are waiting..

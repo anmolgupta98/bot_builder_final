@@ -1,5 +1,6 @@
 <!--Compressed user child node-->
 <% if child %>
+<% user_child_node_message =  "user_child_node_message" + (child.id).to_s %>
 <div class="row mb-2" id= <%= "child_compressed_id" + (child.id).to_s %> >
 	<div class="connector_black_link"></div>
 	<div class="usermessage_compressed_white_box">
@@ -19,10 +20,9 @@
             </div>
         </div> 
 		<div class="child_divider mb-2"></div>
-		  <% if Message.where(node_id: child.id) == [] %>
-             <span class = "default-text p-3">You have not added any messages yet.</span>
-             <br>
-          <% end%>   
+        <div class="container m-1" style="height: 85px; width: 290px; overflow-y: auto; overflow-x: hidden;" id = <%= user_child_node_message %>>
+            <%= render 'bots/user_child_node_message', child: child, delete_message: false %>
+        </div>
 	</div>
 </div>
 

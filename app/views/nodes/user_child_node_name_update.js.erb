@@ -1,10 +1,7 @@
-childname = <%= "childname" + (@child.id).to_s %>;
-childnameform = <%= "childnameform" + (@child.id).to_s %>;
-edit = <%= "editchildname" + (@child.id).to_s %>;
-userchildnode = <%= "user_child_node_name" + (@child.id).to_s %>;
-document.getElementById(childname.id).classList.remove('hide');
-document.getElementById(childnameform.id).classList.add('hide');
-document.getElementById(edit.id).classList.remove('hide');
-document.getElementById(userchildnode.id).innerHTML = "<%= j render 'bots/user_child_node_name', child: @child %>";
+<% user_child_node_name = "user_child_node_name" + (@child.id).to_s %>;
+<% childnameform =  "childnameform" + (@child.id).to_s %>;
+document.getElementById('<%= user_child_node_name %>').classList.remove('hide');
+document.getElementById('<%= childnameform %>').classList.add('hide');
+document.getElementById('<%= user_child_node_name %>').innerHTML = "<%= j render 'bots/user_child_node_name', child: @child %>";
 
 
