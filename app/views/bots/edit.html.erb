@@ -51,11 +51,11 @@
 </div>
 
 <!-- Main content -->
-<% outgoing number = "outgoing_number" + @bot.id %>
-<% bot_language = "bot_language" + @bot.id %>
-<% conversation_starter = "conversation_starter" + @bot.id %>
-<% bot_trigger = "bot_trigger" + @bot.id %>
-<% set_reminder = "set_reminder" + @bot.id %>
+<% outgoing_number = "outgoing_number" + (@bot.id).to_s %>
+<% bot_language = "bot_language" + (@bot.id).to_s %>
+<% conversation_starter = "conversation_starter" + (@bot.id).to_s %>
+<% bot_trigger = "bot_trigger" + (@bot.id).to_s %>
+<% set_reminder = "set_reminder" + (@bot.id).to_s %>
 <% @bots = Bot.where(user_id: current_user.id) %>
 <% if @bot.phone == nil && @bot.language  == nil && @bot.initconv  == nil && @bot.triggerpoint  == nil && @bot.starttime  == nil && @bot.endtime  == nil  && @bot.rebootconv  == nil && @bot.days  == nil && @bot.status ==nil  %>
    <div class = row>
@@ -108,97 +108,75 @@
 			<br><br>
 			
 		</div>
-		<div class = "col-6"  id = "upon_first_click_2" style = "margin-right: 5%; margin-top: 11%;">
-			<h3>Select which numbers to send messages from</h3>
-			<div class = "container">
-			<div class = "col-5 container shadow p-5 bg-white" style = "border: solid 1px #d5d5d5; border-radius: 5%;">
-				<div class="row">
-						<div class="col-2">
-							<%= image_tag('symbol.png', size: "40", class: "rounded-circle")%>
-						</div>
-						<div class="col-8">
-							<div class="custom_font">Business 1</div> 
-							+91 <%= @bot.phone%>
-						</div>
-					</div>	
-			</div>
-		</div>
     </div>
 <% end %>
  
 <div class = "col-8" id = "actualform">
 	<%= form_with scope: :botsettings, url: bot_path(@bot.id), method: :put,  local: true do |f| %>
 		<!-- phone -->
-		<div class="row mt-4 ml-1">
-			<div class="arrow-left"></div>
-			<div class="p-3 mb-1 grey_background my_border_radius text-center">
-				I use this phone number <br> 
-				for conversation 
+		<div class = "col-6"  id = "upon_first_click" style = "margin-right: 1%; margin-top: 11%;">
+			<h4>Select which numbers to send messages from</h4>
+			<div class = "col-5 container shadow bg-white ml-0 mt-4" style = "border: solid 1px #d5d5d5; border-radius: 7px; height: 64px;">
+				<div class="row">
+					<div class="col-2">
+						<%= image_tag('symbol.png', size: "40", class: "rounded-circle")%>
+					</div>
+					<div class="col-8">
+						<div class="custom_font p-1">Business 1</div> 
+						+91 <%= @bot.phone%>
+					</div>
+				</div>	
 			</div>
-		</div>
-
-		<div class="ml-3 mt-4">
-			<div class="row">
-				<div class="col-1">
-					<%= image_tag('symbol.png', size: "40", class: "rounded-circle")%>
-				</div>
-				<div class="col-11 mb-4">
-					<div class="custom_font">Business 1</div> 
-					<%= @bot.phone%>
-				</div>
-			</div>	
-		</div>
+		</div>	
 		<!-- language -->
-		<div class="row mt-4 ml-1 mb-3">
-			<div class="arrow-left"></div>
-			<div class="p-3 mb-1 grey_background my_border_radius text-center">
-				Select language to reply in
-			</div>
-		</div>
-		<div >
-			<% i = 0 %>
-			<%= collection_radio_buttons(:botsettings, :language, Language.all, :language, :language) do |b| %>
+		<div class = "col-6 mb-4"  id = "upon_second_click" style = "margin-right: 1%; margin-top: 11%; ">
+			<h4>Select default bot language</h4>	
+			<div class = "ml-0 mt-4">
+				<% i = 0 %>
+				<%= collection_radio_buttons(:botsettings, :language, Language.all, :language, :language) do |b| %>
 					<% if i < 3%>
-					<span class="radio-toolbar mb-1 mr-4 mt-4">
-						<%= b.radio_button %> 
-						<%= b.label(:"data-value" => b.value ,class: "shadow p-2 mb-4 rounded text-center")%>
-					</span>
-					<% else %>
-						<%if i==3%>
-							<span class="dropdown shadow p-2 mb-4 bg-white rounded text-center">
-						<button class="btn btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							More Languages
-						</button>  
-						<div class="dropdown-menu overflow_two" aria-labelledby="dropdownMenuButton">
-					<% end %>    
-						<span class="radio-toolbar text-center">
-							<%= b.radio_button%>
-							<%= b.label(:"data-value" => b.value , class: "shadow p-2 ml-3 rounded text-center")%> <br>
-							</span>
-						<% if i== Language.all.count - 1%>   		
-							</div>	
-						</span>
-						<% end %>
+						<span class="radio-toolbar mb-1 mr-4 mt-4" style = "border-radius: 7px;">
+							<%= b.radio_button %> 
+							<%= b.label(:"data-value" => b.value ,class: "shadow p-2 mb-4 text-center", style: "border-radius: 7px; border: solid 1px #d5d5d5;")%>
+						</span>		
 					<% end %>
-				<% i=i+1%>
-			<% end %>
+					<% i = i+1 %>
+				<% end %>
+			</div>
 		</div>
 		<!-- initiate conversation -->
-		<div class="row mt-4 ml-1">
-			<div class="arrow-left"></div>
-			<div class="p-3 mb-1 grey_background my_border_radius text-center">
-				Who will initiate conversation
+		<div class = "col-6 mb-4"  id = "upon_third_click" style = "margin-right: 1%; margin-top: 11%;">
+			<h4>Who will initiate the conversation?</h4>	
+			<div class = "ml-0 mt-4">
+				<% i = 0 %>
+				<%= collection_radio_buttons(:botsettings, :initconv, ["Bot", "Customer"], :to_s, :to_s) do |b| %>
+					<% if i < 2%>
+						<span class="radio-toolbar mb-1 mr-4 mt-4" style = "border-radius: 7px;">
+							<%= b.radio_button %> 
+							<%= b.label(:"data-value" => b.value ,class: "shadow p-2 mb-4 text-center", style: "border-radius: 7px; border: solid 1px #d5d5d5;")%>
+						</span>		
+					<% end %>
+					<% i = i+1 %>
+				<% end %>
+			</div>
+			<div class = "ml-0">
+			<strong>Note</strong>
+			</div>
+			<div class = "ml-0">
+			If bot initiates message, it can send only Whatsapp approved templates.
 			</div>
 		</div>
-		<div class="mt-2 ml-4">
-			<%= f.radio_button :initconv , "Bot"%>
-			<%= f.label :initconv , "Bot", value: "Bot", class: "ml-2"%>
+		<!--Reminder-->
+		<div class = "col-6 mb-4"  id = "upon_fourth_click" style = "margin-right: 1%; margin-top: 11%;">
+			<h4>Send reminder message if the customer doesn't respond?</h4>
+		</div>	
+        <div class = "mt-4 ml-3">
+          <button type="button" class="btn btn-success" id = "skip_reminder" style = "margin-right: 20px;" >Skip this for now</button>
+		  <button type="button" class="btn btn-success" id = "set_reminder">Set reminder</button>
 		</div>
-		<div class="mt-2 ml-4">	
-			<%= f.radio_button :initconv , "Customer"%>
-			<%= f.label :initconv , "Customer", value: "Customer", class: "ml-2"%>
-		</div>
+		<div id= "set_reminder_click" class = "mt-4 ml-0">
 		
+		</div>
 		<!-- trigger point -->
 		<div class="row mt-4 ml-1">
 			<div class="arrow-left"></div>
@@ -235,7 +213,9 @@
 <script type="text/javascript">
 // show form
 <% if (@bot.phone == nil && @bot.language == nil && @bot.initconv == nil && @bot.triggerpoint==nil && @bot.starttime==nil && @bot.endtime==nil && @bot.startdate == nil && @bot.enddate== nil && @bot.rebootconv==nil && @bot.days==nil && @bot.status==nil)%>
+setTimeout(function(){
 document.getElementById('actualform').classList.add('hide');
+}, 1);
 <% end %>
 document.getElementById('startsetup').onclick = function() {
 document.getElementById('actualform').classList.remove('hide');

@@ -206,7 +206,9 @@ input:checked + .slider:before {
 
 //second navbar- bot settings and compose message
 .mynavbar{
-	height: 60px;
+  height: 60px;
+  width: 1690px;
+  width: auto !important;
 }
 
 .navbar_content_height{
@@ -398,4 +400,43 @@ input:checked + .slider:before {
   color: white;
 }
   
+//Scroll bar
+#style-4::-webkit-scrollbar-track
+{
+-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+background-color: #F5F5F5;
+}
+
+#style-4::-webkit-scrollbar
+{
+width: 10px;
+background-color: #F5F5F5;
+}
+
+#style-4::-webkit-scrollbar-thumb
+{
+background-color: #000000;
+border: 2px solid #555555;
+}
+
+//Scroll bar index page
+#style-1::-webkit-scrollbar-track
+{
+-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+border-radius: 10px;
+background-color: #F5F5F5;
+}
+
+#style-1::-webkit-scrollbar
+{
+width: 12px;
+background-color: #F5F5F5;
+}
+
+#style-1::-webkit-scrollbar-thumb
+{
+border-radius: 10px;
+-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+background-color: #555;
+}
 

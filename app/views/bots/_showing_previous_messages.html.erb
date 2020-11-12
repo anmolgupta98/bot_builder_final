@@ -5,28 +5,96 @@
         <% @messages = Message.where(node_id: @node.id, bot_id: @bot.id) %>
         <% for message in @messages %>
             <div class="mx-auto">
-            <div class="botresponses_messages_area_full mt-2 p-1">
-                <div class = "row">
-                    <div class = "col-10">
-                        <%= message.text_message %>
-                        <% count += 1 %>
+                <div class="botresponses_messages_area_full mt-2 p-1">
+                    <div class = "row">
+                        <div class = "col-10">
+                            <%= message.text_message %>
+                            <% count += 1 %>
+                        </div>
+                        <% if delete_button == true %>
+                            <div class = "col-1">
+                                <%= link_to image_tag('del.png', size: "13", class: "mt-2 mr-2"), messages_destroy_path(@node.id, @bot.id, message.id), method: :post, remote: true %>
+                            </div>
+                        <% end %>
                     </div>
-                    <% if delete_button == true %>
-                    <div class = "col-1">
-                        <%= link_to image_tag('del.png', size: "13", class: "mt-2 mr-2"), messages_destroy_path(@node.id, @bot.id, message.id), method: :post, remote: true %>
-                    </div>
-                    <% end %>
-                </div>
-            </div> 
+                </div> 
             </div>
         <% end %>
         <% if delete_button == false %>
-        <br>
+            <div style = "height: 1px;"> </div>   
         <% end %>
     <% end %>
     <% if count == 0 && delete_button == false %>  
-            <span class = "default-text p-3">You have not added any messages yet.</span>
-            <span class = "default-text p-3">Click on expand icon and add messages</span>
-            <span class = "default-text p-3">first.</span>
+        <span class = "default-text p-3">You have not added any messages yet.</span>
+        <span class = "default-text p-3">Click on expand icon and add messages</span>
+        <span class = "default-text p-3">first.</span>
+    <% end %>    
+    <% if @node.set_next_action == "exit_bot"&& delete_button == false && count == 0  %>
+        <div class="Path-485 mb-2"></div>
+        <div class = "options_text text-center mb-1">
+            (This exit message is added by default) 
+        </div>
+        <div class="botresponses_messages_area_full text-left"  style = "padding-top: 2px; padding-bottom: 2px; padding-left: 5px;" >
+            <%= @node.exit_message %>
+        </div>    
+        <div style = "height: 1px;"> </div>  
+    <% end %>
+    <% if @node.set_next_action == "exit_bot"&& delete_button == false && count > 0  %>
+        <div class = "row">
+            <div class = "options_text mb-1 mt-0 col-10 text-center">
+                Include the default exit message
+            </div>  
+            <div class = "">    
+                <label class="switch my-auto col-2">
+                <% if @node.exit_message_toggle_switch == true %>
+                <input type="checkbox" checked data-remote="true" class="slider round" data-method="get" data-url= <%= exit_message_toggle_switch_path(@node.id) %>> 
+                <% else %>
+                    <input type="checkbox" data-remote="true" class="slider round" data-method="get" data-url= <%= exit_message_toggle_switch_path(@node.id) %>>
+                <% end %>
+                <span class="slider round"></span>
+                </label>
+            </div>
+        </div>    
+        <% if @node.exit_message_toggle_switch == true %>
+            <div class="Path-485 mb-2 mt-1"></div>
+            <div class="botresponses_messages_area_full text-left"  style = "padding-top: 2px; padding-bottom: 2px; padding-left: 5px;" >
+                <%= @node.exit_message %>
+            </div> 
+        <% end %>    
+        <div style = "height: 1px;"> </div>   
+    <% end %>
+    <% if @node.set_next_action == "transfer_to_agent" && delete_button == false && count == 0  %>
+        <div class="Path-485 mb-2"></div>
+        <div class = "options_text text-center mb-1">
+            (This transfer message is added by default) 
+        </div>
+        <div class="botresponses_messages_area_full text-left"  style = "padding-top: 2px; padding-bottom: 2px; padding-left: 5px;" >
+            <%= @node.transfer_message %>
+        </div>    
+        <div style = "height: 1px;"> </div>  
+    <% end %>
+    <% if @node.set_next_action == "transfer_to_agent" && delete_button == false && count > 0  %>
+        <div class = "row">
+            <div class = "options_text mb-1 mt-0 col-10 text-center">
+                Include the default transfer message
+            </div>  
+            <div class = "">    
+                <label class="switch my-auto col-2">
+                <% if @node.transfer_message_toggle_switch == true %>
+                <input type="checkbox" checked data-remote="true" class="slider round" data-method="get" data-url= <%= transfer_message_toggle_switch_path(@node.id) %>> 
+                <% else %>
+                    <input type="checkbox" data-remote="true" class="slider round" data-method="get" data-url= <%= transfer_message_toggle_switch_path(@node.id) %>>
+                <% end %>
+                <span class="slider round"></span>
+                </label>
+            </div>
+        </div>    
+        <% if @node.transfer_message_toggle_switch == true %>
+            <div class="Path-485 mb-2 mt-1"></div>
+            <div class="botresponses_messages_area_full text-left"  style = "padding-top: 2px; padding-bottom: 2px; padding-left: 5px;" >
+                <%= @node.transfer_message %>
+            </div> 
+        <% end %>    
+        <div style = "height: 1px;"> </div>   
     <% end %>
 <% end %>

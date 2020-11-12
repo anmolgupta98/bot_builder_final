@@ -4,7 +4,7 @@
 </div>
 <!-- Second navbar -->
 
-<nav class="mynavbar bg-white">
+<nav class="container-fluid bg-white" style = "height: 60px;">
   <div class="row">
     <div class="col-8">
       <ul class="steps">
@@ -32,7 +32,7 @@
     <div class="col-2 border text-center">
       <div class="text-center navbar_content_height_undo" style=  "margin-top: -1%;">
 	    <%= link_to test_path(@bot.id) do %>
-			<div style = "height: 45px; width: 250px;" >
+			<div style = "height: 45px; " >
 			<%= image_tag('p.png')%>
 			<%= link_to 'Test the bot', test_path(@bot.id), style: "color: black; text-decoration: none;" %>
 			</div>
@@ -52,11 +52,7 @@
 </div>
 
 <!-- Main content -->
-<div class="container-fluid mt-4" style = "margin-left: 4%;" >
-	<div class="row mt-4">
-		<div class="col-12" >
-			<%= render 'bots/composemessagemain' %>
-		</div>
-	</div>
+<div class="container-fluid border" style = "overflow-y: auto;  padding-top: 30px;  padding-left: 50px; height: 720px;" id = "style-1" >
+  <%= render 'bots/composemessagemain' %>  
 </div>
   

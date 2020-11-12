@@ -2,6 +2,7 @@
 <% childnameform =  "childnameform" + (@child.id).to_s %>;
 document.getElementById('<%= user_child_node_name %>').classList.remove('hide');
 document.getElementById('<%= childnameform %>').classList.add('hide');
+document.getElementById('<%= childnameform %>').value = " ";
 document.getElementById('<%= user_child_node_name %>').innerHTML = "<%= j render 'bots/user_child_node_name', child: @child %>";
 
 

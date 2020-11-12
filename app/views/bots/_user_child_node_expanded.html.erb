@@ -11,7 +11,7 @@
             </div> 
             <div class = "col-8 ml-3 mt-1 hide" id = <%= childnameform %> style = "height: 35px;">
                 <%= form_with scope: :childname, url: user_child_node_name_update_path(child.id), method: :post,  remote: true do |f| %>
-                    <%= f.text_field :name, class: "form__input", style: "width: 130px;"  %>
+                    <%= f.text_field :name, class: "form__input", style: "width: 10px;"  %>
                     <%= f.submit "Done", class: "btn btn-outline-success btn-sm",  style: "height: 24px; padding-top: 0.5px;"%>
                 <% end %>
             </div>
@@ -20,8 +20,10 @@
             </div>
         </div>    
         <div class = "child_divider mt-1"></div>
-        <div class="container m-1" style="height: 85px; width: 290px; overflow-y: auto; overflow-x: hidden;" id = <%= user_child_node_message %>>
-            <%= render 'bots/user_child_node_message', child: child, delete_message: true %>
+        <div id = <%= user_child_node_message %>>
+            <div class="container m-1" style="height: 85px; width: 290px; overflow: auto;" id = "style-1" >
+                <%= render 'bots/user_child_node_message', child: child, delete_message: true %>
+            </div>
         </div>
         <div class = "text-center mt-1" >
             <%= form_with scope: :messages, url:  user_child_node_new_message_path(child.id), method: :post, remote: true do |f| %>

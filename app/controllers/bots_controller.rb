@@ -30,21 +30,6 @@ class BotsController < ApplicationController
       @bot = Bot.find(params[:id])
       if params[:botsettings]
          if @bot.update(params.require(:botsettings).permit(:language, :initconv, :triggerpoint, :days))
-            if params[:botsettings][:days] == "Everyday"
-               @bot.update(starttime: params[:bots][:startime1])
-               @bot.update(endtime:  params[:bots][:endtime1])
-            elsif params[:botsettings][:days] == "Monday to Friday"
-               @bot.update(starttime:  params[:bots][:startime2])
-               @bot.update(endtime:  params[:bots][:endtime2])  
-            elsif params[:botsettings][:days] == "Saturday and Sunday"
-               @bot.update(starttime:  params[:bots][:startime3])
-               @bot.update(endtime:  params[:bots][:endtime3])  
-            else
-               @bot.update(starttime:  params[:bots][:startime4])
-               @bot.update(endtime:  params[:bots][:endtime4])  
-               @bot.update(startdate:  params[:bots][:startdate4])        
-               @bot.update(enddate:  params[:bots][:enddate4])   
-            end
             @bot.update(params.require(:date).permit(:rebootconv)) 
             redirect_to composemessage_path 
          else

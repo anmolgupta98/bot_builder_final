@@ -1,13 +1,15 @@
 <!--Compose message page nodes-->
-<div class="row" id = "composemessagemain">
-	<%= render 'bots/usernode' %> <!-- Triggerphrases-->
-	<div class = "Ellipse-160"></div>
-    <div class = "Path-510"></div>
-    <%= render 'bots/botnode' %> <!--Bot response-->
-	<div class="row", id="usermessagemain_partial_with_connector"> <!--Parent bot response and child user node connectors-->
-		<%= render 'bots/usermessagesmain_with_connector'%>	
-	</div>  
-</div>
+<%# <div style = "overflow-x: auto;" id = "style-1" style = "width: 2000px;"> %>
+	<div class="row" id = "composemessagemain">
+		<%= render 'bots/usernode' %> <!-- Triggerphrases-->
+		<div class = "Ellipse-160"></div>
+		<div class = "Path-510"></div>
+		<%= render 'bots/botnode' %> <!--Bot response-->
+		<div class="row", id="usermessagemain_partial_with_connector"> <!--Parent bot response and child user node connectors-->
+			<%= render 'bots/usermessagesmain_with_connector'%>	
+		</div>  
+	</div>
+<%# </div> %>
 
 
 

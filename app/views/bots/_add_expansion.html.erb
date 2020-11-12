@@ -88,6 +88,29 @@
                     <%= text_area(:set_next_action, :exit_message, cols: 40, rows: 3, class: 'botresponses_exit_area p-2', value: "Thank you. It was nice having a conversation with you.")%>
                <% end %>
             </div>
+            <div id = "transfer_dropdown_and_message" class = "hide">
+                <div class="dropdown mb-2" style = "padding-left: 10px;">
+                    <button class="btn dropdown-toggle options_text" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style = "border: solid 1px grey; width: 105px; height: 30px;">
+                        Select Group
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#">Group1</a>
+                        <a class="dropdown-item" href="#">Group2</a>
+                        <a class="dropdown-item" href="#">Group3</a>
+                        <a class="dropdown-item" href="#">Group4</a>
+                    </div>
+                </div>
+                <div class="mb-2 text-center">
+                <div class = "options_text text-center mb-1">
+                        (This transfer message is added by default) 
+                    </div>
+                    <% if @node.transfer_message%>
+                            <%= text_area(:set_next_action, :transfer_message, cols: 40, rows: 3, class: 'botresponses_exit_area p-2', value: @node.transfer_message)%>
+                    <% else %>
+                            <%= text_area(:set_next_action, :transfer_message, cols: 40, rows: 3, class: 'botresponses_exit_area p-2', value: "Transferring you to an agent.")%>
+                    <% end %>
+                </div>    
+            </div>    
             <div class="mb-2">
                 <%= f.submit value: "Save", class: "btn btn-outline-secondary ml-3 mb-3", style: "width: 270px;"%>
             </div>
@@ -100,26 +123,32 @@
 			document.getElementById("add_a_node").checked = true;
 			document.getElementById("transfer_to_agent").checked = false;
 			document.getElementById("exit_bot").checked = false;
-			document.getElementById('exit_message').classList.add('hide');
+            document.getElementById('exit_message').classList.add('hide');
+            document.getElementById('transfer_dropdown_and_message').classList.add('hide');
 		<% elsif @node.set_next_action == "transfer_to_agent"%>
 			document.getElementById("add_a_node").checked = false;
 			document.getElementById("transfer_to_agent").checked = true;
 			document.getElementById("exit_bot").checked = false;
-			document.getElementById('exit_message').classList.add('hide');
+            document.getElementById('exit_message').classList.add('hide');
+            document.getElementById('transfer_dropdown_and_message').classList.remove('hide');
 		<% elsif @node.set_next_action == "exit_bot"%>
 			document.getElementById("add_a_node").checked = false;
 			document.getElementById("transfer_to_agent").checked = false;
-			document.getElementById("exit_bot").checked = true;
+            document.getElementById("exit_bot").checked = true;
+            document.getElementById('transfer_dropdown_and_message').classList.add('hide');
 		<% end %>
 
 	 document.getElementById('exit_bot').onclick = function() {
-	 	document.getElementById('exit_message').classList.remove('hide');
+        document.getElementById('exit_message').classList.remove('hide');
+        document.getElementById('transfer_dropdown_and_message').classList.add('hide');
 	 }
 	 document.getElementById('add_a_node').onclick = function() {
-	 	document.getElementById('exit_message').classList.add('hide');
+        document.getElementById('exit_message').classList.add('hide');
+        document.getElementById('transfer_dropdown_and_message').classList.add('hide');
 	 }
 	 document.getElementById('transfer_to_agent').onclick = function() {
-	 	document.getElementById('exit_message').classList.add('hide');
+        document.getElementById('exit_message').classList.add('hide');
+        document.getElementById('transfer_dropdown_and_message').classList.remove('hide');
 	 }
 	 <% end %>
 </script>

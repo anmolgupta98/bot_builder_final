@@ -20,8 +20,10 @@
             </div>
         </div> 
 		<div class="child_divider mb-2"></div>
-        <div class="container m-1" style="height: 85px; width: 290px; overflow-y: auto; overflow-x: hidden;" id = <%= user_child_node_message %>>
-            <%= render 'bots/user_child_node_message', child: child, delete_message: false %>
+        <div id = <%= user_child_node_message %>>
+            <div class="container m-1" style="height: 85px; width: 290px; overflow: auto;"  id = "style-1">
+                <%= render 'bots/user_child_node_message', child: child, delete_message: false %>
+            </div>
         </div>
 	</div>
 </div>

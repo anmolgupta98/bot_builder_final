@@ -22,7 +22,7 @@ class NodesController < ApplicationController
     def update
         @node = Node.find(params[:node_id]) 
         @bot = Bot.find(params[:bot_id]) 
-        @node.update(set_next_action: params[:set_next_action][:set_next_action], exit_message: params[:set_next_action][:exit_message])
+        @node.update(set_next_action: params[:set_next_action][:set_next_action], exit_message: params[:set_next_action][:exit_message], transfer_message: params[:set_next_action][:transfer_message])
         respond_to do |format|
                 format.js
         end
@@ -151,5 +151,37 @@ class NodesController < ApplicationController
         respond_to do |format|
             format.js
         end  
+    end    
+
+    def exit_message_toggle_switch
+        @node = Node.find(params[:id])
+        @bot  = Bot.find(@node.bot_id)
+        if @node.exit_message_toggle_switch == true
+            @node.update(exit_message_toggle_switch: false)
+            respond_to do |format|
+             format.js
+            end
+        else
+            @node.update(exit_message_toggle_switch: true)
+            respond_to do |format|
+             format.js
+            end
+        end
+    end   
+    
+    def transfer_message_toggle_switch
+        @node = Node.find(params[:id])
+        @bot  = Bot.find(@node.bot_id)
+        if @node.transfer_message_toggle_switch == true
+            @node.update(transfer_message_toggle_switch: false)
+            respond_to do |format|
+             format.js
+            end
+        else
+            @node.update(transfer_message_toggle_switch: true)
+            respond_to do |format|
+             format.js
+            end
+        end
     end    
 end

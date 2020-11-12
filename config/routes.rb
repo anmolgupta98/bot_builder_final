@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   resources :triggerphrases, except: [:destroy, :create]
   resources :nodes, except: [:new, :update, :destroy]
   resources :messages, except: [:new, :create, :destroy]
+  get '/nodes/transfer_message_toggle_switch/:id', to: 'nodes#transfer_message_toggle_switch', as: 'transfer_message_toggle_switch'
+  get '/nodes/exit_message_toggle_switch/:id', to: 'nodes#exit_message_toggle_switch', as: 'exit_message_toggle_switch'
   delete '/messages/user_child_delete_message/:id', to: 'messages#user_child_delete_message', as: 'user_child_delete_message'
   post '/messages/user_child_node_new_message/:id', to: 'messages#user_child_node_new_message', as: 'user_child_node_new_message'
   get '/nodes/user_child_node_compressed_expand/:id', to: 'nodes#user_child_node_compressed_expand', as: 'user_child_node_compressed_expand'
