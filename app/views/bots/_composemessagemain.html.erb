@@ -4,8 +4,10 @@
 		<%= render 'bots/usernode' %> <!-- Triggerphrases-->
 		<div class = "Ellipse-160"></div>
 		<div class = "Path-510"></div>
-		<%= render 'bots/botnode' %> <!--Bot response-->
-		<div class="row", id="usermessagemain_partial_with_connector"> <!--Parent bot response and child user node connectors-->
+		<div id = <%= "botmessagemain_partial" + (parent_id).to_s %>>
+			<%= render 'bots/botnode', parent_id: parent_id %> <!--Bot response-->
+		</div>
+		<div class="row", id= <%= "usermessagemain_partial_with_connector" + (parent_id).to_s %>> <!--Parent bot response and child user node connectors-->
 			<%= render 'bots/usermessagesmain_with_connector'%>	
 		</div>  
 	</div>

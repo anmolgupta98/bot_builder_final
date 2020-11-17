@@ -1,6 +1,12 @@
-document.getElementById('add_collapsed').innerHTML = "<%= j render 'bots/add_collapsed' %>";
-document.getElementById('after_add').classList.add('hide');
-document.getElementById('after_add_collapsed').classList.remove('hide');
-document.getElementById('showing_previous_messages').innerHTML = "<%= j render 'bots/showing_previous_messages', delete_button: false %>";
-document.getElementById('usermessagemain_partial_with_connector').innerHTML = "<%= j render 'bots/usermessagesmain_with_connector'%>";
+<% add_collapsed = "add_collapsed" + (@node.id).to_s %>;
+<% after_add = "after_add" + (@node.id).to_s %>; 
+<% after_add_collapsed = "after_add_collapsed" + (@node.id).to_s %>;
+<% showing_previous_messages = "showing_previous_messages" + (@node.id).to_s %>;
+<% parent = @parent %>;
+<% usermessagemain_partial_with_connector = "usermessagemain_partial_with_connector" + (parent).to_s %>;
+document.getElementById('<%= add_collapsed %>').innerHTML = "<%= j render 'bots/add_collapsed' %>";
+document.getElementById('<%= after_add %>').classList.add('hide');
+document.getElementById('<%= after_add_collapsed %>').classList.remove('hide');
+document.getElementById('<%= showing_previous_messages %>').innerHTML = "<%= j render 'bots/showing_previous_messages', delete_button: false %>";
+document.getElementById('<%= usermessagemain_partial_with_connector %>').innerHTML = "<%= j render 'bots/usermessagesmain_with_connector'%>";
 //console.log('beautiful long journey.. miles to go');

@@ -1,6 +1,17 @@
 <!-- Collapsed view of bot messages-->
 <% if @node %>
-    <div class="Rectangle-801-collapsed mb-1 mr-4 hide" id = "after_add_collapsed" >
+    <% after_add = "after_add" + @node.id.to_s() %>
+    <% showing_previous_messages = "showing_previous_messages" + @node.id.to_s() %>
+    <% messages_area = "messages_area" + @node.id.to_s() %>
+    <% add_a_node = "add_a_node" + @node.id.to_s() %>
+    <% transfer_to_agent = "transfer_to_agent" + @node.id.to_s() %>
+    <% exit_bot = "exit_bot" + @node.id.to_s() %>
+    <% exit_message = "exit_message" + @node.id.to_s() %>
+    <% transfer_dropdown_and_message = "transfer_dropdown_and_message" + @node.id.to_s() %>
+    <% after_add_collapsed = "after_add_collapsed" + @node.id.to_s() %>
+    <% expand = "expand" + @node.id.to_s() %>
+    <% showing_previous_messages = "showing_previous_messages" + @node.id.to_s() %>
+    <div class="Rectangle-801-collapsed mb-1 mr-4 hide" id = <%= after_add_collapsed %> >
         <div class="row">
             <div class="col-8 row mb-2">
                 <%= image_tag('bot.png', size: "25", class: "rounded-circle mr-3 ml-4 mt-2")%>
@@ -14,11 +25,11 @@
                 <% end %>
             </div>
             <div class = "col-1">
-                <%= link_to image_tag('expand.png', size: "20", class: "mt-2", id: "expand"), node_expand_path(@node.id, @bot.id), method: :get, remote: true %>
+                <%= link_to image_tag('expand.png', size: "20", class: "mt-2", id: expand), node_expand_path(@node.id, @bot.id), method: :get, remote: true %>
             </div>
         </div>
         <div class="Path-485 mb-2"></div>
-        <div id = "showing_previous_messages">
+        <div id = <%= showing_previous_messages %>>
             <%= render 'bots/showing_previous_messages', delete_button: false %>
         </div>    
     </div> 

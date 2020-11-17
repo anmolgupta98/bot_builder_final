@@ -86,7 +86,7 @@
   font: 13px/1.4 Geneva, 'Lucida Sans', 'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif;
 }
 
-/* custom styles */
+/* Bot settings */
 
 [type="date"] {
   border: 1px solid #c4c4c4;
@@ -109,8 +109,6 @@
   font: 13px/1.4 Geneva, 'Lucida Sans', 'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif;
 }
 
-/* custom styles */
-
 [type="time"] {
   border: 1px solid #c4c4c4;
   border-radius: 5px;
@@ -130,7 +128,8 @@
 }
 
 .radio-toolbar input[type="radio"]:checked + label{
-     background-color: rgb(200,200,200); 
+     background-color: #3EB489;
+     border: 1px solid #1abc1a; 
      box-shadow: 0px  0px 10px;  
 }
 #date_rebootconv{
@@ -141,6 +140,45 @@
   #date_rebootconv , &::after{
   background-color: red;
   }
+}
+
+.form_trigger_input_bot_settings{
+	width: 269px;
+	border:0px solid #f7f2ed;
+	border-radius: 0;
+  border-bottom: 1px solid #bababa;
+  background-color: #f7f2ed;
+  transition: all .5s ease;
+	padding: 1em .5em .5em;
+	padding-left: 2em;
+	outline:none;
+	margin-bottom:1.5em auto;
+}
+
+.submit-text_bot_settings{
+    border: none;
+    background-color: #f7f2ed;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 2.33;
+    letter-spacing: normal;
+    margin-left: -14px;
+    color: #3b445b;
+    font-size: 13px;
+}
+
+.submit-text-line_bot_settings {
+    width: 65px;
+    height: 0px;
+    border: solid 1px #bababa;
+    outline:none;
+}
+
+.reminder{
+  border-radius: 5px;
+  border-color:  1px solid #bababa;
+  width: 300px;
 }
 
 //active inactive toggle button 
@@ -439,4 +477,6 @@ border-radius: 10px;
 -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
 background-color: #555;
 }
+
+
 

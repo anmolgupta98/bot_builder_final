@@ -57,9 +57,9 @@
 <% bot_trigger = "bot_trigger" + (@bot.id).to_s %>
 <% set_reminder = "set_reminder" + (@bot.id).to_s %>
 <% @bots = Bot.where(user_id: current_user.id) %>
+<div class = "row">
 <% if @bot.phone == nil && @bot.language  == nil && @bot.initconv  == nil && @bot.triggerpoint  == nil && @bot.starttime  == nil && @bot.endtime  == nil  && @bot.rebootconv  == nil && @bot.days  == nil && @bot.status ==nil  %>
-   <div class = row>
-		<div class = "col-3 container shadow p-5 bg-white" style = "margin-left: 5%; margin-top: 3%; border: solid 1px #d5d5d5; border-radius: 5%; height: 600px;" id = "upon_first_click" >
+		<div class = "col-3 border container shadow p-5 bg-white" style = "margin-left: 5%;  margin-right: 0%;  margin-top: 3%; border: solid 1px #d5d5d5; border-radius: 5%; height: 600px;" >
 			<h3>Bot Settings</h3>
 			<br>
 			Get started by setting up basic details of how <br> your bot should behave.
@@ -85,130 +85,157 @@
 			</div>
 		</div>
 <% else %>
-		<div class = "col-3 container shadow p-5 bg-white" style = "margin-left: 5%; margin-top: 3%; border: solid 1px #d5d5d5; border-radius: 5%; height: 600px;" id = "upon_first_click_2" >
-		<h3>Bot Settings</h3>
-			<br>
-			<a style = "color: #7e7e7e">Outgoing number</a><span style = "margin-left: 35%; color: #157e4b; font-weight: 500;" > Change</span><br>
-			Business 1 
-			<% if @bot.phone != nil %>	
-			   (<%= @bot.phone   %>)
-			<% end %>   
-			<br><br>
-			<a style = "color: #7e7e7e">Bot language</a><span style = "margin-left: 45%; color: #157e4b; font-weight: 500;" > Change</span><br>
-			<%= @bot.language %>
-			<br><br>
-			<a style = "color: #7e7e7e">Conversation Starter</a><span style = "margin-left: 29%; color: #157e4b; font-weight: 500;" > Change</span><br>
-			<%= @bot.initconv %>
-			<br><br>
-			<a style = "color: #7e7e7e">Bot trigger</a><span style = "margin-left: 50%; color: #157e4b; font-weight: 500;" > Change</span><br>
-			<%= @bot.triggerpoint %>
-			<br><br>
-            <a style = "color: #7e7e7e">When no customer response</a><span style = "margin-left: 10%; color: #157e4b; font-weight: 500;" > Change</span><br>
-			Reminder 1 - Hi! we are waiting..
-			<br><br>
-			
+		<div id = "bot_settings_completed" class = "col-3" style = "margin-left: 5%;  margin-right: 0%;  margin-top: 3%;">
+            <%= render 'bots/bot_settings_completed' %>  
 		</div>
-    </div>
 <% end %>
- 
-<div class = "col-8" id = "actualform">
-	<%= form_with scope: :botsettings, url: bot_path(@bot.id), method: :put,  local: true do |f| %>
-		<!-- phone -->
-		<div class = "col-6"  id = "upon_first_click" style = "margin-right: 1%; margin-top: 11%;">
-			<h4>Select which numbers to send messages from</h4>
-			<div class = "col-5 container shadow bg-white ml-0 mt-4" style = "border: solid 1px #d5d5d5; border-radius: 7px; height: 64px;">
-				<div class="row">
-					<div class="col-2">
-						<%= image_tag('symbol.png', size: "40", class: "rounded-circle")%>
-					</div>
-					<div class="col-8">
-						<div class="custom_font p-1">Business 1</div> 
-						+91 <%= @bot.phone%>
+   <div class = "col-8" style = "overflow: auto;" id = "style-1">   
+		<div id = "actualform" class = "col-12"  style = "padding-left: 15%; margin-top: 11% overflow: auto;" >
+			<%= form_with scope: :botsettings, url: bot_path(@bot.id), method: :put,  local: true do |f| %>
+				<!-- phone -->
+				<div class = "col-8"  id = "upon_first_click" style = "margin-right: 1%; margin-top: 11%;">
+					<h4>Select which numbers to send messages from</h4>
+					<div class = "col-5 container shadow bg-white ml-0 mt-4 radio-toolbar" style = "border: solid 1px #d5d5d5; border-radius: 7px; height: 64px;">
+						<div class="row">
+							<div class="col-2">
+								<%= image_tag('symbol.png', size: "40", class: "rounded-circle")%>
+							</div>
+							<div class="col-8">
+								<div class="custom_font p-1">Business 1</div> 
+								+91 <%= @bot.phone%>
+							</div>
+						</div>	
 					</div>
 				</div>	
-			</div>
-		</div>	
-		<!-- language -->
-		<div class = "col-6 mb-4"  id = "upon_second_click" style = "margin-right: 1%; margin-top: 11%; ">
-			<h4>Select default bot language</h4>	
-			<div class = "ml-0 mt-4">
-				<% i = 0 %>
-				<%= collection_radio_buttons(:botsettings, :language, Language.all, :language, :language) do |b| %>
-					<% if i < 3%>
-						<span class="radio-toolbar mb-1 mr-4 mt-4" style = "border-radius: 7px;">
-							<%= b.radio_button %> 
-							<%= b.label(:"data-value" => b.value ,class: "shadow p-2 mb-4 text-center", style: "border-radius: 7px; border: solid 1px #d5d5d5;")%>
-						</span>		
-					<% end %>
-					<% i = i+1 %>
-				<% end %>
-			</div>
-		</div>
-		<!-- initiate conversation -->
-		<div class = "col-6 mb-4"  id = "upon_third_click" style = "margin-right: 1%; margin-top: 11%;">
-			<h4>Who will initiate the conversation?</h4>	
-			<div class = "ml-0 mt-4">
-				<% i = 0 %>
-				<%= collection_radio_buttons(:botsettings, :initconv, ["Bot", "Customer"], :to_s, :to_s) do |b| %>
-					<% if i < 2%>
-						<span class="radio-toolbar mb-1 mr-4 mt-4" style = "border-radius: 7px;">
-							<%= b.radio_button %> 
-							<%= b.label(:"data-value" => b.value ,class: "shadow p-2 mb-4 text-center", style: "border-radius: 7px; border: solid 1px #d5d5d5;")%>
-						</span>		
-					<% end %>
-					<% i = i+1 %>
-				<% end %>
-			</div>
-			<div class = "ml-0">
-			<strong>Note</strong>
-			</div>
-			<div class = "ml-0">
-			If bot initiates message, it can send only Whatsapp approved templates.
-			</div>
-		</div>
-		<!--Reminder-->
-		<div class = "col-6 mb-4"  id = "upon_fourth_click" style = "margin-right: 1%; margin-top: 11%;">
-			<h4>Send reminder message if the customer doesn't respond?</h4>
-		</div>	
-        <div class = "mt-4 ml-3">
-          <button type="button" class="btn btn-success" id = "skip_reminder" style = "margin-right: 20px;" >Skip this for now</button>
-		  <button type="button" class="btn btn-success" id = "set_reminder">Set reminder</button>
-		</div>
-		<div id= "set_reminder_click" class = "mt-4 ml-0">
-		
-		</div>
-		<!-- trigger point -->
-		<div class="row mt-4 ml-1">
-			<div class="arrow-left"></div>
-			<div class="p-3 mb-1 grey_background my_border_radius text-center">
-				When to send the first message ? (Trigger point for bot)
-			</div>
-		</div>
-		<div class="mt-2 ml-4">
-			<%= f.radio_button :triggerpoint , "any_message"%>
-			<%= f.label :triggerpoint , "Any message sent from the user", value: "any_message" , class: "ml-2"%>
-		</div>
-		<div class="mt-2 ml-4">	
-			<%= f.radio_button :triggerpoint , "trigger_phrase"%>
-			<%= f.label :triggerpoint , "When someone texts me", value: "trigger_phrase" , class: "ml-2"%>
-		</div>
-		
-		<!-- auto reboot -->
-		<div class="ml-3 mt-2 alert alert-warning">
-			<p>Note:</p>
-			<p>If user doesn’t reply in 
-				<span class="mr-2 ml-2" style="width: 15px;">
-					<%= select_minute(5, field_name: 'rebootconv') %>
-				</span>
-				minutes, bot will reboot the conversation</p>
-		</div>
-		<!-- submit -->
-		<div class="ml-3 mb-1">
-			Awesome, Lets set up the messages now.
-			<%= f.submit value: "Set up Messages  >", class: "btn btn-secondary ml-3"%>
-		</div>
-	<% end %>
-</div>					
+				<!-- language -->
+				<div class = "col-8 mb-4"  id = "upon_second_click" style = "margin-right: 1%; margin-top: 11%; ">
+					<h4>Select default bot language</h4>	
+					<div class = "ml-0 mt-4">
+						<% i = 0 %>
+						<%= collection_radio_buttons(:botsettings, :language, Language.all, :language, :language) do |b| %>
+							<% if i < 3%>
+								<span class="radio-toolbar mb-1 mr-4 mt-4" style = "border-radius: 7px;">
+									<%= b.radio_button %> 
+									<%= b.label(:"data-value" => b.value ,class: "shadow p-2 mb-4 text-center", style: "border-radius: 7px; border: solid 1px #d5d5d5;")%>
+								</span>		
+							<% end %>
+							<% i = i+1 %>
+						<% end %>
+					</div>
+				</div>
+				<!-- initiate conversation -->
+				<div class = "col-8 mb-4"  id = "upon_third_click" style = "margin-right: 1%; margin-top: 11%;">
+					<h4>Who will initiate the conversation?</h4>	
+					<div class = "ml-0 mt-4">
+						<% i = 0 %>
+						<%= collection_radio_buttons(:botsettings, :initconv, ["Bot", "Customer"], :to_s, :to_s) do |b| %>
+							<% if i < 2%>
+								<span class="radio-toolbar mb-1 mr-4 mt-4" style = "border-radius: 7px;">
+									<%= b.radio_button %> 
+									<%= b.label(:"data-value" => b.value ,class: "shadow p-2 mb-4 text-center", style: "border-radius: 7px; border: solid 1px #d5d5d5;")%>
+								</span>		
+							<% end %>
+							<% i = i+1 %>
+						<% end %>
+					</div>
+					<div class = "ml-0">
+					<strong>Note</strong>
+					</div>
+					<div class = "ml-0">
+					If bot initiates message, it can send only Whatsapp approved templates.
+					</div>
+				</div>
+				<!--Trigger point-->
+				<div class = "col-8 mb-4"  id = "upon_third_click_bot" style = "margin-right: 1%; margin-top: 11%;">
+					<h4>Add keywords to which the bot will respond</h4>	
+					<div class="mt-4 ml-0">
+						<%= f.radio_button :trigger , "Any keyword (Default bot)" %>
+						<%= f.label :trigger , "Any keyword (Default bot)", value: "Any keyword (Default bot)", class: "ml-2"%>
+					</div>
+					<div class="mt-2 ml-0">	
+						<%= f.radio_button :trigger , "Specific keywords (Triggered bot)" %>
+						<%= f.label :trigger , "Specific keywords (Triggered bot)", value: "Specific keywords (Triggered bot)", class: "ml-2"%>
+					</div>
+					<div class = "mt-4">
+						<% for phrase in Triggerphrase.where(bot_id: @bot.id)%>
+						<span class="triggerphrase ml-1 mr-1 mt-4 mb-4">
+								<span class= "triggerfont ml-2 mr-2"><%= phrase.trigger %>
+							<span class="mb-4" id= <%= "triggerphrase_delete" + (phrase.id).to_s%> >
+							<%= link_to image_tag('cross.png', size: "10"), triggerphrase_destroy_path(phrase.id, @bot.id), method: :get, remote: true, class: ""%>	
+							</span>		
+						</span>	
+						</span>  
+						<% end %>
+					</div>
+					<div id = "triggered_bot">
+						<div class="text-center mb-1" id="triggerphrase_add_a_new_phrase" >
+							<%= form_with scope: :triggerform, url: triggerphrase_create_path(@bot.id), method: :get, remote: true do |f| %>
+								<div class = "row mt-4">
+									<div class = "col-6 ml-0">
+										<%= f.text_field :trigger, class: "text-left form_trigger_input_bot_settings", placeholder:  "Add trigger words", style: "width: 300px; padding-left: 0px;", id: "addtriggerphrasefield" %> 
+									</div>
+									<div class = "col-2 mt-2 p-0 form_trigger_input_bot_settings" >
+										<%= f.submit "Add", class: "submit-text_bot_settings", remote: true %>
+									</div>
+								</div>	
+							<% end %>
+						</div>
+					</div>	
+				</div>
+				<!--Reminder-->
+				<div class = "col-8 mb-4"  id = "upon_fourth_click" style = "margin-right: 1%; margin-top: 11%;">
+					<h4>Send reminder message if the customer doesn't respond?</h4>	
+					<div id = "set_reminder" class = "mt-4 ml-0" ><strong>Yes, Set reminder ></strong></div>
+					<button type="button" class="btn btn-success mt-4 ml-0" id = "skip_reminder" style = "margin-right: 20px;" >Skip this for now</button>
+				    <div id= "set_reminder_click" class = "mt-4 ml-0">
+				    	<%= text_area(:bot_settings, :reminder, cols: 8, rows: 3, class: 'container bg-white p-2 reminder', placeholder: "Enter reminder message")%>	
+				        <div class = "row">
+						   <div class = "col-5">
+                              <span style = "color: grey;"> Send After </span>
+							  <span class="mr-2 ml-4" style="width: 13px;"><%= select_minute(5, field_name: 'rebootconv', style: "background-color: #f7f2ed;") %></span>
+							  <span > min </span>
+						   </div>
+						    <div class = "col-4  text-left">
+								<span id = "delete_reminder"> 
+							      <%= image_tag('delete.png') %>
+								  <span><strong> Delete Reminder</strong> </span>
+							    </span>
+							</div>
+						</div>
+						<div class = "mt-3">
+							<%= image_tag('add.png') %>
+							<span style = "color: green;" class = "mt-3">Add Another Reminder</span>
+						</div>
+						<div class = "mt-4">
+                          After sending reminder message
+							<div class="mt-4 ml-0">
+								<%= f.radio_button :open_or_close_conversation , "Keep the Conversation open" %>
+								<%= f.label :open_or_close_conversation , "Keep the Conversation open", value: "Keep the Conversation open", class: "ml-2"%>
+						    </div>
+						    <div class="mt-2 ml-0">	
+								<%= f.radio_button :open_or_close_conversation , "End Conversation" %>
+								<%= f.label :open_or_close_conversation , "End Conversation", value: "End Conversation", class: "ml-2"%>
+						    </div>
+				        </div>
+					</div>
+				</div>	
+				<!-- auto reboot -->
+				<%# <div class="ml-3 mt-2 alert alert-warning">
+					<p>Note:</p>
+					<p>If user doesn’t reply in 
+						
+						minutes, bot will reboot the conversation</p>
+				</div> %> 
+				<!-- submit -->
+				<div class = "col-8 mb-4"  id = "upon_fourth_click" style = "margin-right: 1%; margin-top: 11%;">
+					<h4>Bot Settings configured,</h4>	
+					<h4>Now let's compose the messages.</h4>	
+					<%= f.submit value: "Compose Messages", class: "btn btn-success ml-0 mt-4"%>
+				</div>	
+			<% end %>
+		</div>					
+    </div>	
+
 					
 <script type="text/javascript">
 // show form

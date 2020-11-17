@@ -1,4 +1,8 @@
+<% parent = @parent %>;
+<% usermessagemain_partial_with_connector = "usermessagemain_partial_with_connector" + (parent).to_s %>;
+<% after_add = "after_add" + (@id).to_s %>
+<% after_add_collapsed = "after_add_collapsed" + (@id).to_s %>
 document.getElementById('add').classList.remove('hide');
-document.getElementById('after_add').classList.add('hide');
-document.getElementById('after_add_collapsed').classList.add('hide');
-document.getElementById('usermessagemain_partial_with_connector').innerHTML = "<%= j render 'bots/usermessagesmain_with_connector' %>";
+document.getElementById('<%= after_add %>').classList.add('hide');
+document.getElementById('<%= after_add_collapsed %>').classList.add('hide');
+document.getElementById('<%= usermessagemain_partial_with_connector %>').innerHTML = "<%= j render 'bots/usermessagesmain_with_connector' %>"; 

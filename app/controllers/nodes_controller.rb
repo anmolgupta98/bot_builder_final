@@ -4,6 +4,8 @@ class NodesController < ApplicationController
         @bot = Bot.find(params[:bot_id])    
         @node = Node.new(node_type: params[:node_type], bot_id: @bot.id, parent_id: params[:parent_id]) 
         @node.save
+        @node = Node.find(@node.id)
+        @parent = @node.parent_id
         respond_to do |format|
             format.js
         end  
@@ -12,6 +14,8 @@ class NodesController < ApplicationController
     def destroy
         @bot = Bot.find(params[:bot_id])
         @node = Node.find(params[:id])
+        @id = @node.id
+        @parent = @node.parent_id
         @node.destroy
         @node = nil
         respond_to do |format|
@@ -22,6 +26,7 @@ class NodesController < ApplicationController
     def update
         @node = Node.find(params[:node_id]) 
         @bot = Bot.find(params[:bot_id]) 
+        @parent = @node.id
         @node.update(set_next_action: params[:set_next_action][:set_next_action], exit_message: params[:set_next_action][:exit_message], transfer_message: params[:set_next_action][:transfer_message])
         respond_to do |format|
                 format.js

@@ -1,3 +1,6 @@
-document.getElementById('after_add').classList.remove('hide');
-document.getElementById('after_add_collapsed').classList.add('hide');
-document.getElementById('showing_previous_messages').innerHTML = "<%= j render 'bots/showing_previous_messages', delete_button: true %>";
+<% after_add = "after_add" + (@node.id).to_s %>;
+<% after_add_collapsed = "after_add_collapsed" + (@node.id).to_s %>;
+<% showing_previous_messages = "showing_previous_messages" + (@node.id).to_s %>;
+document.getElementById('<%= after_add %>').classList.remove('hide');
+document.getElementById('<%= after_add_collapsed %>').classList.add('hide');
+document.getElementById('<%= showing_previous_messages %>').innerHTML = "<%= j render 'bots/showing_previous_messages', delete_button: true %>";
