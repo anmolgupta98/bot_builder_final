@@ -1,4 +1,133 @@
+<% if params[:botname] %>
+    console.log('botname');
+    document.getElementById('bot_navigation').innerHTML = "<%= j render 'bots/botnavigation' %>";
+<% else %>
+    <% if params[:botsettingsphone] %> 
+        document.getElementById('Botlanguage').classList.remove('hide');
+        document.getElementById('phone').style.borderColor = "green";
+        document.getElementById('phone').style.backgroundColor = "lightcyan";
+        document.getElementById('upon_second_click').classList.remove('hide');
+        document.getElementById('Outgoingnumber').innerHTML = "<%= j render 'bots/Outgoingnumber' %>";
+        location.href = "#";
+        location.href = "#upon_second_click";
+    <% end %> 
+    <% if params[:botsettingslanguage] %>
+        document.getElementById('Conversationstarter').classList.remove('hide');
+        document.getElementById('upon_third_click').classList.remove('hide'); 
+        <% if @bot.language != nil %>
+            <% if @bot.language == "English" %>
+                document.getElementById('English').style.borderColor = "green";
+                document.getElementById('Hindi').style.borderColor = "grey";
+                document.getElementById('Tamil').style.borderColor = "grey";
+                document.getElementById('English').style.backgroundColor = "lightcyan";
+                document.getElementById('Hindi').style.backgroundColor = "white";
+                document.getElementById('Tamil').style.backgroundColor = "white";
+            <% end %>
+            <% if @bot.language == "Hindi" %>
+                document.getElementById('English').style.borderColor = "grey";
+                document.getElementById('Hindi').style.borderColor = "green";
+                document.getElementById('Tamil').style.borderColor = "grey";
+                document.getElementById('Hindi').style.backgroundColor = "lightcyan";
+                document.getElementById('English').style.backgroundColor = "white";
+                document.getElementById('Tamil').style.backgroundColor = "white";
+            <% end %>
+            <% if @bot.language == "Tamil" %>
+                document.getElementById('English').style.borderColor = "grey";
+                document.getElementById('Hindi').style.borderColor = "grey";
+                document.getElementById('Tamil').style.borderColor = "green";
+                document.getElementById('Tamil').style.backgroundColor = "lightcyan";
+                document.getElementById('Hindi').style.backgroundColor = "white";
+                document.getElementById('English').style.backgroundColor = "white";
+            <% end %>
+        <% end %>
+        document.getElementById('Botlanguage').innerHTML = "<%= j render 'bots/Botlanguage' %>";
+        location.href = "#";
+        location.href = "#upon_third_click";
+    <% end %>
+    <% if params[:botsettingsstarter] %>
+        document.getElementById('Conversationstarter').innerHTML = "<%= j render 'bots/Conversationstarter' %>";
+        document.getElementById('Bottrigger').classList.remove('hide');
+        <% if @bot.initconv == "Customer" %>
+            document.getElementById('Bot').style.borderColor = "grey";
+            document.getElementById('Customer').style.borderColor = "green";
+            document.getElementById('Customer').style.backgroundColor = "lightcyan";
+            document.getElementById('Bot').style.backgroundColor = "white";
+            document.getElementById('upon_third_click_bot').classList.remove('hide');
+            document.getElementById('upon_fourth_click').classList.add('hide');    
+            location.href = "#";
+            location.href = "#upon_third_click_bot";
+        <% end %>	 
+        <% if @bot.initconv == "Bot" %>
+            document.getElementById('Bot').style.borderColor = "green";
+            document.getElementById('Customer').style.borderColor = "grey";
+            document.getElementById('Customer').style.backgroundColor = "white";
+            document.getElementById('Bot').style.backgroundColor = "lightcyan";
+            document.getElementById('upon_fourth_click').classList.remove('hide'); 
+            document.getElementById('upon_third_click_bot').classList.add('hide');
+            location.href = "#";
+            location.href = "#upon_fourth_click";
+        <% end %>
+    <% end %>
+    <% if params[:botsettingstrigger] %>
+        document.getElementById('Bottrigger').innerHTML = "<%= j render 'bots/Bottrigger' %>";
+        document.getElementById('botsettings_trigger').innerHTML = "<%= j render 'bots/botsettings_trigger' %>";
+        <% if @bot.triggerpoint == "Default" %>
+            document.getElementById('Trigger').style.borderColor = "grey";
+            document.getElementById('Default').style.borderColor = "green";
+            document.getElementById('Default').style.backgroundColor = "lightcyan";
+            document.getElementById('Trigger').style.backgroundColor = "white";
+            document.getElementById('triggered_bot').classList.add('hide');
+            document.getElementById('upon_fourth_click').classList.remove('hide'); 
+            location.href = "#";
+            location.href = "#upon_fourth_click";
+        <% end %>	 
+        <% if @bot.triggerpoint == "Trigger" %>
+            document.getElementById('Default').style.borderColor = "grey";
+            document.getElementById('Trigger').style.borderColor = "green";
+            document.getElementById('Trigger').style.backgroundColor = "lightcyan";
+            document.getElementById('Default').style.backgroundColor = "white";
+            document.getElementById('triggered_bot').classList.remove('hide');
+            document.getElementById('upon_fourth_click').classList.add('hide'); 
+        <% end %>	
+    <% end %> 
+    <% if params[:setreminder] %>
+        document.getElementById('NoCustomerResponse').innerHTML = "<%= j render 'bots/NoCustomerResponse' %>";
+        document.getElementById('botsettings_reminder').innerHTML = "<%= j render 'bots/botsettings_reminder' %>";
+        document.getElementById('NoCustomerResponse').classList.remove('hide');
+        <% if @bot.reminder == "no" %>
+            document.getElementById('upon_fifth_click').classList.remove('hide'); 
+            document.getElementById('set_reminder_click').classList.add('hide');
+            location.href = "#";
+            location.href = "#upon_fifth_click";
+        <% end %>	 
+        <% if @bot.reminder == "yes" %>
+            document.getElementById('set_reminder_click').classList.remove('hide');
+            document.getElementById('upon_fifth_click').classList.add('hide'); 
+            location.href = "#";
+            location.href = "#set_reminder_click";
+        <% end %>	
+    <% end %>
+    <% if params[:conversation] %>
 
-document.getElementById('bot_navigation').innerHTML = "<%= j render 'bots/botnavigation' %>";
+        <% if @bot.conversation != nil %>
+            <% if @bot.conversation == "open"%>
+                document.getElementById('close').style.borderColor = "grey";
+                document.getElementById('open').style.borderColor = "green";
+                document.getElementById('open').style.backgroundColor = "lightcyan";
+                document.getElementById('close').style.backgroundColor = "white";
+            <% end %>
+             <% if @bot.conversation == "close"%>
+                document.getElementById('open').style.borderColor = "grey";
+                document.getElementById('close').style.borderColor = "green";
+                document.getElementById('close').style.backgroundColor = "lightcyan";
+                document.getElementById('open').style.backgroundColor = "white";
+            <% end %>
+        <% end %>
+        document.getElementById('upon_fifth_click').classList.remove('hide');
+        document.getElementById('NoCustomerResponse').classList.remove('hide');
+        location.href = "#";
+        location.href = "#upon_fifth_click";
+    <% end %>
+<% end %>
 
 	

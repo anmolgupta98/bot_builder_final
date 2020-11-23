@@ -1,0 +1,20 @@
+<% for reminder in Reminder.where(bot_id: @bot.id)%>
+    <%= form_with scope: :botsettingsupdatereminder, url: reminders_update_botsettings_path(reminder.id), method: :get,  remote: true do |f| %>
+        <%= text_area(:botsettingsupdatereminder, :reminder, cols: 40, rows: 3, class: 'container bg-white ml-3 reminder', value: reminder.reminder,  remote: true )%>
+        <%= f.submit "Update", class: "btn btn-success btn-sm mb-4" %> 
+        <div class = "row" style = "margin-top: -20px;">
+            <div class = "col-3 ml-3">
+                <span style = "color: grey;"> Send After </span>
+                <span class="mr-2 ml-4" style="width: 13px;"><%= select_minute(5, field_name: 'rebootconv', style: "background-color: #f7f2ed;") %></span>
+                <span > min </span>
+            </div>
+            <div class = "col-4  text-left">
+                <span id = "delete_reminder"> 
+                    <%= link_to image_tag('delete.png'), reminders_delete_botsettings_path(reminder.id), method: :delete, remote: true %>
+                    <span><%= link_to "Delete Reminder", reminders_delete_botsettings_path(reminder.id), style: "color: rgb(0,0,0); text-decoration: none;", method: :delete, remote: true %></span>
+                </span>
+            </div>
+        </div>
+    <% end %>
+    <div class = "mt-4">  </div>
+<% end %>

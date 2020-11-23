@@ -1,6 +1,6 @@
-<div class = "container mt-4">
+<div class = "container p-2 mt-4">
     <div class ="text-center">
-        <div>
+        <div class = "mt-4">
             <%= image_tag('bot.png', class: "rounded-circle") %>
         </div >
         <div class = "mt-4">
@@ -27,7 +27,7 @@
                 <%= f.label :"Give me a name to continue", class: "col-form-label" %>
         </div>
         <div class="form-group mx-auto text-center" style="width: 400px;" >
-            <%= f.text_field :name, class: "text-center form__input", placeholder: "Give the bot a name" %> 
+            <%= f.text_field :name, class: "text-center form_input_create_bot", placeholder: "Give the bot a name" %> 
         </div>
         <div class="form-group mx-auto text-center" style="width: 300px;">
             <%= f.submit "Enter", value: "Enter", class: "btn btn-secondary" %>

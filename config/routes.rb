@@ -5,6 +5,12 @@ Rails.application.routes.draw do
   resources :triggerphrases, except: [:destroy, :create]
   resources :nodes, except: [:new, :update, :destroy]
   resources :messages, except: [:new, :create, :destroy]
+  get '/bots/change/botsettings/:id/:settings_change', to: 'bots#settings_change', as: 'settings_change'
+  delete '/reminders/delete/botsettings/:id', to: 'reminders#delete_botsettings', as: 'reminders_delete_botsettings'
+  get '/reminders/update/botsettings/:id', to: 'reminders#update_botsettings', as: 'reminders_update_botsettings'
+  get '/reminders/create/botsettings/:id', to: 'reminders#create_botsettings', as: 'reminders_create_botsettings'
+  get '/triggerphrases/create/botsettings/:id', to: 'triggerphrases#create_botsettings', as: 'triggerphrase_create_botsettings'
+  get '/triggerphrases/destroy/botsettings/:id', to: 'triggerphrases#destroy_botsettings', as: 'triggerphrase_destroy_botsettings'
   get '/nodes/transfer_message_toggle_switch/:id', to: 'nodes#transfer_message_toggle_switch', as: 'transfer_message_toggle_switch'
   get '/nodes/exit_message_toggle_switch/:id', to: 'nodes#exit_message_toggle_switch', as: 'exit_message_toggle_switch'
   delete '/messages/user_child_delete_message/:id', to: 'messages#user_child_delete_message', as: 'user_child_delete_message'

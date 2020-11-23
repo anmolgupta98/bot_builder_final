@@ -1,0 +1,39 @@
+<% if (params[:settings_change] == "1") %>
+    location.href = "#";
+    location.href = "#upon_first_click";
+<% end %>
+<% if (params[:settings_change] == "2") %>
+    location.href = "#";
+    location.href = "#upon_second_click";
+<% end %>
+<% if (params[:settings_change] == "3") %>
+    location.href = "#";
+    location.href = "#upon_third_click";
+<% end %>
+<% if (params[:settings_change] == "4") %>
+    location.href = "#";
+    location.href = "#upon_third_click_bot";
+<% end %>
+<% if (params[:settings_change] == "5") %>
+    document.getElementById('set_reminder_click').classList.remove('hide')
+    document.getElementById('upon_fourth_click').classList.add('hide')
+    location.href = "#";
+    location.href = "#set_reminder_click";
+<% end %>
+<% if (params[:settings_change] == "reminder") %>
+    document.getElementById('Bottrigger').innerHTML = "<%= j render 'bots/Bottrigger' %>";
+    document.getElementById('botsettings_trigger').innerHTML = "<%= j render 'bots/botsettings_trigger' %>";
+    document.getElementById('upon_fourth_click').classList.remove('hide'); 
+    location.href = "#";
+    location.href = "#upon_fourth_click";
+<% end %>
+<% if (params[:settings_change] == "anotherreminder") %>
+    document.getElementById('botsettings_reminder_form').classList.remove('hide');
+<% end %>
+<% if (params[:settings_change] == "skip") %>
+    document.getElementById('upon_fifth_click').classList.remove('hide');
+    location.href = "#";
+    location.href = "#upon_fifth_click";
+    console.log('skip');
+<% end %>
+

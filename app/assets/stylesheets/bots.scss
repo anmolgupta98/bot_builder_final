@@ -2,5 +2,28 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
-// Bot Settings Page
+// Create a new bot form
+.form_input_create_bot{
+	width: 250px;
+	border:0px solid #f7f2ed;
+	border-radius: 0;
+    border-bottom: 1px solid #bababa;
+    background-color: #f7f2ed;
+    transition: all .5s ease;
+	outline:none;   
+    margin-top: 0em;
+    padding: 0.5px;
+}
+
+.form_input_create_bot :focus{
+	width: 250px;
+	border:0px solid #f7f2ed;
+	border-radius: 0;
+    border-bottom: 1px solid #bababa;
+    background-color: #f7f2ed;
+    transition: all .5s ease;
+	outline:none;   
+    margin-top: 0em;
+    padding: 0.5px;
+}
 

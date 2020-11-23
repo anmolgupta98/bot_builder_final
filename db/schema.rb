@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_12_091516) do
+ActiveRecord::Schema.define(version: 2020_11_19_120703) do
 
   create_table "bots", force: :cascade do |t|
     t.string "name"
@@ -28,6 +28,8 @@ ActiveRecord::Schema.define(version: 2020_11_12_091516) do
     t.integer "user_id"
     t.string "days"
     t.string "status"
+    t.string "reminder"
+    t.string "conversation"
   end
 
   create_table "languages", force: :cascade do |t|
@@ -58,6 +60,14 @@ ActiveRecord::Schema.define(version: 2020_11_12_091516) do
     t.boolean "exit_message_toggle_switch"
     t.text "transfer_message"
     t.boolean "transfer_message_toggle_switch"
+  end
+
+  create_table "reminders", force: :cascade do |t|
+    t.text "reminder"
+    t.integer "bot_id"
+    t.integer "rebootconv"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "triggerphrases", force: :cascade do |t|
