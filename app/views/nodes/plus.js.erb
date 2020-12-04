@@ -1,3 +1,4 @@
-var value = parseInt(document.getElementById('add_child').value);
+<% add_child = "add_child" + (@node.id).to_s%>;
+var value = parseInt(document.getElementById('<%= add_child %>').value);
 value = value +1;
-document.getElementById('add_child').value = value;
+document.getElementById('<%= add_child %>').value = value;

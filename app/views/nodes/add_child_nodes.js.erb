@@ -1,14 +1,16 @@
-document.getElementById('usermessagemain_partial').innerHTML = "<%= j render 'bots/usermessagesmain' %>";
+<% usermessagemain_partial = "usermessagemain_partial" + (@node.id).to_s%>;
+<% connector_black_link_vertical = "connector_black_link_vertical" + (@node.id).to_s%>;
+document.getElementById('<%= usermessagemain_partial %>').innerHTML = "<%= j render 'bots/usermessagesmain' %>";
 var i;
 var height= 53;
 <% for child in @node.children %>
    <% if child.user_input_type == nil %>
        height = height + 52;
 	<% else %> 
-	   height = height + 148.78;  
+	   height = height + 151.78;  
 	<% end %>   
 <% end %>
-document.getElementById('connector_black_link_vertical').style.height =  height + "px"; 
+document.getElementById('<%= connector_black_link_vertical %>').style.height =  height + "px"; 
 <% for child in @node.children %>
 		user_child_node_compressed = <%= "user_child_node_compressed" + (child.id).to_s %>;
 		user_child_node_expanded = <%= "child_expanded_id" + (child.id).to_s %>;

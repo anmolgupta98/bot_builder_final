@@ -1,0 +1,14 @@
+<% if @node %>
+    <div class = "text-center">
+        <div class = "Bot-Response ml-3 mt-2 mb-1" >
+            <span>
+                <% if @node.name %>
+                    <%= @node.name.truncate(20) %>
+                <% else %>
+                    <%= " Bot Response" %>
+                <% end %>
+                <%= link_to image_tag('edit.png', size: "17", class: "text-center mb-1", style: "margin-top: 0px;"), bot_node_name_edit_icon_click_path(@node.id), method: :get, remote: true  %>
+            </span>
+        </div>
+    </div> 
+<% end %>

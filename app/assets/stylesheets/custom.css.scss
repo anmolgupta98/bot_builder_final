@@ -490,5 +490,11 @@ background-color: #555;
   background-color: var(--white);
 }
 
-
+//CKEDITOR
+.cke.cke_chrome {
+  visibility: inherit;
+}
+.cke.cke_panel {
+   visibility: visible;
+}
 

@@ -1,9 +1,10 @@
+<% parent_id = @parent %>;
+<% add = "add" + parent_id.to_s() %>;
+<% botmessagemain_partial =  "botmessagemain_partial" + (parent_id).to_s %>;
 <% add_expansion = "add_expansion" + (@node.id).to_s %>;
 <% after_add = "after_add" + (@node.id).to_s %>;
-<% parent = @parent %>;
-<% botmessagemain_partial =  "botmessagemain_partial" + (parent).to_s %>;
-document.getElementById('<%= botmessagemain_partial %>').innerHTML = "<% j render 'bots/botnode' %>";
-document.getElementById('<%= add_expansion %>').innerHTML = "<%= j render 'bots/add_expansion' %>";
-document.getElementById('add').classList.add('hide');
+document.getElementById('<%= botmessagemain_partial%>').innerHTML = "<%= j render 'bots/botnode', parent_id: parent_id %>";
+document.getElementById('<%= add_expansion %>').innerHTML = "<%= j render 'bots/add_expansion', parent_id: parent_id %>";
+document.getElementById('<%= add %>').classList.add('hide');
 document.getElementById('<%= after_add %>').classList.remove('hide');
 

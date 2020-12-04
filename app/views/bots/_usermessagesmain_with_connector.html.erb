@@ -1,5 +1,7 @@
 <!--Parent bot response and child user node connectors-->
 <% if @node%>
+    <% usermessagemain_partial = "usermessagemain_partial" + (@node.id).to_s%>
+    <% connector_black_link_vertical = "connector_black_link_vertical" + (@node.id).to_s%>
     <% if @node.set_next_action == "add_a_node"%>
         <% number_of_child_nodes = 0%>
         <% for i in @node.children%>
@@ -9,9 +11,27 @@
         <% height = height.to_s + "px" %>
         <div class="connector_black_circle" style = "margin-left: -9px;"></div>
         <div class="connector_black_link"></div>
-        <div class="connector_black_link_vertical", style="margin-right: 15px; height:<%= height%>" id = "connector_black_link_vertical" ></div>	
-        <div id="usermessagemain_partial">
+        <div id= <%= connector_black_link_vertical %> style="margin-right: 15px; height:<%= height%>" class = "connector_black_link_vertical" ></div>	
+        <div id= <%= usermessagemain_partial %>>
             <%= render 'bots/usermessagesmain'%> <!--Child user nodes-->
         </div>
     <% end %>
+    <div>
+        <div>
+            <% for children in @node.children%>
+                <div class="row">
+                    <div class="Ellipse-160" style="margin-left: 30px;"></div>
+                    <div class="Path-510" style="margin-right: 15px; "></div>
+                    <div class="row" style="margin-bottom: 5px;">
+                        <div id = <%= "botmessagemain_partial" + (children.id).to_s %>>
+                            <%= render 'bots/botnode', parent_id: children.id %> <!--Bot response-->
+                        </div>
+                        <div class="row" id= <%= "usermessagemain_partial_with_connector" + (children.id).to_s %>> <!--Parent bot response and child user node connectors-->
+                            <%= render 'bots/usermessagesmain_with_connector' %>	
+                        </div>
+                    </div>							
+                </div>							
+            <%end%>
+        </div>			
+    </div>
 <% end %> 

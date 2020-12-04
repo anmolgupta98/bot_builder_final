@@ -1,19 +1,19 @@
 <a style = "color: #7e7e7e;" >Bot trigger</a>
 <%= link_to " Change", settings_change_path(@bot.id, "4"), method: :get,style: "margin-left: 52%; color: #157e4b; font-weight: 500; text-decoration: none" , remote: true %>
-<div class = "mt-2 mb-2 ml-0 p-0 container" style = "height: 75px; overflow-y: auto;" id = "style-4">
+<div class = "mb-2 ml-0">
      <% if @bot.triggerpoint == "Default" %>
         The bot will activate upon any message sent by customer
     <% end %> 
     <% if @bot.triggerpoint == "Trigger" %>
         <% if Triggerphrase.where(bot_id: @bot.id) == [] %>
-            <br>
             You have not added any triggerphrases yet.
         <% end %>  
-        
-        <% for phrase in Triggerphrase.where(bot_id: @bot.id)%>
-            <%= phrase.trigger + ", " %>
-        <% end %>
+        <% names = "" %>
+            <% for phrase in Triggerphrase.where(bot_id: @bot.id)%>
+                <% names.concat(phrase.trigger + ", ") %>
+            <% end %> 
+        <%= names.truncate(29) %>       
     <% end %>
-   
-      
+<br>    
+<br>  
 </div>

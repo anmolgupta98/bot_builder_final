@@ -1,0 +1,4 @@
+<% bot_node_name = "bot_node_name" + (@node.id).to_s %>;
+<% botnameform =  "botnameform" + (@node.id).to_s %>;
+document.getElementById('<%= bot_node_name %>').classList.add('hide');
+document.getElementById('<%= botnameform %>').classList.remove('hide');

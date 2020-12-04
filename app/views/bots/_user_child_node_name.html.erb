@@ -1,9 +1,9 @@
 <% if child %>
     <div class = "text-center">
-        <div class = "Bot-Response ml-3 mt-2 mb-3" >
+        <div class = "Bot-Response ml-3 mt-2 mb-1" >
             <span><% if child.name %></span>
-                <%= child.name %>
-                <%= link_to image_tag('edit2.png', size: "17", class: "text-center", style: "margin-top: 0px;"), user_child_node_name_edit_icon_click_path(child.id), method: :get, remote: true  %>
+                <%= child.name.truncate(20) %>
+                <%= link_to image_tag('edit.png', size: "17", class: "text-center mb-1", style: "margin-top: 0px;"), user_child_node_name_edit_icon_click_path(child.id), method: :get, remote: true  %>
             <% end %>
         </div>
     </div> 

@@ -5,6 +5,10 @@ Rails.application.routes.draw do
   resources :triggerphrases, except: [:destroy, :create]
   resources :nodes, except: [:new, :update, :destroy]
   resources :messages, except: [:new, :create, :destroy]
+  mount Ckeditor::Engine => '/ckeditor'
+  post 'nodes/usermessage/nodes_message_attach_media', to: 'nodes#nodes_message_attach_media', as: 'nodes_message_attach_media'
+  get '/nodes/bot_node_name_edit_icon_click/:id', to: 'nodes#bot_node_name_edit_icon_click', as: 'bot_node_name_edit_icon_click'
+  get '/nodes/botnodename/:id', to: 'nodes#bot_node_name', as: 'bot_node_name'
   get '/bots/change/botsettings/:id/:settings_change', to: 'bots#settings_change', as: 'settings_change'
   delete '/reminders/delete/botsettings/:id', to: 'reminders#delete_botsettings', as: 'reminders_delete_botsettings'
   get '/reminders/update/botsettings/:id', to: 'reminders#update_botsettings', as: 'reminders_update_botsettings'

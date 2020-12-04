@@ -34,13 +34,13 @@
 	    <%= link_to test_path(@bot.id) do %>
 			<div style = "height: 45px; " >
 			<%= image_tag('p.png')%>
-			<%= link_to 'Test the bot', test_path(@bot.id), style: "color: black; text-decoration: none;" %>
+			<%= link_to 'Test the bot', test_path(@bot.id), style: "color: black; text-decoration: none;", class: "navbar_custom_links" %>
 			</div>
 		<% end %>
       </div>
     </div>
     <div class="col-2 border">
-       <div class="text-center navbar_content_height_undo" >
+       <div class="text-center navbar_content_height_undo navbar_custom_links"  style = "margin-top: 4px;">
         Activate
       </div>
     </div>
@@ -52,7 +52,7 @@
 </div>
 
 <!-- Main content -->
-<div class="container-fluid border" style = "overflow-y: auto;  padding-top: 30px;  padding-left: 50px; height: 720px;" id = "style-1" >
+<div class="container-fluid" style = "overflow-y: auto; overflow-x: auto;  padding-top: 30px;  padding-left: 50px; height: 720px;" id = "style-1" >
   <%= render 'bots/composemessagemain', parent_id: 0 %>  
 </div>
   

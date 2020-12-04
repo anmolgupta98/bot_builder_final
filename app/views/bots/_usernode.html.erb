@@ -1,21 +1,36 @@
 <!-- This is the first user messages node: Triggerphrase-->
 <div class="Rectangle-827" id="triggerphrase_usermessage" >
-	<span class="Initial-Message-from-Customer" style = "margin-left: 95px; margin-right: 62px;">
-		Initial Message from Customer 
-    <%= link_to 'Done', triggerphrase_path(@bot.id), method: :patch, remote: true, class:"usermessage_add_button hide p-1", id: "stop_edit", style: "text-decoration: none; color: black; margin-left: 30px;" %>
-    <%= link_to image_tag('edit2.png', size: "20", id: "triggerphrase_edit_icon", style: "margin-left: 30px;"), edit_triggerphrase_path(@bot.id), method: :get, remote: true %>		
-	</span>
+  <span class = "row">
+    <div class="col-2">
+      
+    </div>  
+    <div class = "mt-2 col-7">
+       Initial Message from Customer 
+    </div>
+    <div class = "col-2 mt-1 text-right submit-text hide"  id = "stop_edit">
+      <%= link_to 'OK', triggerphrase_path(@bot.id), method: :patch, remote: true, style: "text-decoration: none; color: green;" %>
+    </div> 
+    <div class = "col-2 text-right mt-1 mb-2" >
+      <%= link_to image_tag('edit.png', size: "18", id: "triggerphrase_edit_icon"), edit_triggerphrase_path(@bot.id), method: :get, remote: true %>		
+    </div>
+  </span>  
 	<div class="Path-389"></div>
   <div id = "triggerphrases_partial"><%= render 'bots/triggerphrases'%></div>
-	<div class="Path-389 mt-2 mb-1 hide" id="triggerphrase_usermessage_second_card_divider"></div>
+	<div class="Path-389 mt-1 mb-1 hide" id="triggerphrase_usermessage_second_card_divider"></div>
 	<div class="text-center mb-1 hide" id="triggerphrase_add_a_new_phrase" >
 		<%= form_with scope: :triggerform, url: triggerphrase_create_path(@bot.id), method: :get, remote: true do |f| %>
-      <span class="mx-auto text-center" style="width: 300px; margin-right: 5px;" >
-        <%= f.text_field :trigger, class: "form_trigger text-center", placeholder: "Add trigger words", remote: true, style: "border-radius: 10px;", id: "addtriggerphrasefield" %> 
-      </span>
-      <span class="form-group mx-auto mt-4" style="width: 300px;">
-        <%= f.submit "Add", value: "Add", class: "submit-text ml-2", remote: true %>
+      <span class="mx-auto text-center row">
+       	<div class = "col-8 text-left ml-4 mr-0 p-0">
+          <%= f.text_field :trigger, class: "form_trigger_trigger text-center", placeholder: "Add trigger words", remote: true, style: "width: 290px;", id: "addtriggerphrasefield" %> 
+        </div>
+        <div class = "col-3 text-right" , style= "padding-bottom: 0px; width: 10px; margin-top: -18px; height: 1px;" >
+          <%= f.submit "Add", class: "submit-text mt-3", remote: true %>
+        </div>
       </span>
     <% end %>
 	</div>
 </div>
+									
+									
+										
+							

@@ -3,7 +3,8 @@ class MessagesController < ApplicationController
     def new
         @bot = Bot.find(params[:bot_id])    
         @node = Node.find(params[:node_id])
-        @message = Message.new(params.require(:text_messages).permit(:text_message).merge(bot_id: @bot.id, node_id: @node.id, node_type: "bot"))
+        @ckeditorid = "ckeditor" + @node.id.to_s() 
+        @message = Message.new(params.require(:text_messages).permit(:text_message, :message_type).merge(bot_id: @bot.id, node_id: @node.id, node_type: "bot"))
         @message.save
         respond_to do |format|
             format.js

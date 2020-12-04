@@ -84,6 +84,20 @@
 	outline:none;
 	transition: all .5s ease;
 }
+
+
+.form_trigger_trigger{
+	width: 29px;
+	border:0px solid white;
+	border-radius: 0;
+    border-bottom: 1px solid #bababa;
+    background-color: white;
+    transition: all .5s ease;
+	
+	outline:none;
+	margin-bottom:1.5em auto;
+}
+
 .form_trigger:focus{
 	border-bottom-color: black;
 	box-shadow: 0 0 5px white; 

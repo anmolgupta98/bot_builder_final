@@ -3,9 +3,9 @@ class NodesController < ApplicationController
     def new
         @bot = Bot.find(params[:bot_id])    
         @node = Node.new(node_type: params[:node_type], bot_id: @bot.id, parent_id: params[:parent_id]) 
+        @parent = params[:parent_id]
         @node.save
-        @node = Node.find(@node.id)
-        @parent = @node.parent_id
+        @node = Node.where(bot_id: @bot.id, parent_id: params[:parent_id]).first   
         respond_to do |format|
             format.js
         end  
@@ -26,10 +26,10 @@ class NodesController < ApplicationController
     def update
         @node = Node.find(params[:node_id]) 
         @bot = Bot.find(params[:bot_id]) 
-        @parent = @node.id
+        @parent = params[:set_next_action][:parent_id]
         @node.update(set_next_action: params[:set_next_action][:set_next_action], exit_message: params[:set_next_action][:exit_message], transfer_message: params[:set_next_action][:transfer_message])
         respond_to do |format|
-                format.js
+            format.js
         end
     end    
 
@@ -189,4 +189,30 @@ class NodesController < ApplicationController
             end
         end
     end    
+
+    def bot_node_name
+       @node = Node.find(params[:id])
+       @node.update(name: params[:botname][:name])
+       respond_to do |format|
+            format.js
+       end
+    end
+
+    def bot_node_name_edit_icon_click
+        @node = Node.find(params[:id])
+        respond_to do |format|
+             format.js
+        end
+    end
+
+    def nodes_message_attach_media
+		@node = Node.find(params[:attach_message][:node_id])
+		@bot = Bot.find(@node.bot_id)
+		@parent_id = @node.parent_id
+		@message = Message.create(params.require(:attach_message).permit(:image, :node_id, :node_type, :bot_id, :message_type))
+		respond_to do |format|
+		    format.js
+        end
+    end      
+
 end

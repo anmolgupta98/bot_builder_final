@@ -1,4 +1,8 @@
 <% if @node %>
+    <% connector_black_link_vertical = "connector_black_link_vertical" + (@node.id).to_s%>
+	<% increase = "increase" + (@node.id).to_s%>
+	<% decrease = "decrease" + (@node.id).to_s%>
+	<% add_child = "add_child" + (@node.id).to_s%>
     <!-- After adding child nodes, child nodes with define -->
 	<% if @node.children %>
 		<% for child in @node.children %>
@@ -49,9 +53,9 @@
 					<div class="col-6 mt-2 ml-2", style="padding-left: 5px;">
 						<%= form_with scope: :number_of_nodes, url: add_child_nodes_path(@node.id, @bot.id), method: :post, remote: true do |f| %>
 							<span class=" text-center">
-								<%= link_to "-", node_minus_path(@node.id, @bot.id), id: "decrease", method: :get, remote: true, style: "text-decoration: none;" %>
-								<%= f.text_field :number, class: "number_of_nodes_field text-center", value: 1,style: "width:30px;", id: "add_child", remote: true %>
-								<%= link_to "+", node_plus_path(@node.id, @bot.id), id: "increase", method: :get, remote: true, style: "text-decoration: none;" %>
+								<%= link_to "-", node_minus_path(@node.id, @bot.id), id:  decrease, method: :get, remote: true, style: "text-decoration: none;" %>
+								<%= f.text_field :number, class: "number_of_nodes_field text-center", value: 1,style: "width:30px;", id: add_child, remote: true %>
+								<%= link_to "+", node_plus_path(@node.id, @bot.id), id: increase, method: :get, remote: true, style: "text-decoration: none;" %>
 							</span>
 							<span class="text-center Bot-Response" style = "margin-left: 19px;" id = <%= "add_child_nodes_button" + (@node.id).to_s %>>
 								<%= f.submit "Add", value: "Add", class: "usermessage_add_button", remote: true %>
@@ -93,9 +97,9 @@
 		<% if child.user_input_type != nil %>
 			document.getElementById(child_define.id).classList.add('hide');
 			document.getElementById(user_child_node_compressed.id).classList.remove('hide');
-			height = document.getElementById('connector_black_link_vertical').style.height;
-			height = parseInt(height) + 105.78;
-			document.getElementById('connector_black_link_vertical').style.height = height + "px" ;
+			height = document.getElementById('<%= connector_black_link_vertical %>').style.height;
+			height = parseInt(height) + 102.78;
+			document.getElementById('<%= connector_black_link_vertical %>').style.height = height + "px" ;
 		<% end %>
 	<% end %>
 </script>

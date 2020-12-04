@@ -4,13 +4,14 @@
   <div class="nav-item" style = "margin-right: 1%;" >Referralyogi </div>
   <div class = "nav-item" style= "font-size: 140%; color: #ebebeb; margin-right: 1%;" >|</div>
   <div style = "margin-right: 1%;"><%= image_tag('bot.png', class: "rounded-circle", size: "30") %> </div>
+  <% noid = "noid" + (@bot.id).to_s() %>
   <div id = "name"><%= @bot.name %></div>
   <div class = "col-2 hide" id = "nameform">
     <%= form_with scope: :botname, url: bot_path(@bot.id), method: :put,  remote: true do |f| %>
-        <%= f.text_field :name, class: "text-center form_edit_name", placeholder:  @bot.name  %>
+        <%= f.text_field :name, class: "text-center form_edit_name", placeholder:  @bot.name, id: noid  %>
     <% end %>
     </div>  
-  <div> &nbsp;<%= image_tag('edit2.png', size: "25", class: "text-center", id: "edit")  %></div>
+  <div> &nbsp;<%= image_tag('edit4.png', size: "25", class: "text-center mb-1", id: "edit")  %></div>
 </nav>
 
 <script type="text/javascript">

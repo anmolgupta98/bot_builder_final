@@ -1,2 +1,2 @@
 <% showing_previous_messages = "showing_previous_messages" + (@node.id).to_s %>;
-document.getElementById('<%= showing_previous_messages %>').innerHTML = "<%= j render 'bots/showing_previous_messages', delete_button: true %>";
+document.getElementById('<%= showing_previous_messages %>').innerHTML = "<%= j render 'bots/showing_previous_messages', delete_button: true, parent_id: @node.parent_id %>";

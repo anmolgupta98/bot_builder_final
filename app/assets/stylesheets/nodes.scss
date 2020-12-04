@@ -151,7 +151,7 @@
     margin-top: 15px;
     width: 12px;
     height: 12px;
-    box-shadow: 0 0 6px 0 grey;
+    box-shadow: 0 0 6px 0 white;
     border: solid 1.5px black;
     border-radius: 50%;
     background-color: var(--white);
@@ -163,8 +163,8 @@
     margin-top: 20px;
     width: 19px;
     height: 0;
-    box-shadow: 0 0 6px 0 grey;
-    border-top: solid 1.5px grey;
+    // box-shadow: 0 0 6px 0 black;
+    border-top: solid 2px black;
 }
   
 .connector_black_link_vertical {
@@ -174,8 +174,8 @@
     margin-right: 0px;
     width: 0px;
     height: 70px;
-    box-shadow: 0 0 6px 0 grey;
-    border-right: solid 1.5px grey;
+    // box-shadow: 0 0 6px 0 black;
+    border-right: solid 2px black;
 }
 
 // Child nodes
@@ -315,4 +315,16 @@
     border-radius: 3px;
     box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.16);
     background-color: var(--white);   
+}
+
+//Bot response name form
+.form_bot_response{
+	width: 180px;
+	border:0px solid #f7f2ed;
+	border-radius: 0;
+    border-bottom: 1px solid #bababa;
+    background-color:  #dcf8c6;
+    transition: all .5s ease;
+	outline:none;   
+    padding: 0.5px;
 }

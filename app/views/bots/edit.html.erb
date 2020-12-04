@@ -5,45 +5,41 @@
 </div>
 
 <!--Second navbar -->
-<nav class="mynavbar bg-white">
+<nav class="container-fluid bg-white" style = "height: 60px;">
   <div class="row">
     <div class="col-8">
       <ul class="steps">
-        <li class="past" style = "width: 20px;">
+        <li class="past" style = "width: 24px; margin-left: 0%;">
           <span>
             <strong>Steps</strong>
           </span>
         </li>
-        <li class="present">
+        <li class="future">
           <span>
             <%= link_to edit_bot_path(@bot.id), class:"navbar_custom_links" do%>
               <div style="height: 50px; width: 200px;">1. Bot Settings</div>
             <% end %>
-          </span><i></i> 
-        </li>  
-
-        <li class="future">
+          </span><i></i>
+        </li>
+        <li class="present">
           <span>
-            <%= link_to composemessage_path(@bot.id), class:"navbar_custom_links",  id: "composemessagenavbar" do%>
+            <%= link_to composemessage_path(@bot.id), class:"navbar_custom_links" do%>
               <div style="height: 50px; width: 200px;">2. Compose Message</div>
             <% end %>
           </span><i></i>
         </li>
       </ul>
     </div>
-    <div class="col-2">
-      <div class="text-center navbar_content_height_undo" style=  "margin-top: -4%;">
-        <%= link_to image_tag('undo.png', size: "45"), root_path%>
-        <%= link_to 'Undo', root_path, class: "Undo"%>
-      </div>
+    <div class="col-2 text-center">
+      
     </div>
-    <div class="col-2">
-      <div class="text-center navbar_content_height_undo" style = "background-color: #dedede; color: white">
+    <div class="col-2 border">
+       <div class="text-center navbar_content_height_undo navbar_custom_links" style = "margin-top: 4px;">
         Activate
       </div>
     </div>
   </div>
-</nav> 
+</nav>  
 
 <div class ="container">
 	<%= render 'layouts/messages' %> 
@@ -85,7 +81,7 @@
 			<%= render 'bots/bot_settings_completed' %>  
 		</div>
 
-	    <div class = "col-8" style = "height: 600px; margin-top: 4%; overflow-y: hidden;" id = "style-1">   
+	    <div class = "col-8" style = "height: 600px; margin-top: 4%; overflow-y: hidden; overflow-x: hidden;" id = "style-1">   
 			<div id = "actualform" class = "col-12"  style = "padding-left: 15%; margin-top: 0%;" >
 				<!--Phone-->
 				<div id = "upon_first_click" class = "" style = "padding-top: 18%; margin-bottom: 22%;">
@@ -274,13 +270,25 @@
 						<%=  button_tag(value: "yes", type: 'submit', class: "mt-4 ml-0", style: "margin-right: 20px; border: none; background-color: #f7f2ed", remote: true ) do %>	
 								Yes, Set reminder >
 						<% end %>
-						<%# <% if @bot.reminder == nil %> 
+						<% if @bot.reminder == nil %>
 							<div>
 								<%=  button_tag(value: "no", type: 'submit', class: "btn btn-success mt-4 ml-0", style: "margin-right: 20px;", remote: true ) do %>	
 										Skip this for now
 								<% end %>
 							</div>
-						<%# <% end %> 
+						<% end %>
+						<% if @bot.reminder != nil %>
+							<% if @bot.reminder == "no" %>
+								<div>
+									&nbsp;(You skipped this step earlier. If you want, you can add the reminders now.)
+								</div>	
+								<div style = "margin-right: 300px;">
+								<%=  button_tag(value: "no", type: 'submit', class: "btn btn-success mt-4 ml-0", remote: true ) do %>	
+										Skip this step
+								<% end %>
+							</div>	
+							<% end %>
+						<% end %>	
 					<% end %>
 				</div>
 				<div id= "set_reminder_click" class = "mt-4 ml-0" style = "margin-bottom: 35%; padding-top: 12%;">
@@ -295,11 +303,11 @@
 								<%= form_with scope: :botsettingsreminder, url: reminders_create_botsettings_path(@bot.id), method: :get,  remote: true do |f| %>
 									<span id = "reminder">
 									<%= text_area(:botsettingsreminder, :reminder, cols: 40, rows: 3, class: 'container bg-white ml-3 reminder', placeholder: "Enter reminder message",  remote: true )%>
-									<span class = "row ml-3 mt-2" style = "margin-top: -20px;">
+									<span class = "row ml-3 mt-0" style = "margin-top: -20px;">
 										<div style = "color: grey;" class = "col-1 text-left p-0"> Send After </div>
 										<div class="mr-2 ml-4 col-2 p-0" style="width: 13px;"><%= select_minute(5, field_name: 'rebootconv', style: "background-color: #f7f2ed;") %> min  </div>
-										<div class = "col-2"></div>
-										<div class = "col-1 p-0 text-left" style = "margin-top: -48px;" > 
+										<div class = "col-1"></div>
+										<div class = "col-1 text-left" style = "padding-left: 7px;"  > 
 										<%= f.submit "Add", class: "btn btn-success btn-sm" %></div> 
 									</span>
 								<% end %>	

@@ -1,11 +1,12 @@
 <!--Compressed user child node-->
 <% if child %>
 <% user_child_node_message =  "user_child_node_message" + (child.id).to_s %>
+<% expand =  "expand" + (child.id).to_s %>
 <div class="row mb-2" id= <%= "child_compressed_id" + (child.id).to_s %> >
 	<div class="connector_black_link"></div>
-	<div class="usermessage_compressed_white_box">
+	<div class="usermessage_compressed_white_box rounded">
 		<div class = "row text-center">
-            <div class = "Bot-Response col-8 ml-3 mt-2 mb-3" id = <%= "childname" + (child.id).to_s %>>
+            <div class = "Bot-Response col-8 ml-3 mt-2 mb-1" id = <%= "childname" + (child.id).to_s %>>
                 <% if child.name %>
                     <%= child.name %>
                 <% else %>
@@ -16,10 +17,10 @@
                 <%= link_to image_tag('del.png', size: "17"), user_child_node_compressed_delete_path(child.id), method: :delete, data: { confirm: "All attached child nodes will be lost. Are you sure?" }, remote: true %>
             </div>
             <div class = "col-2 text-right" style = "padding-left: 5px; height: 25px; padding-top: -2px;">
-                <%= link_to image_tag('expand.jpg', size: "14", class: "mt-2", id: "expand"), user_child_node_compressed_expand_path(child.id), method: :get, remote: true %>
+                <%= link_to image_tag('expand.jpg', size: "14", class: "mt-2", id: expand), user_child_node_compressed_expand_path(child.id), method: :get, remote: true %>
             </div>
         </div> 
-		<div class="child_divider mb-2"></div>
+		<div class="child_divider mb-3"></div>
         <div id = <%= user_child_node_message %>>
             <div class="container m-1" style="height: 85px; width: 290px; overflow: auto;"  id = "style-1">
                 <%= render 'bots/user_child_node_message', child: child, delete_message: false %>

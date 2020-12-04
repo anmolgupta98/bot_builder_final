@@ -1,36 +1,35 @@
 <!-- Collapsed view of bot messages-->
-<% if @node %>
-    <% after_add = "after_add" + @node.id.to_s() %>
-    <% showing_previous_messages = "showing_previous_messages" + @node.id.to_s() %>
-    <% messages_area = "messages_area" + @node.id.to_s() %>
-    <% add_a_node = "add_a_node" + @node.id.to_s() %>
-    <% transfer_to_agent = "transfer_to_agent" + @node.id.to_s() %>
-    <% exit_bot = "exit_bot" + @node.id.to_s() %>
-    <% exit_message = "exit_message" + @node.id.to_s() %>
-    <% transfer_dropdown_and_message = "transfer_dropdown_and_message" + @node.id.to_s() %>
+<% if Node.where(bot_id: @bot.id, parent_id: parent_id).first%>
+    <% @node = Node.where(bot_id: @bot.id, parent_id: parent_id).first %>
     <% after_add_collapsed = "after_add_collapsed" + @node.id.to_s() %>
     <% expand = "expand" + @node.id.to_s() %>
     <% showing_previous_messages = "showing_previous_messages" + @node.id.to_s() %>
     <div class="Rectangle-801-collapsed mb-1 mr-4 hide" id = <%= after_add_collapsed %> >
         <div class="row">
-            <div class="col-8 row mb-2">
-                <%= image_tag('bot.png', size: "25", class: "rounded-circle mr-3 ml-4 mt-2")%>
-                <div class="Bot-Response mt-2">Bot Response</div>
+            <div class="col-8 mt-2">
+                <%= image_tag('bot.png', size: "25", class: "rounded-circle mr-3 ml-4 mb-1")%>
+               <span class = "mt-4"> 
+                    <% if @node.name %>
+                        <%= @node.name.truncate(20) %>
+                    <% else %>
+                        <%= " Bot Response" %>
+                    <% end %>
+                </span>
             </div>
-            <div class = "col-2"> </div>
+            <div class = "col-1"> </div>
             <div class="col-1 text-center">
-                <% if Node.where(bot_id: @bot.id, parent_id: 0).first %>
-                    <% @node = Node.where(bot_id: @bot.id, parent_id: 0).first %>
-                     <%= link_to image_tag('del.png', size: "15", class: "mt-2", style: "margin-right: 0px;"), node_destroy_path(@node.id, @bot.id), method: :delete, data: { confirm: "All attached child nodes will be lost. Are you sure?" }, remote: true %>
+                <% if Node.where(bot_id: @bot.id, parent_id: parent_id).first %>
+                    <% @node = Node.where(bot_id: @bot.id, parent_id: parent_id).first %>
+                     <%= link_to image_tag('del.png', size: "17", class: "mt-2", style: "margin-right: 0px;"), node_destroy_path(@node.id, @bot.id), method: :delete, data: { confirm: "All attached child nodes will be lost. Are you sure?" }, remote: true %>
                 <% end %>
             </div>
             <div class = "col-1">
-                <%= link_to image_tag('expand.png', size: "20", class: "mt-2", id: expand), node_expand_path(@node.id, @bot.id), method: :get, remote: true %>
+                <%= link_to image_tag('expand.jpg', size: "14", class: "mt-2", id: expand), node_expand_path(@node.id, @bot.id), method: :get, remote: true %>
             </div>
         </div>
-        <div class="Path-485 mb-2"></div>
+        <div class="Path-485 mb-0"></div>
         <div id = <%= showing_previous_messages %>>
-            <%= render 'bots/showing_previous_messages', delete_button: false %>
+            <%= render 'bots/showing_previous_messages', delete_button: false, parent_id: parent_id %>
         </div>    
     </div> 
 <% end %>   
