@@ -9,6 +9,21 @@ require("@rails/activestorage").start()
 require("channels")
 require("jquery")
 require('../../assets/javascripts/ckeditor/config')
+require('../../assets/javascripts/ckeditor/plugins/xml/plugin')
+require('../../assets/javascripts/ckeditor/plugins/textwatcher/plugin')
+require('../../assets/javascripts/ckeditor/plugins/autocomplete/plugin')
+require('../../assets/javascripts/ckeditor/plugins/ajax/plugin')
+require('../../assets/javascripts/ckeditor/plugins/textmatch/plugin')
+require('../../assets/javascripts/ckeditor/plugins/button/plugin')
+require('../../assets/javascripts/ckeditor/plugins/panelbutton/plugin')
+require('../../assets/javascripts/ckeditor/plugins/panel/plugin')
+require('../../assets/javascripts/ckeditor/plugins/floatpanel/plugin')
+require('../../assets/javascripts/ckeditor/plugins/emoji/plugin')
+
+
+
+
+
 
 // Uncomment to copy all static images under ../images to the output folder and reference
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)

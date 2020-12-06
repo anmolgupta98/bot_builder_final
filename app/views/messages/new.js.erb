@@ -1,4 +1,13 @@
 <% showing_previous_messages = "showing_previous_messages" + (@node.id).to_s %>;
 <% messages_area = "messages_area" + (@node.id).to_s %>;
-document.getElementById('<%= messages_area %>').innerHTML = "<%= j render 'bots/messages_area' %>";
+<% ckeditorid = "ckeditor" + (@node.id).to_s() %>;
+ <% send_message = "send_message" + (@node.id).to_s() %>
+document.getElementById('<%= ckeditorid %>').value = "";
+document.querySelectorAll('.cke_editable').value = "";
+document.querySelectorAll('.cke_contents_ltr').value = "";
+document.getElementsByClassName('.cke_editable_themed').value = "";
+document.getElementById('<%= messages_area %>').classList.add('hide');
 document.getElementById('<%= showing_previous_messages %>').innerHTML = "<%= j render 'bots/showing_previous_messages', delete_button: true, parent_id: @node.parent_id  %>";
+for (instance in CKEDITOR.instances){
+    CKEDITOR.instances[instance].setData('<p></p>');
+};

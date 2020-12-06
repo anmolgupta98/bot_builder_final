@@ -1,16 +1,21 @@
 <!--New text message partial for user node -->
 <% if @node %>
     <% send_message = "send_message" + (@node.id).to_s() %>
-    <%= javascript_include_tag '//cdn.ckeditor.com/4.11.1/standard/ckeditor.js' %>
+    <%= javascript_include_tag  '//cdn.ckeditor.com/4.13.0/standard-all/ckeditor.js' %>
+    
     <script>
-        
+       CKEDITOR.plugins.addExternal(
+                        "emoji",
+                        "/assets/ckeditor/plugins/emoji/",
+                        "plugin.js"
+                     )
     </script>
-    <script src="https://use.fontawesome.com/257fdfda17.js"></script>
+    
     <% ckeditorid = "ckeditor" + (@node.id).to_s() %>
     <div class="text-center mx-auto">
         <%= form_with scope: :text_messages, url:  messages_new_path(@node.id, @bot.id), method: :post, remote: true do |f|%>
         <div class="botresponses_messages_area_full mt-1">
-            <%= cktext_area :text_messages, :text_message, cols: 30, rows: 4, ckeditor: { }, style: 'background-color: #ebfddd;', id: ckeditorid  %> 
+            <%= cktext_area :text_messages, :text_message, cols: 30, rows: 4, ckeditor: { id: "cke" + ckeditorid, style: 'overflow-y: hidden;'  }, style: 'background-color: #ebfddd; overflow-y: hidden;', id: ckeditorid   %> 
             <%= f.text_field :message_type, value: "text" , class: "hide"%>
             <div class="Path-484 ml-2 mb-1" style = "margin-top: -5px;"></div>
             <div class = "row">
@@ -26,11 +31,6 @@
 <% end %>
 
 <script type='text/javascript' charset='UTF-8'>
-    document.getElementById('<%= ckeditorid %>').classList.add('show');
-    document.getElementsByClassName("cke").style.visibility = 'visible';
-    document.getElementsByClassName("cke_inner").style.visibility = 'visible';
-    document.getElementsByClassName("cke_reset").style.visibility = 'visible';
-    document.getElementsByClassName("cke_editor_cke").style.visibility = 'visible';
-    document.getElementsByClassName("cke_ltr").style.visibility = 'visible';
-    document.getElementsByClassName("cke_browser_webkit").style.visibility = 'visible';
+    
+    
 </script>

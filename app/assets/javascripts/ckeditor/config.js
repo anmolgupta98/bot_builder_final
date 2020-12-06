@@ -6,12 +6,14 @@ if (typeof(CKEDITOR) != 'undefined') {
       config.allowedContent = true;
       config.filebrowserUploadMethod = 'form';
       
-      
+    
       config.toolbar = [
         { name: 'styles', items: [ 'Font', 'FontSize' ] },
         { name: 'colors', items: [ 'TextColor', 'BGColor' ] },
         { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ], items: [ 'Bold', 'Italic', 'Underline', 'Strike', '-', 'RemoveFormat' ] },
-        { name: 'insert', items: ['SpecialChar' ] }
+        { name: 'insert', items: ['SpecialChar','emoji' ] }
       ];
+
+      config.extraPlugins = 'emoji, autocomplete, textwatcher, textmatch, ajax, xml, panelbutton, button, floatpanel, panel';
     };
 };  

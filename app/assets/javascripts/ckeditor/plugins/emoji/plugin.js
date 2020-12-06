@@ -1,8 +1,4 @@
-﻿/**
- * @license Copyright (c) 2003-2020, CKSource - Frederico Knabben. All rights reserved.
- * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
- */
-
+﻿if (typeof(CKEDITOR) != 'undefined') {
 ( function() {
 	'use strict';
 
@@ -101,12 +97,12 @@
 						}
 					];
 
-				// Keeps html elements references to not find them again.
+				
 				this.elements = {};
 
-				// Below line might be removable
+				
 				editor.ui.addToolbarGroup( 'emoji', 'insert' );
-				// Name is responsible for icon name also.
+				
 				editor.ui.add( 'EmojiPanel', CKEDITOR.UI_PANELBUTTON, {
 					label: 'emoji',
 					title: lang.title,
@@ -129,13 +125,13 @@
 						var keys = block.keys,
 							rtl = editor.lang.dir === 'rtl';
 
-						keys[ rtl ? 37 : 39 ] = 'next'; // ARROW-RIGHT
-						keys[ 40 ] = 'next'; // ARROW-DOWN
-						keys[ 9 ] = 'next'; // TAB
-						keys[ rtl ? 39 : 37 ] = 'prev'; // ARROW-LEFT
-						keys[ 38 ] = 'prev'; // ARROW-UP
-						keys[ CKEDITOR.SHIFT + 9 ] = 'prev'; // SHIFT + TAB
-						keys[ 32 ] = 'click'; // SPACE
+						keys[ rtl ? 37 : 39 ] = 'next'; 
+						keys[ 40 ] = 'next'; 
+						keys[ 9 ] = 'next'; 
+						keys[ rtl ? 39 : 37 ] = 'prev'; 
+						keys[ 38 ] = 'prev'; 
+						keys[ CKEDITOR.SHIFT + 9 ] = 'prev';
+						keys[ 32 ] = 'click'; 
 
 						self.blockElement = block.element;
 						self.emojiList = self.editor._.emoji.list;
@@ -186,7 +182,7 @@
 				createEmojiBlock: function() {
 					var output = [];
 
-					// (#2607)
+				
 					this.loadSVGNavigationIcons();
 
 					output.push( this.createGroupsNavigation() );
@@ -226,8 +222,7 @@
 							}
 						}, '' );
 					} else {
-						// iOS has problem with reading `href` attribute, that's why,
-						// its necessary to use `xlink:href` even its deprecated: https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/xlink:href
+						
 						useAttr = CKEDITOR.env.safari ? 'xlink:href="#{svgId}"' : 'href="#{svgId}"';
 
 						itemTemplate = new CKEDITOR.template(
@@ -355,7 +350,7 @@
 				},
 				getEmojiSections: function() {
 					return arrTools.reduce( this.groups, function( acc, item ) {
-						// If group is empty skip it.
+						
 						if ( !item.items.length ) {
 							return acc;
 						} else {
@@ -393,9 +388,7 @@
 					);
 				},
 				filter: function( evt ) {
-					// Apply filters to emoji items in dropdown.
-					// Hiding not searched one.
-					// Can accept input event or string
+
 					var groups = {},
 						query = typeof evt === 'string' ? evt : evt.sender.getValue();
 
@@ -444,8 +437,7 @@
 					this.filter( '' );
 				},
 				openReset: function() {
-					// Resets state of emoji dropdown.
-					// Clear filters, reset focus, etc.
+					
 					var self = this,
 						firstCall;
 
@@ -459,16 +451,16 @@
 						self.elements.emojiBlock.$.scrollTop = 0;
 						self.refreshNavigationStatus();
 
-						// Clear search results:
+						
 						self.clearSearchInput();
 
-						// Reset focus:
+					
 						CKEDITOR.tools.setTimeout( function() {
 							self.elements.input.focus( true );
 							self.blockObject._.markItem( self.inputIndex );
 						}, 0, self );
 
-						// Remove statusbar icons:
+						
 						self.clearStatusbar();
 					};
 				},
@@ -531,8 +523,7 @@
 					} );
 				},
 
-				// To avoid CORS issues due to XML-based SVG icons, they should be loaded into the panel document.
-				// This method ensures that the icons are loaded locally.
+				
 				loadSVGNavigationIcons: function() {
 					if ( !this.editor.plugins.emoji.isSVGSupported() ) {
 						return;
@@ -614,7 +605,7 @@
 					initPlugin();
 				}
 
-				// HELPER FUNCTIONS:
+		
 
 				function initPlugin() {
 					editor._.emoji.autocomplete = new CKEDITOR.plugins.autocomplete( editor, {
@@ -636,21 +627,21 @@
 
 				function matchCallback( text, offset ) {
 					var left = text.slice( 0, offset ),
-						// Emoji should be started with space or newline, but space shouldn't leak to output, hence it is in non captured group (#2195).
+						
 						match = left.match( new RegExp( '(?:\\s\|^)(:\\S{' + charactersToStart + '}\\S*)$' ) );
 
 					if ( !match ) {
 						return null;
 					}
 
-					// In case of space preceding colon we need to return the last index (#2394) of capturing group.
+					
 					return { start: left.lastIndexOf( match[ 1 ] ), end: offset };
 				}
 
 				function dataCallback( matchInfo, callback ) {
 					var emojiName = matchInfo.query.substr( 1 ).toLowerCase(),
 						data = arrTools.filter( emojiList, function( item ) {
-							// Comparing lowercase strings, because emoji should be case insensitive (#2167).
+							
 							return item.id.toLowerCase().indexOf( emojiName ) !== -1;
 						} ).sort( function( a, b ) {
 							var aStartsWithEmojiName = !a.id.substr( 1 ).indexOf( emojiName ),
@@ -691,49 +682,4 @@
 		return item;
 	}
 } )();
-
-/**
- * A number that defines how many characters are required to start displaying emoji's autocomplete suggestion box.
- * Delimiter `:`, which activates the emoji suggestion box, is not included in this value.
- *
- * ```js
- * 	editor.emoji_minChars = 0; // Emoji suggestion box appears after typing ':'.
- * ```
- *
- * @since 4.10.0
- * @cfg {Number} [emoji_minChars=2]
- * @member CKEDITOR.config
- */
-
-/**
- * Address of the JSON file containing the emoji list. The file is downloaded through the {@link CKEDITOR.ajax#load} method
- * and the URL address is processed by {@link CKEDITOR#getUrl}.
- * Emoji list has to be an array of objects with the `id` and `symbol` properties. These keys represent the text to match and the
- * UTF symbol for its replacement.
- * An emoji has to start with the `:` (colon) symbol.
- *
- * ```json
- * [
- * 	{
- * 		"id": ":grinning_face:",
- * 		"symbol":"😀"
- * 	},
- * 	{
- * 		"id": ":bug:",
- * 		"symbol":"🐛"
- * 	},
- * 	{
- * 		"id": ":star:",
- * 		"symbol":"⭐"
- * 	}
- * ]
- * ```
- *
- * ```js
- * 	editor.emoji_emojiListUrl = 'https://my.custom.domain/ckeditor/emoji.json';
- * ```
- *
- * @since 4.10.0
- * @cfg {String} [emoji_emojiListUrl='plugins/emoji/emoji.json']
- * @member CKEDITOR.config
- */
+}
