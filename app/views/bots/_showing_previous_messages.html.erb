@@ -1,5 +1,6 @@
 <!-- Rendering all previous text messages for user message node-->
 <% count = 0 %>
+
 <% if Node.where(bot_id: @bot.id, parent_id: parent_id).first%>
     <% @node = Node.where(bot_id: @bot.id, parent_id: parent_id).first %>
     <% for message in Message.where(bot_id: @bot.id, node_id: @node.id) %>
@@ -24,19 +25,36 @@
             </div>
         <%else%>
             <div class="mx-auto">
-                <div class="botresponses_messages_area_full mt-2 p-1">
-                    <div class = "row">
-                        <div class = "col-10">
-                            <%=  raw(message.text_message) %>
-                            <% count += 1 %>
-                        </div>
-                        <% if delete_button == true %>
-                            <div class = "col-1">
-                                <%= link_to image_tag('del.png', size: "15", class: "mt-0 mr-2"), messages_destroy_path(@node.id, @bot.id, message.id), method: :post, remote: true %>
+            <% previousmessageckeditorid = "previousmessageckeditor" + (message.id).to_s() %>
+            <% edit_message = "edit_message" + (message.id).to_s() %>
+                <% if delete_button == false %>
+                    <div class="botresponses_messages_area_full rounded mt-2 p-1">
+                        <div class = "row">
+                            <div class = "col-9">
+                                <%=  raw(message.text_message) %>
+                                <% count += 1 %>
                             </div>
-                        <% end %>
-                    </div>
-                </div> 
+                        </div>
+                    </div>  
+                <% end %>   
+                <div class = "row">
+                    <% if delete_button == true %>
+                        <div class = "col-8">
+                            <%= form_with scope: :previous_text_messages, url:  messages_edit_path(@node.id, @bot.id, message.id), method: :post, remote: true do |f|%>
+                            <%= text_area(:previous_text_messages, :text_message, cols: 30, class: 'botresponses_messages_area_full rounded p-2 ml-2', id: previousmessageckeditorid , value: strip_tags(message.text_message) )%>
+                            <% end %> 
+                            <% count += 1%>
+                        </div>
+                        <div class = "col-1">
+                            <%=  image_tag('edit.png', size: "15", class: "mt-1 mr-2", id: edit_message, style: "cursor: pointer;") %>
+                            
+                        </div>
+                            <div class = "col-1">
+                            <%= link_to image_tag('del.png', size: "15", class: "mt-1 mr-2"), messages_destroy_path(@node.id, @bot.id, message.id), method: :post, remote: true %>
+                        </div>
+                    <% end %>
+                </div>
+                
             </div>
         <% end %>    
     <% end %>
@@ -117,3 +135,15 @@
         <div style = "height: 1px;"> </div>   
     <% end %>
 <% end %>
+
+<script>
+    <% for message in Message.where(bot_id: @bot.id, node_id: @node.id) %>
+        document.getElementById('<%= "edit_message" + (message.id).to_s() %>').onclick= function () {
+            CKEDITOR.replace( ('<%= "previousmessageckeditorid" + (message.id).to_s()  %>'), {
+                customConfig: "/assets/ckeditor/config.js"
+            });
+        };
+    <% end %>    
+    
+
+</script>

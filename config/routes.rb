@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :nodes, except: [:new, :update, :destroy]
   resources :messages, except: [:new, :create, :destroy]
   mount Ckeditor::Engine => '/ckeditor'
+  get '/welcome/ckeditor', to: 'welcome#ckeditor_config', as: 'ckeditor_config'
   post 'nodes/usermessage/nodes_message_attach_media', to: 'nodes#nodes_message_attach_media', as: 'nodes_message_attach_media'
   get '/nodes/bot_node_name_edit_icon_click/:id', to: 'nodes#bot_node_name_edit_icon_click', as: 'bot_node_name_edit_icon_click'
   get '/nodes/botnodename/:id', to: 'nodes#bot_node_name', as: 'bot_node_name'
@@ -33,6 +34,7 @@ Rails.application.routes.draw do
   delete '/nodes/node_destroy/:id/:bot_id', to: 'nodes#destroy', as: 'node_destroy'
   get '/nodes/node_expand/:node_id/:bot_id', to: 'nodes#expand', as: 'node_expand'
   put '/nodes/node_update/:node_id/:bot_id', to: 'nodes#update', as: 'node_update'
+  post '/messages/edit_message/:node_id/:bot_id/:id', to: 'messages#edit', as: 'messages_edit'
   post '/messages/destroy_message/:node_id/:bot_id/:id', to: 'messages#destroy', as: 'messages_destroy'
   post '/messages/new_message/:node_id/:bot_id', to: 'messages#new', as: 'messages_new'
   get '/nodes/new/bot/:node_type/:bot_id/:parent_id', to: 'nodes#new', as: 'new_bot_node'

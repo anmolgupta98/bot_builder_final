@@ -8,17 +8,6 @@ require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
 require("jquery")
-require('../../assets/javascripts/ckeditor/config')
-require('../../assets/javascripts/ckeditor/plugins/xml/plugin')
-require('../../assets/javascripts/ckeditor/plugins/textwatcher/plugin')
-require('../../assets/javascripts/ckeditor/plugins/autocomplete/plugin')
-require('../../assets/javascripts/ckeditor/plugins/ajax/plugin')
-require('../../assets/javascripts/ckeditor/plugins/textmatch/plugin')
-require('../../assets/javascripts/ckeditor/plugins/button/plugin')
-require('../../assets/javascripts/ckeditor/plugins/panelbutton/plugin')
-require('../../assets/javascripts/ckeditor/plugins/panel/plugin')
-require('../../assets/javascripts/ckeditor/plugins/floatpanel/plugin')
-require('../../assets/javascripts/ckeditor/plugins/emoji/plugin')
 
 
 

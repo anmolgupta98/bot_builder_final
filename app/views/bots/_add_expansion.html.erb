@@ -1,6 +1,9 @@
 <!-- Adding expanded view of bot messages -->
+
 <% if Node.where(bot_id: @bot.id, parent_id: parent_id).first%>
+    <script src = "/assets/ckeditor/ckeditor.js" > </script>
     <% @node = Node.where(bot_id: @bot.id, parent_id: parent_id).first %>
+    <% ckeditorid = "ckeditor" + (@node.id).to_s() %>
     <% after_add = "after_add" + @node.id.to_s() %>
     <% showing_previous_messages = "showing_previous_messages" + @node.id.to_s() %>
     <% messages_area = "messages_area" + @node.id.to_s() %>
@@ -43,7 +46,7 @@
             </div>
         </div>
         
-        <div class="Path-485 mb-0"></div>
+        <div class="Path-485 mb-3"></div>
 
         <!-- Previous text messages-->
         <div id = <%= showing_previous_messages %>>
@@ -57,11 +60,11 @@
 
         <!-- options -->
         <div class="row">
-            <div class="options_text ml-3 mb-2 mt-1 col-4" >
+            <div class="options_text ml-3 mb-2 mt-2 col-4" >
                 Add Message
             </div>
             <div class="ml-2">
-                <%= image_tag('addbutton.png', size: "30", class: "ml-1 rounded-circle", id: add_button)%>
+                <%= image_tag('addbutton.png', size: "30", class: "ml-1 rounded-circle", id: add_button, style: "cursor: pointer;")%>
             </div>
         </div>
         <div class="row mt-2 mb-1">
@@ -166,8 +169,14 @@
         function image_upload(){
             console.log('uploaded');
             document.getElementById('<%= add_media %>').click();
+            document.getElementById('<%= messages_area %>').classList.add('hide');
         }
        
+        document.getElementById('<%= add_button %>').onclick= function () {
+            document.getElementById('<%= messages_area %>').classList.remove('hide');
+            document.getElementById('<%= "cke_" + ckeditorid %>').style.visibility = "visible";
+        };
+   
         <% if Node.where(bot_id: @bot.id, parent_id: parent_id).first%>
             <% if @node.set_next_action == "add_a_node" %>
                 document.getElementById('<%= add_a_node %>').checked = true;
@@ -189,26 +198,25 @@
                 document.getElementById('<%= transfer_dropdown_and_message %>').classList.add('hide');
             <% end %>
 
-        document.getElementById("<%= exit_bot %>").onclick = function() {
-            document.getElementById('<%= exit_message %>').classList.remove('hide');
-            document.getElementById('<%= transfer_dropdown_and_message %>').classList.add('hide');
-        }
-        document.getElementById('<%= add_a_node %>').onclick = function() {
-            document.getElementById('<%= exit_message %>').classList.add('hide');
-            document.getElementById('<%= transfer_dropdown_and_message %>').classList.add('hide');
-        }
-        document.getElementById("<%= transfer_to_agent %>").onclick = function() {
-            document.getElementById('<%= exit_message %>').classList.add('hide');
-            document.getElementById('<%= transfer_dropdown_and_message %>').classList.remove('hide');
-        }
-        <% if Message.where(node_id: @node.id, bot_id: @bot.id ) == []|| Message.where(node_id: @node.id, bot_id: @bot.id ).length == 1  %> 
-            document.getElementById('<%= messages_area %>').classList.remove('hide');
-        <% else %>    
-            document.getElementById('<%= messages_area %>').classList.add('hide');
-        <% end %>    
-         document.getElementById('<%= add_button %>').onclick= function () {
-            document.getElementById('<%= messages_area %>').classList.remove('hide');
-        };
+            document.getElementById("<%= exit_bot %>").onclick = function() {
+                document.getElementById('<%= exit_message %>').classList.remove('hide');
+                document.getElementById('<%= transfer_dropdown_and_message %>').classList.add('hide');
+            }
+            document.getElementById('<%= add_a_node %>').onclick = function() {
+                document.getElementById('<%= exit_message %>').classList.add('hide');
+                document.getElementById('<%= transfer_dropdown_and_message %>').classList.add('hide');
+            }
+            document.getElementById("<%= transfer_to_agent %>").onclick = function() {
+                document.getElementById('<%= exit_message %>').classList.add('hide');
+                document.getElementById('<%= transfer_dropdown_and_message %>').classList.remove('hide');
+            }
+            <% if Message.where(node_id: @node.id, bot_id: @bot.id ) == []|| Message.where(node_id: @node.id, bot_id: @bot.id ).length == 1  %> 
+                document.getElementById('<%= messages_area %>').classList.remove('hide');
+            <% else %>    
+                document.getElementById('<%= messages_area %>').classList.add('hide');
+            <% end %>    
+      
+        
         <% end %>
     </script>
 <% end %>  

@@ -13,4 +13,9 @@ class WelcomeController < ApplicationController
 		  	end
 		  end
 	end
+
+	def ckeditor_config
+		
+	end	
+
 end

@@ -10,6 +10,17 @@ class MessagesController < ApplicationController
             format.js
         end  
     end
+
+    def edit
+        @message = Message.find(params[:id])
+        @bot = Bot.find(params[:bot_id])    
+        @node = Node.find(params[:node_id])
+        @ckeditorid = "ckeditor" + @node.id.to_s() 
+        @message.update(params.require(:previous_text_messages).permit(:text_message))
+        respond_to do |format|
+            format.js
+        end  
+    end
     
     def destroy
         @message = Message.find(params[:id])

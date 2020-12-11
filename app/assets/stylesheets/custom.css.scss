@@ -491,8 +491,8 @@ background-color: #555;
 }
 
 //CKEDITOR
-.cke.cke_chrome {
-  visibility: inherit;
+.cke_chrome {
+  visibility: visible;
 }
 .cke.cke_panel {
    visibility: visible;
@@ -514,3 +514,4 @@ background-color: #555;
 .cke_reset_all{
   background-color: white;
 }
+
