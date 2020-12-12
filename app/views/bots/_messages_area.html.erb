@@ -4,9 +4,7 @@
     <%# <%= javascript_include_tag  '//cdn.ckeditor.com/4.13.0/standard-all/ckeditor.js' %>   
     <%# <%= javascript_include_tag  '//localhost:3000/welcome/ckeditor' %> 
      
-    <script src = "/assets/ckeditor/ckeditor.js" > 
-    
-    </script> 
+    <script src = "/assets/ckeditor/ckeditor.js" > </script> 
     
     <% ckeditorid = "ckeditor" + (@node.id).to_s() %>
     <div class="text-center mx-auto">
@@ -18,7 +16,7 @@
             <div class="Path-484 ml-2 mb-1" style = "margin-top: -5px;"></div>
             <div class = "row">
                 <div class = "col-6"></div>
-                <div class = "col-1 mt-1"  id = <%= "bold" %>></div>
+                <div class = "col-1 mt-1" ></div>
                 <div class = "col-1 mt-1"></div>
                 <div class = "col-1"></div>
                 <div class = "col-1"><%= image_submit_tag('send.png', class: "rounded-circle", style: "width: 25px;", id: send_message) %></div>
