@@ -20,6 +20,15 @@ class MessagesController < ApplicationController
             format.js
         end  
     end
+
+    def edit_click
+        @message = Message.find(params[:id])
+        @bot = Bot.find(params[:bot_id])    
+        @node = Node.find(params[:node_id])
+        respond_to do |format|
+            format.js
+        end  
+    end
     
     def destroy
         @message = Message.find(params[:id])

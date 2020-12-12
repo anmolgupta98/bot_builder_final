@@ -34,6 +34,7 @@ Rails.application.routes.draw do
   delete '/nodes/node_destroy/:id/:bot_id', to: 'nodes#destroy', as: 'node_destroy'
   get '/nodes/node_expand/:node_id/:bot_id', to: 'nodes#expand', as: 'node_expand'
   put '/nodes/node_update/:node_id/:bot_id', to: 'nodes#update', as: 'node_update'
+  post '/messages/edit_message_click/:node_id/:bot_id/:id', to: 'messages#edit_click', as: 'messages_edit_click'
   post '/messages/edit_message/:node_id/:bot_id/:id', to: 'messages#edit', as: 'messages_edit'
   post '/messages/destroy_message/:node_id/:bot_id/:id', to: 'messages#destroy', as: 'messages_destroy'
   post '/messages/new_message/:node_id/:bot_id', to: 'messages#new', as: 'messages_new'

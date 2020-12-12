@@ -1,0 +1,12 @@
+document.getElementById('<%= "text_area_message" + (@message.id).to_s() %>').classList.replace('col-8', 'col-11');
+document.getElementById('<%= "text_area_message" + (@message.id).to_s() %>').style.marginLeft = "13px";
+document.getElementById('<%= "edit_message" + (@message.id).to_s() %>').classList.add('hide');
+document.getElementById('<%= "delete_text_message" + (@message.id).to_s() %>').classList.add('hide');
+document.getElementById('<%= "horizontal" + (@message.id).to_s() %>').classList.remove('hide');
+document.getElementById('<%= "send_text_message" + (@message.id).to_s() %>').classList.remove('hide');
+<% previousmessageckeditorid = "previousmessageckeditor" + (@message.id).to_s()%>
+CKEDITOR.replace(('<%= previousmessageckeditorid %>'), {
+        customConfig: "/assets/ckeditor/config.js"
+});;  
+
+   

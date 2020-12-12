@@ -31,6 +31,7 @@
             <% send_text_message_block = "send_text_message_block" + (message.id).to_s() %>
             <% text_area_message = "text_area_message" + (message.id).to_s() %>
             <% delete_text_message = "delete_text_message" + (message.id).to_s() %>
+            <% horizontal = "horizontal" + (message.id).to_s() %>
                 <% if delete_button == false %>
                     <div class="botresponses_messages_area_full rounded mt-2 p-1">
                         <div class = "row">
@@ -46,8 +47,10 @@
                         <div class = "col-8" id = <%= text_area_message %>>
                             <%= form_with scope: :previous_text_messages, url:  messages_edit_path(@node.id, @bot.id, message.id), method: :post, remote: true do |f|%>
                                 <%= text_area(:previous_text_messages, :text_message, cols: 30, class: 'botresponses_messages_area_full rounded p-2 ml-2', id: previousmessageckeditorid,  value: strip_tags(message.text_message) )%>
-                                <% count += 1%>
-                             <%= image_submit_tag('send.png', class: "rounded-circle hide", style: "width: 25px; margin-left: 230px;", id: send_text_message, remote: true) %>    
+                                <% count += 1%>  
+                                   
+                             <%= image_submit_tag('send.png', class: "rounded-circle hide mt-1", style: "width: 25px; margin-left: 230px;", id: send_text_message, remote: true) %>  
+                             <hr style = "margin-top: 0px;" id = <%= horizontal %> class = "hide"> 
                         </div>
                          <div id = <%= send_text_message_block %> class = "hide">
                         <div class = "container mb-2 mt-0" style = "background-color: #ebfddd; margin-left: 13px; width: 272px;">
@@ -56,7 +59,7 @@
                         </div> 
                     </div>   
                         <div class = "col-1">
-                            <%=  image_tag('edit.png', size: "15", class: "mt-1 mr-2", id: edit_message, style: "cursor: pointer;") %> 
+                            <%= link_to image_tag('edit.png', size: "15", class: "mt-1 mr-2"), messages_edit_click_path(@node.id, @bot.id, message.id), method: :post, remote: true, id: edit_message %> 
                         </div>
                         <div class = "col-1">
                             <%= link_to image_tag('del.png', size: "15", class: "mt-1 mr-2"), messages_destroy_path(@node.id, @bot.id, message.id), method: :post, remote: true, id: delete_text_message %>
@@ -148,23 +151,7 @@
 <script>
 
  
-     <% for message in Message.where(bot_id: @bot.id, node_id: @node.id, message_type: "text") %>
-          console.log('<%= previousmessageckeditorid %>');
-        document.getElementById('<%= "edit_message" + (message.id).to_s() %>').onclick= function () {
-            document.getElementById('<%= "text_area_message" + (message.id).to_s() %>').classList.replace('col-8', 'col-11');
-            document.getElementById('<%= "text_area_message" + (message.id).to_s() %>').style.marginLeft = "13px";
-            document.getElementById('<%= "edit_message" + (message.id).to_s() %>').classList.add('hide');
-            document.getElementById('<%= "delete_text_message" + (message.id).to_s() %>').classList.add('hide');
-            document.getElementById('<%= "send_text_message" + (message.id).to_s() %>').classList.remove('hide');
-            document.getElementById('<%= "send_text_message_block" + (message.id).to_s() %>').classList.remove('hide');
-            <% previousmessageckeditorid = "previousmessageckeditor" + (message.id).to_s()%>
-            CKEDITOR.replace(('<%= previousmessageckeditorid %>'), {
-                    customConfig: "/assets/ckeditor/config.js"
-            });;  
-            console.log('<%= previousmessageckeditorid %>');
-        };
-         
-    <% end %> 
+     
     
    
 
